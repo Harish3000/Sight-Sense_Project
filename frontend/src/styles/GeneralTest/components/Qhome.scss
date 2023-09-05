@@ -1,0 +1,49 @@
+#Qhome {
+  background-image: url("../../../assets/GeneralTest_assets/img/eye.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  height: 100vh;
+  display: flex;
+  justify-content: space-around;
+  section {
+    background-color: rgba(154, 158, 166, 0.7);
+    padding-left: 2rem;
+    padding-right: 2rem;
+    height: 80%;
+    width: 35%;
+  }
+
+  h1 {
+    text-align: center;
+    color: black;
+    font-size: 2rem;
+  }
+  .play-button-container {
+    width: 100%;
+  }
+  a.play-btn {
+    background-color: black;
+    color: white;
+    cursor: pointer;
+    padding: 1rem;
+    border-radius: 25px;
+    text-align: center;
+    width: 100%;
+    transition: background-color 0.3s linear, color 0.3s linear;
+    display: block;
+    transition: 0.3s linear all;
+  }
+  a.play-btn:hover {
+    background-color: lightgray;
+    color: black;
+  }
+}
+
+@meadia (max-width: 768px) {
+  #Qhome section {
+    padding: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
