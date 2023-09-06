@@ -7,6 +7,10 @@ const UserBase = require("./routes/User/User_base");
 //express app
 const app = express();
 
+
+
+
+
 //middleware
 app.use(express.json()); //to add json to the 'req' Object
 
@@ -17,6 +21,10 @@ app.use((req, res, next) => {
 
 //routes
 UserBase(app);
+
+
+
+
 
 //connect to DB
 mongoose
