@@ -168,7 +168,6 @@ class play extends React.Component {
       default:
         break;
     }
-    //this.playButtonSound();
   };
 
   playButtonSound = () => {
@@ -282,7 +281,6 @@ class play extends React.Component {
     }
   };
 
-  // Modify your generatePDF function to capture the modal content
   generatePDF = () => {
     const { state } = this;
     const playerStats = {
@@ -293,22 +291,38 @@ class play extends React.Component {
       wrongAnswers: state.wrongAnswers,
     };
 
-    // Create a new jsPDF instance
     const pdf = new jsPDF("p", "mm", "a4");
 
-    // Add content to the PDF
-    pdf.text(`Score: ${playerStats.score}`, 10, 10);
-    pdf.text(`Number of Questions: ${playerStats.numberOfQuestions}`, 10, 20);
+    const pageWidth = pdf.internal.pageSize.getWidth();
+    const textWidth =
+      (pdf.getStringUnitWidth("Sight Sense") * pdf.internal.getFontSize()) /
+      pdf.internal.scaleFactor;
+    const xOffset = (pageWidth - textWidth) / 2;
+
+    pdf.setFontSize(18);
+    pdf.text("Sight Sense", xOffset, 10);
+
+    pdf.setFontSize(12);
+    pdf.text(`Score: ${playerStats.score}`, 10, 30);
+    pdf.text(`Number of Questions: ${playerStats.numberOfQuestions}`, 10, 40);
     pdf.text(
       `Number of Answered Questions: ${playerStats.numberOfAnsweredQuestions}`,
       10,
-      30
+      50
     );
-    pdf.text(`Correct Answers: ${playerStats.correctAnswers}`, 10, 40);
-    pdf.text(`Wrong Answers: ${playerStats.wrongAnswers}`, 10, 50);
+    pdf.text(`Correct Answers: ${playerStats.correctAnswers}`, 10, 60);
+    pdf.text(`Wrong Answers: ${playerStats.wrongAnswers}`, 10, 70);
 
-    // Save the PDF
-    pdf.save("player-stats.pdf");
+    const footerText = "All Rights Reserved";
+    const footerTextWidth =
+      (pdf.getStringUnitWidth(footerText) * pdf.internal.getFontSize()) /
+      pdf.internal.scaleFactor;
+    const footerXOffset = (pageWidth - footerTextWidth) / 2;
+
+    pdf.setFontSize(10);
+    pdf.text(footerText, footerXOffset, pdf.internal.pageSize.getHeight() - 10);
+
+    pdf.save("Eye-Test-Score.pdf");
   };
 
   endGame = () => {

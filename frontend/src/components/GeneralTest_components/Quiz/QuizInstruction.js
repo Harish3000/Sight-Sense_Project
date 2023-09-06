@@ -26,7 +26,7 @@ const QuizInstruction = () => (
           <li>
             Select the option which best answers the question by clicking it.
           </li>
-          <li style={{ paddingLeft: "300px" }}>
+          <li style={{ paddingLeft: "200px" }}>
             <img src={QuestionAnswer} alt="Quiz Options" />
           </li>
           <li>
