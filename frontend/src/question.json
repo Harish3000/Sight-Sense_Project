@@ -1,129 +1,142 @@
 [
   {
     "question": "What temperature does water boil at?",
-    "optionA": "50 degrees Celcius",
-    "optionB": "25 degrees Celcius",
-    "optionC": "100 degrees Celcius",
-    "optionD": "150 degrees Celcius",
-    "answer": "100 degrees Celcius",
-    "image": "https://flexfitness-coach-img.s3.amazonaws.com/asen_trainer.jpg"
+    "optionA": "71",
+    "optionB": "70",
+    "optionC": "74",
+    "optionD": "None of the above",
+    "answer": "74",
+    "image": "https://flexfitness-coach-img.s3.amazonaws.com/Ishihara_9.svg.png"
   },
 
   {
     "question": "Who wrote Julius Caesar, Macbeth and Hamlet?",
-    "optionA": "Wole Soyinka",
-    "optionB": "William Shakespeare",
-    "optionC": "Ngozi Chimamanda Adichie",
-    "optionD": "Dan Brown",
-    "answer": "William Shakespeare"
+    "optionA": "20",
+    "optionB": "45",
+    "optionC": "44",
+    "optionD": "None of the above",
+    "answer": "45",
+    "image": "https://flexfitness-coach-img.s3.amazonaws.com/45.jpg"
   },
 
   {
     "question": "What did the crocodile swallow in Peter Pan?",
-    "optionA": "A Book",
-    "optionB": "A Computer",
-    "optionC": "A pair of shoes",
-    "optionD": "Alarm Clock",
-    "answer": "Alarm Clock"
+    "optionA": "11",
+    "optionB": "14",
+    "optionC": "10",
+    "optionD": "12",
+    "answer": "12",
+    "image": "https://flexfitness-coach-img.s3.amazonaws.com/12.jpg"
   },
 
   {
     "question": "Which is the only mammal that can’t jump?",
-    "optionA": "Dog",
-    "optionB": "Elephant",
-    "optionC": "Goat",
-    "optionD": "Lion",
-    "answer": "Elephant"
+    "optionA": "7",
+    "optionB": "5",
+    "optionC": "55",
+    "optionD": "70",
+    "answer": "5",
+    "image": "https://flexfitness-coach-img.s3.amazonaws.com/5.jpg"
   },
 
   {
     "question": "Who lived at 221B, Baker Street, London?",
-    "optionA": "Tony Stark",
-    "optionB": "Morgan Freeman",
-    "optionC": "Sherlock Holmes",
-    "optionD": "Samuel L. Jackson",
-    "answer": "Sherlock Holmes"
+    "optionA": "87",
+    "optionB": "91",
+    "optionC": "97",
+    "optionD": "81",
+    "answer": "97",
+    "image": "https://flexfitness-coach-img.s3.amazonaws.com/97.jpg"
   },
 
   {
     "question": "What colour is a panda?",
-    "optionA": "Green and Yellow",
-    "optionB": "Blue and Red",
-    "optionC": "Green and White",
-    "optionD": "Black and White",
-    "answer": "Black and White"
+    "optionA": "8",
+    "optionB": "9",
+    "optionC": "0",
+    "optionD": "6",
+    "answer": "6",
+    "image": "https://flexfitness-coach-img.s3.amazonaws.com/6.webp"
   },
 
   {
-    "question": "Where is the smallest bone in the human body?",
-    "optionA": "The Chest",
-    "optionB": "The Ear",
-    "optionC": "The Legs",
-    "optionD": "The Hands",
-    "answer": "The Ear"
+    "question": "Observe the lines with each eye carefully",
+    "optionA": "Each Lines are balck and diffrent thikness",
+    "optionB": "Each Lines are balck and same thikness",
+    "optionC": "Some Lines are grey and same thikness",
+    "optionD": "Ecach Lines are grey and diffrent thikness",
+    "answer": "Each Lines are balck and same thikness",
+    "image": "https://flexfitness-coach-img.s3.amazonaws.com/asm.webp"
   },
 
   {
-    "question": "What does the roman numeral C represent?",
-    "optionA": "100",
-    "optionB": "10",
-    "optionC": "10,000",
-    "optionD": "1,000,000",
-    "answer": "100"
+    "question": "Observe the lines with each eye carefully",
+    "optionA": "Each Lines are balck and diffrent thikness",
+    "optionB": "Each Lines are balck and same thikness",
+    "optionC": "Some Lines are grey and same thikness",
+    "optionD": "Ecach Lines are grey and diffrent thikness",
+    "answer": "Each Lines are balck and same thikness",
+    "image": "https://flexfitness-coach-img.s3.amazonaws.com/asm.webp"
   },
 
   {
-    "question": "What takes place in Hong Kong's Happy Valley?",
-    "optionA": "Chicken Wrestling",
-    "optionB": "Horse racing",
-    "optionC": "Street Racing",
-    "optionD": "Arm Wrestling",
-    "answer": "Horse racing"
+    "question": "Are all the radiating heavy black line of the same intensity and thickness?",
+    "optionA": "Grey and same thikness",
+    "optionB": "YES",
+    "optionC": "NO",
+    "optionD": "Not Clear",
+    "answer": "YES",
+    "image": "https://flexfitness-coach-img.s3.amazonaws.com/asd3.gif"
   },
 
   {
-    "question": "Who painted the Mona Lisa?",
-    "optionA": "Alexander Graham Bell",
-    "optionB": "Sir Isaac Newton",
-    "optionC": "Leonardo Da Vinci",
-    "optionD": "Albert Einstein",
-    "answer": "Leonardo Da Vinci"
+    "question": "Cover left eye with your left hand and look closely at the image, then repeat with the right eye.",
+    "optionA": "All lines are clear for both eyes",
+    "optionB": "Some lines are clear for both eyes",
+    "optionC": "Some lines are clear for both eyes",
+    "optionD": "Some lines are clear for both eyes",
+    "answer": "All lines are clear for both eyes",
+    "image": "https://flexfitness-coach-img.s3.amazonaws.com/astigmatism-quiz.svg"
   },
 
   {
-    "question": "What’s the most important book in the Moslem religion?",
-    "optionA": "The Koran",
-    "optionB": "The Dictionary",
-    "optionC": "The Bible",
-    "optionD": "The Chemistry text Book",
-    "answer": "The Koran"
+    "question": "What are the letters in line 8 (Please keep minimum distance of 1 meter from the screen)",
+    "optionA": "D E F P O T E C",
+    "optionB": "L E F P O T E C",
+    "optionC": "F E F P O T E C",
+    "optionD": "P E F P O T E C",
+    "answer": "D E F P O T E C",
+    "image": "https://flexfitness-coach-img.s3.amazonaws.com/online-eye-test-inlineimage1.jpg"
   },
 
   {
-    "question": "What’s the capital of Ethiopia?",
-    "optionA": "Cape Town",
-    "optionB": "San Francisco",
-    "optionC": "Abuja",
-    "optionD": "Syndey",
-    "answer": "Addis Ababa"
+    "question": "What are the letters in line 6",
+    "optionA": "E O F C 2 P",
+    "optionB": "E O E C Z P",
+    "optionC": "E D F C Z P",
+    "optionD": "E D E C Z P",
+    "answer": "E D F C Z P",
+    "image": "https://flexfitness-coach-img.s3.amazonaws.com/blurry.png"
   },
 
   {
-    "question": "How many squares are there on a chess board?",
-    "optionA": "128",
-    "optionB": "64",
-    "optionC": "32",
-    "optionD": "256",
-    "answer": "64"
+    "question": "What are the letters in line 7",
+    "optionA": "F F L P Z 2 D",
+    "optionB": "F E L O P Z D",
+    "optionC": "E F I P Z 7 D",
+    "optionD": "F E L O 2 2 O",
+    "answer": "F E L O P Z D",
+    "image": "https://flexfitness-coach-img.s3.amazonaws.com/blurry.png"
   },
 
   {
-    "question": "Who invented the electric light bulb?",
-    "optionA": "Tom Cruise",
-    "optionB": "Barack Obama",
-    "optionC": "Wole Soyinka",
-    "optionD": "Thomas Edison",
-    "answer": "Thomas Edison"
+    "question": "What are the letters in line 8",
+    "optionA": "D E F P O T E C",
+    "optionB": "O E F P O T E C",
+    "optionC": "D F E P O T E C",
+    "optionD": "O F F P O T E C",
+    "answer": "D E F P O T E C",
+    "image": "https://flexfitness-coach-img.s3.amazonaws.com/blurry.png"
   },
 
   {

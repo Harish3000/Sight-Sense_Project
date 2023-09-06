@@ -40,6 +40,36 @@ class play extends React.Component {
     this.buttonSound = React.createRef();
   }
 
+  //   displayQuestions = (
+  //     questions = this.state.questions,
+  //     currentQuestion,
+  //     nextQuestion,
+  //     previousQuestion
+  //   ) => {
+  //     let { currentQuestionIndex } = this.state;
+  //     if (!isEmpty(this.state.questions)) {
+  //       questions = this.state.questions;
+  //       currentQuestion = questions[currentQuestionIndex];
+  //       if (currentQuestion) {
+  //         // Check if currentQuestion is defined
+  //         nextQuestion = questions[currentQuestionIndex + 1];
+  //         previousQuestion = questions[currentQuestionIndex - 1];
+  //         const answer = currentQuestion.answer;
+  //         this.setState(
+  //           {
+  //             currentQuestion,
+  //             nextQuestion,
+  //             previousQuestion,
+  //             numberOfQuestions: questions.length,
+  //             answer,
+  //           },
+  //           () => {
+  //             this.handleDisabledButton();
+  //           }
+  //         );
+  //       }
+  //     }
+  //   };
   displayQuestions = (
     questions = this.state.questions,
     currentQuestion,
@@ -55,6 +85,14 @@ class play extends React.Component {
         nextQuestion = questions[currentQuestionIndex + 1];
         previousQuestion = questions[currentQuestionIndex - 1];
         const answer = currentQuestion.answer;
+
+        // Check if it's the 7th or 8th question
+        if (currentQuestionIndex === 6) {
+          this.showAdviceMessage("Close Left Eye and Check");
+        } else if (currentQuestionIndex === 7) {
+          this.showAdviceMessage("Close Right Eye and Check");
+        }
+
         this.setState(
           {
             currentQuestion,
@@ -69,6 +107,11 @@ class play extends React.Component {
         );
       }
     }
+  };
+
+  showAdviceMessage = (messageText) => {
+    // Show a message using Ant Design message component
+    message.info(messageText, 5);
   };
 
   componentDidMount() {
@@ -175,7 +218,7 @@ class play extends React.Component {
   };
 
   correctAnswers = () => {
-    message.success("Correct Answer", 1.5);
+    message.success("Correct Answer", 0.6);
 
     this.setState(
       (prevState) => ({
@@ -200,7 +243,7 @@ class play extends React.Component {
   };
   wrongAnswers = () => {
     navigator.vibrate(1000);
-    message.error("Wrong Answer", 1.5);
+    message.error("Wrong Answer", 0.6);
     this.setState(
       (prevState) => ({
         wrongAnswers: prevState.wrongAnswers + 1,
@@ -374,11 +417,12 @@ class play extends React.Component {
           <Modal
             show={showModal}
             onHide={this.handleClose}
-            style={{
+            tyle={{
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              minHeight: "100vh",
+              minHeight: "700vh",
+              backgroundColor: "rgba(0, 0, 0, 0.5)", // Use rgba with an alpha value for transparency
             }}
           >
             <Modal.Header closeButton>
@@ -436,6 +480,26 @@ class play extends React.Component {
               </p>
             )}
           </div>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              minHeight: "50vh",
+            }}
+          >
+            {currentQuestion.image && (
+              <img
+                src={currentQuestion.image}
+                alt=""
+                style={{
+                  maxWidth: "150%",
+                  maxHeight: "350px",
+                }}
+              />
+            )}
+          </div>
+
           <h5>{currentQuestion.question}</h5>
           <div className="options-container">
             <p onClick={this.handleOptionClick} className="option">

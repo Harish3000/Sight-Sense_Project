@@ -15,6 +15,13 @@ const QuizInstruction = () => (
         <p>Ensure you read this guide from start to finish.</p>
         <ul className="browser-default" id="main-list">
           <li>
+            Place your device on a stable surface, such as a table or desk
+          </li>
+          <li>
+            Once your device is positioned correctly and you are comfortable,
+            follow the on-screen instructions to begin the eye test.
+          </li>
+          <li>
             The Eye Quiz has a duration of 15 minutes and ends as soon as your
             time elapses.
           </li>
@@ -39,10 +46,20 @@ const QuizInstruction = () => (
 
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           <span style={{ textAlign: "left" }}>
-            <Link to="/general-test/QuizHome">No take me back</Link>
+            <Link
+              to="/general-test/QuizHome"
+              style={{ textDecoration: "none" }}
+            >
+              No take me back
+            </Link>
           </span>
           <span style={{ textAlign: "right" }}>
-            <Link to="/general-test/play/quiz">Okay Let's Do this</Link>
+            <Link
+              to="/general-test/play/quiz"
+              style={{ textDecoration: "none" }}
+            >
+              Okay Let's Do this
+            </Link>
           </span>
         </div>
       </div>
