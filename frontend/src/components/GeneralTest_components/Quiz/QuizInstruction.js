@@ -39,10 +39,10 @@ const QuizInstruction = () => (
 
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           <span style={{ textAlign: "left" }}>
-            <Link to="/">No take me back</Link>
+            <Link to="/general-test/QuizHome">No take me back</Link>
           </span>
           <span style={{ textAlign: "right" }}>
-            <Link to="/play/Quiz">Okay Let's Do this</Link>
+            <Link to="/general-test/play/quiz">Okay Let's Do this</Link>
           </span>
         </div>
       </div>

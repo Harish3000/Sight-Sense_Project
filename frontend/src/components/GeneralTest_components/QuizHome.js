@@ -24,7 +24,7 @@ const Qhome = () => (
         <div className="play-button-container">
           <ul>
             <li>
-              <Link className="play-btn" to="/play/instructions">
+              <Link className="play-btn" to="/general-test/quiz-instruction">
                 PLAY
               </Link>
             </li>

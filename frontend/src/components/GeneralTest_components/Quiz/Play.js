@@ -1,12 +1,11 @@
 import React, { Fragment } from "react";
 import { Helmet } from "react-helmet";
 import { Modal } from "react-bootstrap";
-import { Modal as AntdModal, Alert } from "antd";
+import { Modal as AntdModal, Alert, message } from "antd";
 
 import "@mdi/font/css/materialdesignicons.min.css";
 import questions from "../../../question.json";
 import isEmpty from "../../../utils/is-empty";
-import M from "materialize-css";
 
 import correctNotification from "../../../assets/GeneralTest_assets/audio/correct-answer.mp3";
 import wrongNotification from "../../../assets/GeneralTest_assets/audio/wrong-answer.mp3";
@@ -148,7 +147,7 @@ class play extends React.Component {
       title: "Confirm Quit",
       content: "Are you sure you want to quit?",
       onOk: () => {
-        window.location.href = "/";
+        window.location.href = "/general-test/QuizHome";
       },
       onCancel: () => {},
     });
@@ -177,11 +176,7 @@ class play extends React.Component {
   };
 
   correctAnswers = () => {
-    M.toast({
-      html: "Correct Answer",
-      classes: "toast-valid",
-      displayLength: 1500,
-    });
+    message.success("Correct Answer", 1.5);
 
     this.setState(
       (prevState) => ({
@@ -206,11 +201,7 @@ class play extends React.Component {
   };
   wrongAnswers = () => {
     navigator.vibrate(1000);
-    M.toast({
-      html: "Wrong Answer",
-      classes: "toast-invalid",
-      displayLength: 1500,
-    });
+    message.error("Wrong Answer", 1.5);
     this.setState(
       (prevState) => ({
         wrongAnswers: prevState.wrongAnswers + 1,
@@ -249,7 +240,7 @@ class play extends React.Component {
             },
           },
           () => {
-            window.location.href = "/";
+            window.location.href = "/general-test/QuizHome";
           }
         );
       } else {
