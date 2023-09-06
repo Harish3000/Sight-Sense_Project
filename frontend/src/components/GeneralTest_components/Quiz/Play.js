@@ -4,7 +4,7 @@ import { Modal } from "react-bootstrap";
 import { Modal as AntdModal, Alert } from "antd";
 
 import "@mdi/font/css/materialdesignicons.min.css";
-import questions from "../../../questions.json";
+import questions from "../../../question.json";
 import isEmpty from "../../../utils/is-empty";
 import M from "materialize-css";
 
@@ -14,9 +14,7 @@ import buttonSound from "../../../assets/GeneralTest_assets/audio/button-sound.m
 import classnames from "classnames";
 
 import "bootstrap/dist/css/bootstrap.min.css";
-
 import jsPDF from "jspdf";
-//import html2canvas from "html2canvas";
 
 class play extends React.Component {
   constructor(props) {
