@@ -2,18 +2,15 @@ import React, { Fragment } from "react";
 import { Helmet } from "react-helmet";
 import { Modal } from "react-bootstrap";
 import { Modal as AntdModal, Alert, message } from "antd";
-
 import "@mdi/font/css/materialdesignicons.min.css";
-import questions from "../../../question.json";
-import isEmpty from "../../../utils/is-empty";
-
+import "bootstrap/dist/css/bootstrap.min.css";
 import correctNotification from "../../../assets/GeneralTest_assets/audio/correct-answer.mp3";
 import wrongNotification from "../../../assets/GeneralTest_assets/audio/wrong-answer.mp3";
 import buttonSound from "../../../assets/GeneralTest_assets/audio/button-sound.mp3";
 import classnames from "classnames";
-
-import "bootstrap/dist/css/bootstrap.min.css";
+import questions from "../../../question.json";
 import jsPDF from "jspdf";
+import isEmpty from "../../../utils/is-empty";
 
 class play extends React.Component {
   constructor(props) {
@@ -40,36 +37,6 @@ class play extends React.Component {
     this.buttonSound = React.createRef();
   }
 
-  //   displayQuestions = (
-  //     questions = this.state.questions,
-  //     currentQuestion,
-  //     nextQuestion,
-  //     previousQuestion
-  //   ) => {
-  //     let { currentQuestionIndex } = this.state;
-  //     if (!isEmpty(this.state.questions)) {
-  //       questions = this.state.questions;
-  //       currentQuestion = questions[currentQuestionIndex];
-  //       if (currentQuestion) {
-  //         // Check if currentQuestion is defined
-  //         nextQuestion = questions[currentQuestionIndex + 1];
-  //         previousQuestion = questions[currentQuestionIndex - 1];
-  //         const answer = currentQuestion.answer;
-  //         this.setState(
-  //           {
-  //             currentQuestion,
-  //             nextQuestion,
-  //             previousQuestion,
-  //             numberOfQuestions: questions.length,
-  //             answer,
-  //           },
-  //           () => {
-  //             this.handleDisabledButton();
-  //           }
-  //         );
-  //       }
-  //     }
-  //   };
   displayQuestions = (
     questions = this.state.questions,
     currentQuestion,
@@ -81,12 +48,10 @@ class play extends React.Component {
       questions = this.state.questions;
       currentQuestion = questions[currentQuestionIndex];
       if (currentQuestion) {
-        // Check if currentQuestion is defined
         nextQuestion = questions[currentQuestionIndex + 1];
         previousQuestion = questions[currentQuestionIndex - 1];
         const answer = currentQuestion.answer;
 
-        // Check if it's the 7th or 8th question
         if (currentQuestionIndex === 6) {
           this.showAdviceMessage("Close Left Eye and Check");
         } else if (currentQuestionIndex === 7) {
@@ -110,7 +75,6 @@ class play extends React.Component {
   };
 
   showAdviceMessage = (messageText) => {
-    // Show a message using Ant Design message component
     message.info(messageText, 5);
   };
 
@@ -140,7 +104,6 @@ class play extends React.Component {
       this.wrongTimeout = setTimeout(() => {
         this.wrongSound.current.play();
       }, 500);
-      //document.getElementById("wrong-sound").play();
       this.wrongAnswers();
     }
   };
@@ -387,7 +350,6 @@ class play extends React.Component {
     console.log(playerStats);
   };
 
-  //close modal after display result
   handleClose = () => {
     this.setState({ showModal: false });
   };
