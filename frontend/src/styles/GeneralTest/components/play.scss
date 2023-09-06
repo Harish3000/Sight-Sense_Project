@@ -1,5 +1,5 @@
 .questions {
-  background-color: #f5f5f5;
+  background-color: #ffffff;
   border-left: 5px solid blue;
   width: 99%;
   margin: 3rem 0 auto;
@@ -52,6 +52,7 @@
   cursor: pointer;
   margin-right: 2rem;
   padding: 1rem;
+  border-radius: 21px;
 }
 
 .button-container button:first-child {
@@ -60,8 +61,9 @@
   transition: 0.2s linear all;
 }
 .button-container button:first-child:hover {
-  background-color: #070808;
+  background-color: #3bb0ff;
   box-shadow: 0 0 10px #070808;
+  transition: 0.2s linear all;
 }
 
 .button-container button:nth-child(2) {
@@ -72,11 +74,12 @@
 .button-container button:nth-child(2):hover {
   background-color: #50a15c;
   box-shadow: 0 0 10px#70e84d;
+  transition: 0.2s linear all;
 }
 
 .button-container button:last-child {
-  background-color: darken(#fc146d, 10%);
-  box-shadow: 0 0 10px #fc146d;
+  background-color: darken(#d90254, 10%);
+  box-shadow: 0 0 10px #9c023d;
   transition: 0.2s linear all;
 }
 .button-container button:last-child:hover {
