@@ -11,6 +11,7 @@ import classnames from "classnames";
 import questions from "../../../question.json";
 import jsPDF from "jspdf";
 import isEmpty from "../../../utils/is-empty";
+import axios from "axios";
 
 class play extends React.Component {
   constructor(props) {
@@ -353,6 +354,27 @@ class play extends React.Component {
   handleClose = () => {
     this.setState({ showModal: false });
   };
+
+  handleSaveButtonClick = () => {
+    const { score } = this.state;
+
+    const data = {
+      test_name: "General Test",
+      user_id: Math.random(),
+      test_date: new Date(),
+      test_score: score,
+    };
+
+    axios
+      .post("http://localhost:4000/GeneralTest/add", data)
+      .then((response) => {
+        message.success("Test Data saved successfully");
+        console.log("Data saved successfully:", response.data);
+      })
+      .catch((error) => {
+        console.error("Error saving data:", error);
+      });
+  };
   render() {
     const { showModal } = this.state;
     const { showAlert } = this.state;
@@ -405,6 +427,12 @@ class play extends React.Component {
                 onClick={this.generatePDF}
               >
                 Download PDF
+              </button>
+              <button
+                className="btn btn-outline-danger"
+                onClick={this.handleSaveButtonClick} // Add this line
+              >
+                Save
               </button>
               <button
                 className="btn btn-outline-danger"
