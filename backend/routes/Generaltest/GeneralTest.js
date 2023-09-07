@@ -26,4 +26,16 @@ router.route("/add").post((req, res) => {
     });
 });
 
+//Clear histoty
+router.route("/delete-all").delete((req, res) => {
+  Test.deleteMany({})
+    .then(() => {
+      res.json("All General Test data deleted successfully.");
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).json("Error deleting General Test data.");
+    });
+});
+
 module.exports = router;
