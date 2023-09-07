@@ -110,7 +110,7 @@
   },
 
   {
-    "question": "What are the letters in line 6",
+    "question": "What are the letters in line 6 (Please keep minimum distance of 1 meter from the screen)",
     "optionA": "E O F C 2 P",
     "optionB": "E O E C Z P",
     "optionC": "E D F C Z P",
@@ -120,7 +120,7 @@
   },
 
   {
-    "question": "What are the letters in line 7",
+    "question": "What are the letters in line 7 (Please keep minimum distance of 1 meter from the screen)",
     "optionA": "F F L P Z 2 D",
     "optionB": "F E L O P Z D",
     "optionC": "E F I P Z 7 D",
@@ -130,7 +130,7 @@
   },
 
   {
-    "question": "What are the letters in line 8",
+    "question": "What are the letters in line 8 (Please keep minimum distance of 1 meter from the screen)",
     "optionA": "D E F P O T E C",
     "optionB": "O E F P O T E C",
     "optionC": "D F E P O T E C",
@@ -140,7 +140,7 @@
   },
 
   {
-    "question": "What are the letters in line 4",
+    "question": "What are the letters in line 4 (Please keep minimum distance of 1 meter from the screen)",
     "optionA": "2 0 A N",
     "optionB": "Z 0 N A",
     "optionC": "Z O K N",
