@@ -5,9 +5,9 @@ const { route } = require("../User/User");
 //Add test
 router.route("/add").post((req, res) => {
   const test_name = "General Test";
-  const user_id = generateRandomUserId();
+  const user_id = Math.random();
   const test_date = new Date();
-  const test_score = Number(req.body.test_score);
+  const test_score = req.body.test_score;
 
   const newTest = new Test({
     test_name,

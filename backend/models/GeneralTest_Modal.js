@@ -16,9 +16,10 @@ const GeneralTestSchema = new Schema({
     required: false,
   },
   test_score: {
-    type: Number,
+    type: String,
     required: false,
   },
 });
 
 const GeneralTest = mongoose.model("GeneralTest", GeneralTestSchema);
+module.exports = GeneralTest;
