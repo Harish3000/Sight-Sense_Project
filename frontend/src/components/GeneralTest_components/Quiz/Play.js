@@ -423,21 +423,20 @@ class play extends React.Component {
             </Modal.Body>
             <Modal.Footer>
               <button
-                className="btn btn-outline-danger"
+                className="btn btn-primary"
                 onClick={this.generatePDF}
+                style={{ marginRight: "10px" }}
               >
                 Download PDF
               </button>
               <button
-                className="btn btn-outline-danger"
-                onClick={this.handleSaveButtonClick} // Add this line
+                className="btn btn-success"
+                onClick={this.handleSaveButtonClick}
+                style={{ marginRight: "10px" }}
               >
                 Save
               </button>
-              <button
-                className="btn btn-outline-danger"
-                onClick={this.handleClose}
-              >
+              <button className="btn btn-danger" onClick={this.handleClose}>
                 Close
               </button>
             </Modal.Footer>
