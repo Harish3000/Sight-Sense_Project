@@ -375,6 +375,18 @@ class play extends React.Component {
         console.error("Error saving data:", error);
       });
   };
+
+  handleDeleteAllDataClick = () => {
+    axios
+      .delete("http://localhost:4000/GeneralTest/delete-all")
+      .then((response) => {
+        message.warning("All General Test data deleted successfully");
+        console.log("Data deleted successfully:", response.data);
+      })
+      .catch((error) => {
+        console.error("Error deleting data:", error);
+      });
+  };
   render() {
     const { showModal } = this.state;
     const { showAlert } = this.state;
@@ -425,19 +437,29 @@ class play extends React.Component {
               <button
                 className="btn btn-primary"
                 onClick={this.generatePDF}
-                style={{ marginRight: "10px" }}
+                style={{ marginRight: "5px" }}
               >
                 Download PDF
               </button>
               <button
                 className="btn btn-success"
                 onClick={this.handleSaveButtonClick}
-                style={{ marginRight: "10px" }}
+                style={{ marginRight: "5px" }}
               >
                 Save
               </button>
-              <button className="btn btn-danger" onClick={this.handleClose}>
+              <button
+                className="btn btn-danger"
+                onClick={this.handleClose}
+                style={{ marginRight: "5px" }}
+              >
                 Close
+              </button>
+              <button
+                className="btn btn-warning"
+                onClick={this.handleDeleteAllDataClick}
+              >
+                Reset Stats
               </button>
             </Modal.Footer>
           </Modal>
