@@ -418,7 +418,7 @@ class play extends React.Component {
               alignItems: "center",
               justifyContent: "center",
               minHeight: "700vh",
-              backgroundColor: "rgba(0, 0, 0, 0.5)", // Use rgba with an alpha value for transparency
+              backgroundColor: "rgba(0, 0, 0, 0.5)",
             }}
           >
             <Modal.Header closeButton>
