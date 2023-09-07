@@ -3,7 +3,7 @@ import React from "react";
 function TestC() {
   return (
     <div>
-      <h1>Testing purpose</h1>
+      <h1>Testing purposes used this function</h1>
     </div>
   );
 }
