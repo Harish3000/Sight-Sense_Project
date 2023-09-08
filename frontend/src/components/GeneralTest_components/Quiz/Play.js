@@ -308,19 +308,26 @@ class play extends React.Component {
       pdf.internal.scaleFactor;
     const xOffset = (pageWidth - textWidth) / 2;
 
-    pdf.setFontSize(18);
-    pdf.text("Sight Sense", xOffset, 10);
+    pdf.setFontSize(22);
+
+    pdf.line(10, 20, pageWidth - 10, 20);
+
+    pdf.text("Sight Sense", xOffset, 30);
 
     pdf.setFontSize(12);
-    pdf.text(`Score: ${playerStats.score}`, 10, 30);
-    pdf.text(`Number of Questions: ${playerStats.numberOfQuestions}`, 10, 40);
+    pdf.text(`         Score: ${playerStats.score}`, 10, 50);
     pdf.text(
-      `Number of Answered Questions: ${playerStats.numberOfAnsweredQuestions}`,
+      `         Number of Questions: ${playerStats.numberOfQuestions}`,
       10,
-      50
+      60
     );
-    pdf.text(`Correct Answers: ${playerStats.correctAnswers}`, 10, 60);
-    pdf.text(`Wrong Answers: ${playerStats.wrongAnswers}`, 10, 70);
+    pdf.text(
+      `         Number of Answered Questions: ${playerStats.numberOfAnsweredQuestions}`,
+      10,
+      70
+    );
+    pdf.text(`         Correct Answers: ${playerStats.correctAnswers}`, 10, 80);
+    pdf.text(`         Wrong Answers: ${playerStats.wrongAnswers}`, 10, 90);
 
     const footerText = "All Rights Reserved";
     const footerTextWidth =
