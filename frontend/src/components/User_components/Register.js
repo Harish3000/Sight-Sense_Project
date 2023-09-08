@@ -20,36 +20,46 @@ const Register = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-        axios
-          .post("http://localhost:4000/api/users/createuser", {
-            firstname,
-            lastname,
-            contact,
-            addLine1,
-            addLine2,
-            addLine3,
-            gender,
-            email,
-            password,
-          })
-          .then(() => {
-            toast.success("Registration Success!!");
-            setTimeout(() => {
-              navigate("/");
-            }, 3000);
-          })
-          .catch((err) => console.log(err));
 
-        // Reset the form after submission
-        setFirstName("");
-        setLastName("");
-        setContact("");
-        setAddLine1("");
-        setAddLine2("");
-        setAddLine3("");
-        setGender("");
-        setEmail("");
-        setPassword("");
+    try {
+      const response = await axios.post("http://localhost:4000/api/users/createuser", {
+        firstname,
+        lastname,
+        contact,
+        addLine1,
+        addLine2,
+        addLine3,
+        gender,
+        email,
+        password,
+      });
+
+      // Registration success
+      toast.success("Registration Success!!");
+      setTimeout(() => {
+        navigate("/");
+      }, 3000);
+
+      // Reset the form after successful registration
+      setFirstName("");
+      setLastName("");
+      setContact("");
+      setAddLine1("");
+      setAddLine2("");
+      setAddLine3("");
+      setGender("");
+      setEmail("");
+      setPassword("");
+    } catch (error) {
+      // Registration error, check if the error message contains "Email Already In Use!!"
+      if (error.response && error.response.data && error.response.data.err === "Email Already In Use!!") {
+        toast.error("Email is already in use. Please choose a different email.");
+      } else {
+        // Handle other registration errors
+        console.error(error);
+        toast.error("Registration failed. Please try again.");
+      }
+    }
   };
 
   return (
