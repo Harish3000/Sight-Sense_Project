@@ -12,6 +12,8 @@ import questions from "../../../question.json";
 import jsPDF from "jspdf";
 import isEmpty from "../../../utils/is-empty";
 import axios from "axios";
+import Icon from "@mdi/react";
+import { mdiFormatListBulleted } from "@mdi/js";
 
 class play extends React.Component {
   constructor(props) {
@@ -355,6 +357,9 @@ class play extends React.Component {
     this.setState({ showModal: false });
   };
 
+  showSummaryModal = () => {
+    this.setState({ showModal: true });
+  };
   handleSaveButtonClick = () => {
     const { score } = this.state;
 
@@ -551,6 +556,29 @@ class play extends React.Component {
               Quit
             </button>
           </div>
+          {currentQuestionIndex === 15 && (
+            <button
+              onClick={this.showSummaryModal}
+              style={{
+                backgroundColor: "green",
+                color: "white",
+                borderRadius: "5px",
+                position: "absolute",
+                padding: "5px",
+                right: "10px",
+                display: "flex",
+                alignItems: "center",
+              }}
+            >
+              <Icon
+                path={mdiFormatListBulleted} // Specify the MDI icon you imported
+                size={1} // Adjust the size of the icon as needed
+                color="white" // Set the icon color
+              />
+              <span style={{ marginLeft: "5px" }}>Summary</span>{" "}
+              {/* Button text */}
+            </button>
+          )}
         </div>
       </Fragment>
     );
