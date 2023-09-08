@@ -2,7 +2,6 @@ const router = require("express").Router();
 let Test = require("../../models/GeneralTest_Modal");
 const { route } = require("../User/User");
 
-//Add test
 // Update or add test
 router.route("/add").post((req, res) => {
   const test_name = "General Test";
@@ -49,6 +48,7 @@ router.route("/add").post((req, res) => {
       console.log(err);
     });
 });
+
 //Clear histoty
 router.route("/delete-all").delete((req, res) => {
   Test.deleteMany({})
