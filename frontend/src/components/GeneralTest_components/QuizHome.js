@@ -11,6 +11,7 @@ const Qhome = () => (
     </Helmet>
     <div id="Qhome">
       <section>
+        <br />
         <h1>
           <b>Eye Testing Quiz</b>
           <br /> <br />
@@ -28,7 +29,7 @@ const Qhome = () => (
           <ul>
             <li>
               <Link className="play-btn" to="/general-test/quiz-instruction">
-                TEST
+                Lets Test Your Eyes
               </Link>
             </li>
           </ul>
