@@ -4,6 +4,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer as ReactToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useSignUp } from "../../contexts/User_context/useSignUp";
 
 const Register = () => {
   const [firstname, setFirstName] = useState("");
@@ -16,71 +17,24 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const { signup, err, isLoading } = useSignUp();
+
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    try {
-      const response = await axios.post(
-        "http://localhost:4000/api/users/createuser",
-        {
-          firstname,
-          lastname,
-          contact,
-          addLine1,
-          addLine2,
-          addLine3,
-          gender,
-          email,
-          password,
-        }
-      );
-
-      // Registration success
-      toast.success("Registration Success!!");
-      setTimeout(() => {
-        navigate("/login");
-      }, 3000);
-
-      // Reset the form after successful registration
-      setFirstName("");
-      setLastName("");
-      setContact("");
-      setAddLine1("");
-      setAddLine2("");
-      setAddLine3("");
-      setGender("");
-      setEmail("");
-      setPassword("");
-    } catch (error) {
-      // Registration error checking
-      if (
-        error.response &&
-        error.response.data &&
-        error.response.data.err === "Email Already In Use!!"
-      ) {
-        toast.error(
-          "Email is already in use. Please choose a different email."
-        );
-      } else if (
-        error.response &&
-        error.response.data &&
-        error.response.data.err === "All fields must be filled!!"
-      ) {
-        toast.error("All fields must be filled.");
-      } else if (
-        error.response &&
-        error.response.data &&
-        error.response.data.err === "Password is not strong enough!!"
-      ) {
-        toast.error("Password is not strong enough.");
-      } else {
-        // Handle other registration errors
-        console.error(error);
-        toast.error("Registration failed. Please try again.");
-      }
-    }
+    await signup(
+      firstname,
+      lastname,
+      contact,
+      addLine1,
+      addLine2,
+      addLine3,
+      gender,
+      email,
+      password
+    );
   };
 
   return (
@@ -189,11 +143,15 @@ const Register = () => {
 
               <br></br>
               <div className="btns-div">
-                <button type="submit">Register</button>
+                <button type="submit" disabled={isLoading}>
+                  Register
+                </button>
                 <Link to="/login">
                   <button type="button">Cancel</button>
                 </Link>
               </div>
+
+              {err && <div className="err">{err}</div>}
             </form>
           </div>
         </div>
