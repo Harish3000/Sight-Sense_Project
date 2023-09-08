@@ -11,6 +11,10 @@ import classnames from "classnames";
 import questions from "../../../question.json";
 import jsPDF from "jspdf";
 import isEmpty from "../../../utils/is-empty";
+import axios from "axios";
+import Icon from "@mdi/react";
+import { mdiFormatListBulleted } from "@mdi/js";
+//import "../../../../node_modules/materialize-css/dist/css/materialize.min.css";
 
 class play extends React.Component {
   constructor(props) {
@@ -150,7 +154,7 @@ class play extends React.Component {
     this.playButtonSound();
 
     AntdModal.confirm({
-      title: "Confirm Quit",
+      title: "Confirm Quit ",
       content: "Are you sure you want to quit?",
       onOk: () => {
         window.location.href = "/general-test/QuizHome";
@@ -228,7 +232,7 @@ class play extends React.Component {
     );
   };
   startTimer = () => {
-    const countDownTime = Date.now() + 400000;
+    const countDownTime = Date.now() + 600000;
     this.interval = setInterval(() => {
       const now = new Date();
       const distance = countDownTime - now;
@@ -305,19 +309,26 @@ class play extends React.Component {
       pdf.internal.scaleFactor;
     const xOffset = (pageWidth - textWidth) / 2;
 
-    pdf.setFontSize(18);
-    pdf.text("Sight Sense", xOffset, 10);
+    pdf.setFontSize(22);
+
+    pdf.line(10, 20, pageWidth - 10, 20);
+
+    pdf.text("Sight Sense", xOffset, 30);
 
     pdf.setFontSize(12);
-    pdf.text(`Score: ${playerStats.score}`, 10, 30);
-    pdf.text(`Number of Questions: ${playerStats.numberOfQuestions}`, 10, 40);
+    pdf.text(`         Score: ${playerStats.score}`, 10, 50);
     pdf.text(
-      `Number of Answered Questions: ${playerStats.numberOfAnsweredQuestions}`,
+      `         Number of Questions: ${playerStats.numberOfQuestions}`,
       10,
-      50
+      60
     );
-    pdf.text(`Correct Answers: ${playerStats.correctAnswers}`, 10, 60);
-    pdf.text(`Wrong Answers: ${playerStats.wrongAnswers}`, 10, 70);
+    pdf.text(
+      `         Number of Answered Questions: ${playerStats.numberOfAnsweredQuestions}`,
+      10,
+      70
+    );
+    pdf.text(`         Correct Answers: ${playerStats.correctAnswers}`, 10, 80);
+    pdf.text(`         Wrong Answers: ${playerStats.wrongAnswers}`, 10, 90);
 
     const footerText = "All Rights Reserved";
     const footerTextWidth =
@@ -337,7 +348,7 @@ class play extends React.Component {
       this.setState({ showAlert: false }, () => {
         this.setState({ showModal: true });
       });
-    }, 1800); //1.8 seconds
+    }, 1800); //1.8 Seconds show the alert
 
     const { state } = this;
     const playerStats = {
@@ -352,6 +363,42 @@ class play extends React.Component {
 
   handleClose = () => {
     this.setState({ showModal: false });
+  };
+
+  showSummaryModal = () => {
+    this.setState({ showModal: true });
+  };
+  handleSaveButtonClick = () => {
+    const { score } = this.state;
+
+    const data = {
+      test_name: "General Test",
+      user_id: Math.random(),
+      test_date: new Date(),
+      test_score: score,
+    };
+
+    axios
+      .post("http://localhost:4000/GeneralTest/addTest", data)
+      .then((response) => {
+        message.success("Test Data saved successfully");
+        console.log("Data saved successfully:", response.data);
+      })
+      .catch((error) => {
+        console.error("Error saving data:", error);
+      });
+  };
+
+  handleDeleteAllDataClick = () => {
+    axios
+      .delete("http://localhost:4000/GeneralTest/delete-all")
+      .then((response) => {
+        message.warning("All General Test data deleted successfully");
+        console.log("Data deleted successfully:", response.data);
+      })
+      .catch((error) => {
+        console.error("Error deleting data:", error);
+      });
   };
   render() {
     const { showModal } = this.state;
@@ -368,7 +415,7 @@ class play extends React.Component {
         <Fragment>
           {showAlert && (
             <Alert
-              message="This is a Success Alert"
+              message="You are Completed the Quiz"
               type="success"
               showIcon
               closable
@@ -379,18 +426,24 @@ class play extends React.Component {
           <Modal
             show={showModal}
             onHide={this.handleClose}
-            tyle={{
+            style={{
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              minHeight: "700vh",
-              backgroundColor: "rgba(0, 0, 0, 0.5)", // Use rgba with an alpha value for transparency
+              minHeight: "1900vh",
+              backgroundColor: "rgba(0, 0, 0, 0.5)",
             }}
           >
             <Modal.Header closeButton>
-              <Modal.Title>Player Stats</Modal.Title>
+              <Modal.Title>General Test Result</Modal.Title>
             </Modal.Header>
-            <Modal.Body>
+            <Modal.Body
+              style={{
+                maxHeight: "900vh",
+                overflowY: "auto",
+                textAlign: "center",
+              }}
+            >
               <p>Score: {state.score}</p>
               <p>Number of Questions: {state.numberOfQuestions}</p>
               <p>
@@ -398,19 +451,41 @@ class play extends React.Component {
               </p>
               <p>Correct Answers: {state.correctAnswers}</p>
               <p>Wrong Answers: {state.wrongAnswers}</p>
+              <p style={{ fontWeight: "bold" }}>
+                Score Percentage:{" "}
+                {((state.score / state.numberOfQuestions) * 100).toFixed(2)}%
+              </p>
             </Modal.Body>
-            <Modal.Footer>
+            <Modal.Footer style={{ minHeight: "16vh" }}>
+              <b>
+                If your score below 8 please Test adavance Test in our System
+              </b>
               <button
-                className="btn btn-outline-danger"
+                className="btn btn-primary"
                 onClick={this.generatePDF}
+                style={{ marginRight: "5px" }}
               >
                 Download PDF
               </button>
               <button
-                className="btn btn-outline-danger"
+                className="btn btn-success"
+                onClick={this.handleSaveButtonClick}
+                style={{ marginRight: "5px" }}
+              >
+                Save
+              </button>
+              <button
+                className="btn btn-danger"
                 onClick={this.handleClose}
+                style={{ marginRight: "5px" }}
               >
                 Close
+              </button>
+              <button
+                className="btn btn-warning"
+                onClick={this.handleDeleteAllDataClick}
+              >
+                Reset Stats
               </button>
             </Modal.Footer>
           </Modal>
@@ -422,7 +497,9 @@ class play extends React.Component {
         </Fragment>
 
         <div className="questions">
-          <h2>Quiz Mode</h2>
+          <b>
+            <h2>Test Mode</h2>
+          </b>
           <div className="linfeline-container">
             {currentQuestionIndex < 15 && (
               <p>
@@ -456,7 +533,7 @@ class play extends React.Component {
                 alt=""
                 style={{
                   maxWidth: "150%",
-                  maxHeight: "350px",
+                  maxHeight: "410px",
                 }}
               />
             )}
@@ -502,6 +579,24 @@ class play extends React.Component {
               Quit
             </button>
           </div>
+          {currentQuestionIndex === 15 && (
+            <button
+              onClick={this.showSummaryModal}
+              style={{
+                backgroundColor: "green",
+                color: "white",
+                borderRadius: "5px",
+                position: "absolute",
+                padding: "5px",
+                right: "10px",
+                display: "flex",
+                alignItems: "center",
+              }}
+            >
+              <Icon path={mdiFormatListBulleted} size={1} color="white" />
+              <span style={{ marginLeft: "5px" }}>Summary</span>{" "}
+            </button>
+          )}
         </div>
       </Fragment>
     );
