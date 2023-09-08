@@ -231,7 +231,7 @@ class play extends React.Component {
     );
   };
   startTimer = () => {
-    const countDownTime = Date.now() + 400000;
+    const countDownTime = Date.now() + 600000;
     this.interval = setInterval(() => {
       const now = new Date();
       const distance = countDownTime - now;
@@ -425,18 +425,18 @@ class play extends React.Component {
           <Modal
             show={showModal}
             onHide={this.handleClose}
-            tyle={{
+            style={{
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              minHeight: "700vh",
+              minHeight: "1900vh",
               backgroundColor: "rgba(0, 0, 0, 0.5)",
             }}
           >
             <Modal.Header closeButton>
-              <Modal.Title>Player Stats</Modal.Title>
+              <Modal.Title>General Test Result</Modal.Title>
             </Modal.Header>
-            <Modal.Body>
+            <Modal.Body style={{ maxHeight: "900vh", overflowY: "auto" }}>
               <p>Score: {state.score}</p>
               <p>Number of Questions: {state.numberOfQuestions}</p>
               <p>
