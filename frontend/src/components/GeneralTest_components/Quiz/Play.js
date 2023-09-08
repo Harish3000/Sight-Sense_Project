@@ -483,7 +483,7 @@ class play extends React.Component {
         </Fragment>
 
         <div className="questions">
-          <h2>Quiz Mode</h2>
+          <h2>Test Mode</h2>
           <div className="linfeline-container">
             {currentQuestionIndex < 15 && (
               <p>
@@ -517,7 +517,7 @@ class play extends React.Component {
                 alt=""
                 style={{
                   maxWidth: "150%",
-                  maxHeight: "400px",
+                  maxHeight: "410px",
                 }}
               />
             )}
