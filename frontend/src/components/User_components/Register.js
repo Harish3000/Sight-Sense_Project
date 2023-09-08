@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer as ReactToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useSignUp } from "../../contexts/User_context/useSignUp";
+import { useSignUp } from "../../hooks/User_hooks/useSignUp";
 
 const Register = () => {
   const [firstname, setFirstName] = useState("");
