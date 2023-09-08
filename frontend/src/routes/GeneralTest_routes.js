@@ -1,6 +1,5 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import Test from "../components/GeneralTest_components/test";
 import QuizInstruction from "../components/GeneralTest_components/Quiz/QuizInstruction";
 import QuizHome from "../components/GeneralTest_components/QuizHome";
 import Play from "../components/GeneralTest_components/Quiz/Play";
@@ -8,7 +7,6 @@ import Play from "../components/GeneralTest_components/Quiz/Play";
 export default function GeneralTest_routes() {
   return (
     <Routes>
-      <Route path="/general-test/test" element={<Test />} />
       <Route
         path="/general-test/quiz-instruction"
         element={<QuizInstruction />}
@@ -18,4 +16,3 @@ export default function GeneralTest_routes() {
     </Routes>
   );
 }
- 

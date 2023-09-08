@@ -570,13 +570,8 @@ class play extends React.Component {
                 alignItems: "center",
               }}
             >
-              <Icon
-                path={mdiFormatListBulleted} // Specify the MDI icon you imported
-                size={1} // Adjust the size of the icon as needed
-                color="white" // Set the icon color
-              />
+              <Icon path={mdiFormatListBulleted} size={1} color="white" />
               <span style={{ marginLeft: "5px" }}>Summary</span>{" "}
-              {/* Button text */}
             </button>
           )}
         </div>
