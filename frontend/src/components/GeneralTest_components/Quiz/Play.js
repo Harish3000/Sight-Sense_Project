@@ -151,7 +151,7 @@ class play extends React.Component {
     this.playButtonSound();
 
     AntdModal.confirm({
-      title: "Confirm Quit",
+      title: "Confirm Quit ",
       content: "Are you sure you want to quit?",
       onOk: () => {
         window.location.href = "/general-test/QuizHome";
@@ -366,7 +366,7 @@ class play extends React.Component {
     };
 
     axios
-      .post("http://localhost:4000/GeneralTest/add", data)
+      .post("http://localhost:4000/GeneralTest/addTest", data)
       .then((response) => {
         message.success("Test Data saved successfully");
         console.log("Data saved successfully:", response.data);
