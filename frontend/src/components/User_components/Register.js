@@ -36,6 +36,11 @@ const Register = () => {
     //         lastName,
     //         email,
     //         password,
+    //          contact,
+    //          gender,
+    //          addLine1,
+    //          addLine2,
+    //          addLine3
     //       })
     //       .then(() => {
     //         toast.success("Registration Success!!");
@@ -50,6 +55,11 @@ const Register = () => {
     //     setFirstName("");
     //     setLastName("");
     //     setPassword("");
+    //      setAddLine1("");
+    //      setAddLine2("");
+    //      setAddLine3("");
+    //      setContact("");
+    //      setGender("");
     //   }
     // } catch (err) {
     //   console.log(err);
