@@ -1,7 +1,7 @@
 const User = require("../models/User_model");
 const mongoose = require("mongoose");
 
-// create a new Item
+// create a new User
 const createUser = async (req, res) => {
   const { firstname,
           lastname,
@@ -11,10 +11,10 @@ const createUser = async (req, res) => {
           addLine3,
           gender,
           email,
-          pwd
+          password
    } = req.body;
 
-  //add the item to the database
+  //Add user to the database
   try {
     const obj = await User.create({ firstname,
       lastname,
@@ -24,7 +24,7 @@ const createUser = async (req, res) => {
       addLine3,
       gender,
       email,
-      pwd });
+      password });
     res.status(200).json(obj);
   } catch (error) {
     res.status(400).json({ error: error.message });
