@@ -5,7 +5,7 @@ export default function ProfileHome() {
   return (
     <div>
         <Link to="/login">
-        <button type='button'>Login Here</button>
+        <button type='button'>Get Started !</button>
         </Link>
     </div>
   )
