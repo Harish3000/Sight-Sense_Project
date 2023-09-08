@@ -20,17 +20,6 @@ const Register = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    try {
-      console.log("Checking for the email:", email);
-      const response = await axios.get(
-        `http://localhost:4000/api/users/check-email/${encodeURIComponent(
-          email
-        )}`
-      );
-
-      if (response.data.exists) {
-        toast.error("Email already registered. Please use a different email.");
-      } else {
         axios
           .post("http://localhost:4000/api/users/createuser", {
             firstname,
@@ -61,10 +50,6 @@ const Register = () => {
         setGender("");
         setEmail("");
         setPassword("");
-      }
-    } catch (err) {
-      console.log(err);
-    }
   };
 
   return (
