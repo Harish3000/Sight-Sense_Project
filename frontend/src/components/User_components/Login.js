@@ -12,20 +12,20 @@ const Login = () => {
 
   const handleLoginFormSubmit = (e) => {
     console.log("Login Successefully")
-    // e.preventDefault();
+    e.preventDefault();
 
-    // axios
-    //   .post("http://localhost:4000/User/login", { email, password })
-    //   .then((result) => {
-    //     if (result.data.message === "Success") {
-    //       toast.success("Login Successfully!!");
-    //       setTimeout(() => {
-    //         navigate("/home");
-    //       }, 3000); // Adjust the time in milliseconds as needed (e.g., 3000ms = 3 seconds)
-    //     } else {
-    //       toast.error("Register first!!");
-    //     }
-    //   });
+    axios
+      .post("http://localhost:4000/api/users/login", { email, password })
+      .then((result) => {
+        if (result.data.message === "Success") {
+          toast.success("Login Successfully!!");
+          setTimeout(() => {
+            navigate("/home");
+          }, 3000); // Adjust the time in milliseconds as needed (e.g., 3000ms = 3 seconds)
+        } else {
+          toast.error("Register first!!");
+        }
+      });
   };
 
   return (

@@ -53,7 +53,30 @@ const checkUserByEmail = async (req, res) => {
   }
 };
 
+// Login function
+const loginUser = async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    const user = await User.findOne({ email: email });
+
+    if (user) {
+      if (user.password === password) {
+        res.json({ message: "Success" });
+      } else {
+        res.json({ error: "Incorrect" });
+      }
+    } else {
+      res.json({ error: "No record existing!!" });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
+
 module.exports = {
   createUser,
   checkUserByEmail,
+  loginUser
 };
