@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Upload, Button, Spin, message, Image } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 import axios from "axios";
+import "./ImageUploader.css"; // Import the external CSS file
 
 function ImageUploader() {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -59,13 +60,13 @@ function ImageUploader() {
   const renderImagePreview = () => {
     if (selectedFile) {
       return (
-        <div>
+        <div className="image-preview">
           <Image src={URL.createObjectURL(selectedFile)} />
         </div>
       );
     }
     return (
-      <div>
+      <div className="image-preview">
         <Image
           src="https://via.placeholder.com/150"
           alt="Default Image"
@@ -77,7 +78,7 @@ function ImageUploader() {
   };
 
   return (
-    <div style={{ textAlign: "center" }}>
+    <div className="card">
       <h1>Azure Advanced Analysis</h1>
       <h2>Image Preview:</h2>
       {renderImagePreview()}
