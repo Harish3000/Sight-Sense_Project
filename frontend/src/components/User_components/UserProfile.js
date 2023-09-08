@@ -7,7 +7,7 @@ import { useLogOut } from '../../hooks/User_hooks/useLogOut';
 
 export default function UserProfile() {
 
-    const { logout } = useLogOut;
+    const { logout } = useLogOut();
 
     const handleLogOut = () => {
         logout();
