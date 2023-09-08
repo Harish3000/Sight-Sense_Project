@@ -445,7 +445,10 @@ class play extends React.Component {
               <p>Correct Answers: {state.correctAnswers}</p>
               <p>Wrong Answers: {state.wrongAnswers}</p>
             </Modal.Body>
-            <Modal.Footer>
+            <Modal.Footer style={{ minHeight: "16vh" }}>
+              <b>
+                If your score below 8 please Test adavance Test in our System
+              </b>
               <button
                 className="btn btn-primary"
                 onClick={this.generatePDF}
