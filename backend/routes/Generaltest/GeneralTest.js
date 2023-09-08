@@ -13,7 +13,6 @@ router.route("/add").post((req, res) => {
   Test.findOne({ user_id: user_id })
     .then((existingTest) => {
       if (existingTest) {
-        // If an existing record is found, update it
         existingTest.test_date = test_date;
         existingTest.test_score = test_score;
 
