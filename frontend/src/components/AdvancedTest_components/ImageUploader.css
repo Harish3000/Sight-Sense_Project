@@ -1,0 +1,13 @@
+/* ImageUploader.css */
+.card {
+  border: 1px solid #000;
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 600px;
+  text-align: center;
+}
+
+.image-preview {
+  max-width: 100%;
+  height: auto;
+}

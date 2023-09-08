@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 
 import Quizmage from "../../../assets/GeneralTest_assets/img/Question.png";
 import QuestionAnswer from "../../../assets/GeneralTest_assets/img/QuestionAns.png";
+//import "../../../../node_modules/materialize-css/dist/css/materialize.min.css";
+
 
 const QuizInstruction = () => (
   <>
