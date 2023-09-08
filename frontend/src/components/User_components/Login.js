@@ -5,6 +5,7 @@ import axios from "axios";
 import { ToastContainer as ReactToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useLogIn } from "../../hooks/User_hooks/useLogIn";
+import validator from "validator";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -14,6 +15,18 @@ const Login = () => {
 
   const handleLoginFormSubmit = async (e) => {
     e.preventDefault();
+
+    // Client-side email format validation
+    if (!validator.isEmail(email)) {
+      toast.error("Email is not valid");
+      return;
+    }
+
+    //Client-side all fields filled checking
+    if (!email || !password) {
+      toast.error("Please fill out all the fields");
+    }
+
     try {
       await login(email, password);
       // Login was successful

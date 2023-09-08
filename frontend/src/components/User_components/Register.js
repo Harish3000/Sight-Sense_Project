@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { ToastContainer as ReactToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useSignUp } from "../../hooks/User_hooks/useSignUp";
+import validator from "validator";
 
 const Register = () => {
   const [firstname, setFirstName] = useState("");
@@ -22,7 +23,33 @@ const Register = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-  
+
+    //Client-side all fields filled checking
+    if (
+      !firstname ||
+      !lastname ||
+      !contact ||
+      !addLine1 ||
+      !addLine2 ||
+      !addLine3 ||
+      !gender ||
+      !email ||
+      !password
+    ) {
+      toast.error("Please fill out all the fields")
+    }
+      if (!validator.isEmail(email)) {
+        // Client-side email format validation
+        toast.error("Email is not valid");
+        return;
+      }
+
+    // Client-side password strength checking
+    if (!validator.isStrongPassword(password)) {
+      toast.error("Password is not strong enough!!");
+      return;
+    }
+
     try {
       await signup(
         firstname,
@@ -35,18 +62,23 @@ const Register = () => {
         email,
         password
       );
-  
+
       // Registration was successful
       toast.success("Registration successful!");
       setTimeout(() => {
-        navigate("/home");
+        navigate("/login");
       }, 3000);
     } catch (error) {
       // Registration failed
-      toast.error("Registration failed. Please try again.");
+      if (error.response) {
+        // If the error is from the backend, display the error message from the server
+        toast.error(error.response.data.message);
+      } else {
+        // If it's not from the backend, display a generic error message
+        toast.error("Registration failed. Please try again.");
+      }
     }
   };
-  
 
   return (
     <div className="reg-body">

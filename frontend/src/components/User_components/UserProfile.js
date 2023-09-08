@@ -1,13 +1,15 @@
 import React from 'react';
 import axios from 'axios';
+import { useContext } from 'react';
 import { useEffect, useState } from 'react';
 import { ToastContainer as ReactToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useLogOut } from '../../hooks/User_hooks/useLogOut';
+import { AuthContext } from '../../contexts/User_context/AuthContext';
 
 export default function UserProfile() {
 
-    const { logout } = useLogOut();
+    const { logout } = useContext(AuthContext);
 
     const handleLogOut = () => {
         logout();
