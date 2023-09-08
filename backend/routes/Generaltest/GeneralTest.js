@@ -3,7 +3,7 @@ let Test = require("../../models/GeneralTest_Modal");
 const { route } = require("../User/User");
 
 // Update or add test
-router.route("/add").post((req, res) => {
+router.route("/addTest").post((req, res) => {
   const test_name = "General Test";
   const user_id = "User 1";
   const test_date = new Date();
