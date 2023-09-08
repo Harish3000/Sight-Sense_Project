@@ -34,6 +34,14 @@ export default function UserProfile() {
                     <p>Gender: {user.gender}</p>
                 </div>
             )}
+
+            <div>
+                <button type='button'>edit</button>
+            </div>
+
+            <div>
+                <button type='button'>delete</button>
+            </div>
             <ReactToastContainer />
         </div>
     );
