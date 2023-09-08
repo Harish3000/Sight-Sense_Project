@@ -4,28 +4,27 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { ToastContainer as ReactToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useLogIn } from "../../hooks/User_hooks/useLogIn";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { login, err, isLoading } = useLogIn();
   const navigate = useNavigate();
 
-  const handleLoginFormSubmit = (e) => {
-    console.log("Login Successefully");
+  const handleLoginFormSubmit = async (e) => {
     e.preventDefault();
-
-    axios
-      .post("http://localhost:4000/api/users/login", { email, password })
-      .then((result) => {
-        if (result.data.message === "Success") {
-          toast.success("Login Successfully!!");
-          setTimeout(() => {
-            navigate("/home");
-          }, 3000);
-        } else {
-          toast.error("Register first.");
-        }
-      });
+    try {
+      await login(email, password);
+      // Login was successful
+      toast.success("Login successful!");
+      setTimeout(() => {
+        navigate("/home");
+      }, 3000);
+    } catch (err) {
+      // Login failed
+      toast.error("Login failed. Please try again.");
+    }
   };
 
   return (
@@ -55,11 +54,14 @@ const Login = () => {
                 />
               </div>
               <div className="btns-div">
-                <button type="submit">Login</button>
+                <button type="submit" disabled={isLoading}>
+                  Login
+                </button>
                 <Link to="/register">
                   <button type="button">Register</button>
                 </Link>
               </div>
+              {err && <div className="err">{err}</div>}
             </form>
           </div>
         </div>
