@@ -55,8 +55,41 @@ function ImageUploader() {
       setPredictionResult(formattedPredictions.join("\n"));
       setDisableButtons(true);
 
-      // Close the camera modal after uploading
-      closeCamera();
+      // Check if any prediction has a probability greater than 0.75
+      const highProbabilityPrediction = response.data.predictions.find(
+        (prediction) => prediction.probability > 0.75
+      );
+
+      if (highProbabilityPrediction) {
+        if (highProbabilityPrediction.tagName === "Healthy Eyes") {
+          // Display congratulations message with two buttons
+          Modal.confirm({
+            title: "Congratulations!",
+            content: (
+              <div>
+                <p>You have healthy vision!</p>
+              </div>
+            ),
+            okText: "Redo Test",
+            cancelText: "OK",
+            onOk: redoTest,
+            onCancel: () => {},
+          });
+        } else {
+          // Display a popup for other predictions with buttons "Re-Do Test" and "Find Clinics"
+          Modal.confirm({
+            title: `You have ${highProbabilityPrediction.tagName}`,
+            content: (
+              <div>
+                <p>What would you like to do?</p>
+              </div>
+            ),
+            okText: "Re-Do Test",
+            cancelText: "Find Clinics",
+            onOk: redoTest,
+          });
+        }
+      }
     } catch (error) {
       console.error("Error:", error);
       message.error("An error occurred while processing the image.");
