@@ -3,29 +3,52 @@ let Test = require("../../models/GeneralTest_Modal");
 const { route } = require("../User/User");
 
 //Add test
+// Update or add test
 router.route("/add").post((req, res) => {
   const test_name = "General Test";
-  const user_id = Math.random();
+  const user_id = "User 1";
   const test_date = new Date();
   const test_score = req.body.test_score;
 
-  const newTest = new Test({
-    test_name,
-    user_id,
-    test_date,
-    test_score,
-  });
+  // Find an existing test record for the user
+  Test.findOne({ user_id: user_id })
+    .then((existingTest) => {
+      if (existingTest) {
+        // If an existing record is found, update it
+        existingTest.test_date = test_date;
+        existingTest.test_score = test_score;
 
-  newTest
-    .save()
-    .then(() => {
-      res.json("Test added!");
+        existingTest
+          .save()
+          .then(() => {
+            res.json("Test updated!");
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      } else {
+        // If no existing record is found, create a new one
+        const newTest = new Test({
+          test_name,
+          user_id,
+          test_date,
+          test_score,
+        });
+
+        newTest
+          .save()
+          .then(() => {
+            res.json("Test added!");
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
     })
     .catch((err) => {
       console.log(err);
     });
 });
-
 //Clear histoty
 router.route("/delete-all").delete((req, res) => {
   Test.deleteMany({})
