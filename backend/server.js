@@ -14,7 +14,6 @@ const app = express();
 app.use(cors());
 app.use(express.json()); //to add json to the 'req' Object
 const bodyParser = require("body-parser");
-const cors = require("cors");
 
 app.use((req, res, next) => {
   console.log(req.path, req.method);
