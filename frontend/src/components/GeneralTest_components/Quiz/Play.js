@@ -414,7 +414,7 @@ class play extends React.Component {
         <Fragment>
           {showAlert && (
             <Alert
-              message="Succsessfully Completed the Quiz"
+              message="You are Completed the Quiz"
               type="success"
               showIcon
               closable
@@ -436,7 +436,13 @@ class play extends React.Component {
             <Modal.Header closeButton>
               <Modal.Title>General Test Result</Modal.Title>
             </Modal.Header>
-            <Modal.Body style={{ maxHeight: "900vh", overflowY: "auto" }}>
+            <Modal.Body
+              style={{
+                maxHeight: "900vh",
+                overflowY: "auto",
+                textAlign: "center",
+              }}
+            >
               <p>Score: {state.score}</p>
               <p>Number of Questions: {state.numberOfQuestions}</p>
               <p>
@@ -444,6 +450,10 @@ class play extends React.Component {
               </p>
               <p>Correct Answers: {state.correctAnswers}</p>
               <p>Wrong Answers: {state.wrongAnswers}</p>
+              <p style={{ fontWeight: "bold" }}>
+                Score Percentage:{" "}
+                {((state.score / state.numberOfQuestions) * 100).toFixed(2)}%
+              </p>
             </Modal.Body>
             <Modal.Footer style={{ minHeight: "16vh" }}>
               <b>
