@@ -22,22 +22,25 @@ const Register = () => {
     event.preventDefault();
 
     try {
-      const response = await axios.post("http://localhost:4000/api/users/createuser", {
-        firstname,
-        lastname,
-        contact,
-        addLine1,
-        addLine2,
-        addLine3,
-        gender,
-        email,
-        password,
-      });
+      const response = await axios.post(
+        "http://localhost:4000/api/users/createuser",
+        {
+          firstname,
+          lastname,
+          contact,
+          addLine1,
+          addLine2,
+          addLine3,
+          gender,
+          email,
+          password,
+        }
+      );
 
       // Registration success
       toast.success("Registration Success!!");
       setTimeout(() => {
-        navigate("/");
+        navigate("/login");
       }, 3000);
 
       // Reset the form after successful registration
@@ -51,9 +54,27 @@ const Register = () => {
       setEmail("");
       setPassword("");
     } catch (error) {
-      // Registration error, check if the error message contains "Email Already In Use!!"
-      if (error.response && error.response.data && error.response.data.err === "Email Already In Use!!") {
-        toast.error("Email is already in use. Please choose a different email.");
+      // Registration error checking
+      if (
+        error.response &&
+        error.response.data &&
+        error.response.data.err === "Email Already In Use!!"
+      ) {
+        toast.error(
+          "Email is already in use. Please choose a different email."
+        );
+      } else if (
+        error.response &&
+        error.response.data &&
+        error.response.data.err === "All fields must be filled!!"
+      ) {
+        toast.error("All fields must be filled.");
+      } else if (
+        error.response &&
+        error.response.data &&
+        error.response.data.err === "Password is not strong enough!!"
+      ) {
+        toast.error("Password is not strong enough.");
       } else {
         // Handle other registration errors
         console.error(error);

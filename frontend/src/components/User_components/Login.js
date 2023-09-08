@@ -11,7 +11,7 @@ const Login = () => {
   const navigate = useNavigate();
 
   const handleLoginFormSubmit = (e) => {
-    console.log("Login Successefully")
+    console.log("Login Successefully");
     e.preventDefault();
 
     axios
@@ -21,9 +21,9 @@ const Login = () => {
           toast.success("Login Successfully!!");
           setTimeout(() => {
             navigate("/home");
-          }, 3000); // Adjust the time in milliseconds as needed (e.g., 3000ms = 3 seconds)
+          }, 3000);
         } else {
-          toast.error("Register first!!");
+          toast.error("Register first.");
         }
       });
   };
@@ -55,13 +55,9 @@ const Login = () => {
                 />
               </div>
               <div className="btns-div">
-                <button type="submit">
-                  Login
-                </button>
+                <button type="submit">Login</button>
                 <Link to="/register">
-                  <button type="button">
-                    Register
-                  </button>
+                  <button type="button">Register</button>
                 </Link>
               </div>
             </form>

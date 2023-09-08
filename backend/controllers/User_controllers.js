@@ -1,5 +1,6 @@
 const User = require("../models/User_model");
 const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
 
 //register user 
 const createUser = async (req, res) => {
@@ -34,6 +35,30 @@ const createUser = async (req, res) => {
   }
 }
 
+//login user
+const loginUser = async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    const user = await User.findOne({ email: email });
+
+    if (user) {
+      const passwordMatch = await bcrypt.compare(password, user.password);
+      if (passwordMatch) {
+        res.json({ message: "Success" });
+      } else {
+        res.json({ error: "Incorrect" });
+      }
+    } else {
+      res.json({ error: "No record existing!!" });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
+
 module.exports = {
-  createUser
+  createUser,
+  loginUser
 };

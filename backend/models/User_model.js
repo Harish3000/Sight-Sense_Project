@@ -1,6 +1,7 @@
 //This file contains the schema for the user collection in the database
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
+const validator = require("validator");
 
 //declare schema
 const Schema = mongoose.Schema;
@@ -38,7 +39,7 @@ const userSchema = new Schema({
   email: {
     type: String,
     required: true,
-    unique: true
+    unique: true,
   },
   password: {
     type: String,
@@ -58,6 +59,30 @@ userSchema.statics.register = async function (
   email,
   password
 ) {
+  //email format validation
+  if (!validator.isEmail(email)) {
+    throw Error("Email is not valid");
+  }
+
+  //password strngth checking
+  if (!validator.isStrongPassword(password)) {
+    throw Error("Password is not strong enough!!");
+  }
+
+  if (
+    !firstname ||
+    !lastname ||
+    !contact ||
+    !addLine1 ||
+    !addLine2 ||
+    !addLine3 ||
+    !gender ||
+    !email ||
+    !password
+  ) {
+    throw Error("All fields must be filled!!");
+  }
+
   const exists = await this.findOne({ email });
 
   if (exists) {

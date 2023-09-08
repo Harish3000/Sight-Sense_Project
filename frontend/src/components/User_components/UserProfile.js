@@ -7,19 +7,6 @@ import "react-toastify/dist/ReactToastify.css";
 export default function UserProfile() {
     const [user, setUser] = useState([]);
 
-    useEffect(() => {
-        async function getUsers() {
-            try {
-                const response = await axios.get("http://localhost:4000/api/users/profile/dilhariedissanayake@gmail.com");
-                setUser(response.data);
-            } catch (error) {
-                toast.error(error.message);
-            }
-        }
-
-        getUsers();
-    }, []);
-
     return (
         <div>
             <h1>User Profile</h1>
