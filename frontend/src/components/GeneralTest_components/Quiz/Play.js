@@ -340,7 +340,7 @@ class play extends React.Component {
       this.setState({ showAlert: false }, () => {
         this.setState({ showModal: true });
       });
-    }, 1800); //1.8 seconds
+    }, 1800); //1.8 Seconds show the alert
 
     const { state } = this;
     const playerStats = {
@@ -407,7 +407,7 @@ class play extends React.Component {
         <Fragment>
           {showAlert && (
             <Alert
-              message="This is a Success Alert"
+              message="Succsessfully Completed the Quiz"
               type="success"
               showIcon
               closable
