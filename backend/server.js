@@ -15,6 +15,9 @@ app.use(cors());
 app.use(express.json()); //to add json to the 'req' Object
 const bodyParser = require("body-parser");
 
+// Parse URL-encoded request bodies
+app.use(express.urlencoded({ extended: true }));
+
 app.use((req, res, next) => {
   console.log(req.path, req.method);
   next();
