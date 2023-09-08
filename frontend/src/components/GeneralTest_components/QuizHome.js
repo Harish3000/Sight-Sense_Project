@@ -12,7 +12,8 @@ const Qhome = () => (
     <div id="Qhome">
       <section>
         <h1>
-          <b>Eye Quiz</b>
+          <b>Eye Testing Quiz</b>
+          <br /> <br />
         </h1>
         <span>
           {" "}
@@ -20,12 +21,14 @@ const Qhome = () => (
             <Icon path={mdiEyeCircleOutline} size={4} color="black" />
           </div>
         </span>
+        <br /> <br />
         <h1>Welcome To Eye Quiz</h1>
+        <br /> <br />
         <div className="play-button-container">
           <ul>
             <li>
               <Link className="play-btn" to="/general-test/quiz-instruction">
-                PLAY
+                TEST
               </Link>
             </li>
           </ul>

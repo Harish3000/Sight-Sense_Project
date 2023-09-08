@@ -517,7 +517,7 @@ class play extends React.Component {
                 alt=""
                 style={{
                   maxWidth: "150%",
-                  maxHeight: "350px",
+                  maxHeight: "400px",
                 }}
               />
             )}
