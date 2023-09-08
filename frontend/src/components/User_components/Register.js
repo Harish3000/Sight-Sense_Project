@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer as ReactToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -23,19 +22,31 @@ const Register = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
-    await signup(
-      firstname,
-      lastname,
-      contact,
-      addLine1,
-      addLine2,
-      addLine3,
-      gender,
-      email,
-      password
-    );
+  
+    try {
+      await signup(
+        firstname,
+        lastname,
+        contact,
+        addLine1,
+        addLine2,
+        addLine3,
+        gender,
+        email,
+        password
+      );
+  
+      // Registration was successful
+      toast.success("Registration successful!");
+      setTimeout(() => {
+        navigate("/home");
+      }, 3000);
+    } catch (error) {
+      // Registration failed
+      toast.error("Registration failed. Please try again.");
+    }
   };
+  
 
   return (
     <div className="reg-body">
