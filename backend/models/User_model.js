@@ -8,40 +8,40 @@ const Schema = mongoose.Schema;
 const userSchema = new Schema({
   firstname: {
     type: String,
-    required: true
+    required: true,
   },
   lastname: {
     type: String,
-    required: true
+    required: true,
   },
   contact: {
     type: String,
-    required: true
+    required: true,
   },
   addLine1: {
     type: String,
-    required: true
+    required: true,
   },
   addLine2: {
     type: String,
-    required: true
+    required: true,
   },
   addLine3: {
     type: String,
-    required: true
+    required: true,
   },
   gender: {
     type: String,
-    required: true
+    required: true,
   },
   email: {
     type: String,
-    required: true
+    required: true,
   },
   password: {
     type: String,
-    required: true
-  }
+    required: true,
+  },
 });
 
 //create & export model based on schema

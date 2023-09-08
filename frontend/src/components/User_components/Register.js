@@ -6,64 +6,65 @@ import { ToastContainer as ReactToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const Register = () => {
-  const [email, setEmail] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [password, setPassword] = useState("");
+  const [firstname, setFirstName] = useState("");
+  const [lastname, setLastName] = useState("");
   const [contact, setContact] = useState("");
-  const [gender, setGender] = useState("");
   const [addLine1, setAddLine1] = useState("");
   const [addLine2, setAddLine2] = useState("");
   const [addLine3, setAddLine3] = useState("");
+  const [gender, setGender] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
-    console.log("Successfully Registered");
-    // event.preventDefault();
+    event.preventDefault();
+    try {
+      console.log("Checking for the email:", email);
+      const response = await axios.get(
+        `http://localhost:4000/api/users/check-email/${encodeURIComponent(
+          email
+        )}`
+      );
 
-    // try {
-    //   const response = await axios.get(
-    //     `http://localhost:4000/User/check-email/${email}`
-    //   );
+      if (response.data.exists) {
+        toast.error("Email already registered. Please use a different email.");
+      } else {
+        axios
+          .post("http://localhost:4000/api/users/createuser", {
+            firstname,
+            lastname,
+            contact,
+            addLine1,
+            addLine2,
+            addLine3,
+            gender,
+            email,
+            password,
+          })
+          .then(() => {
+            toast.success("Registration Success!!");
+            setTimeout(() => {
+              navigate("/");
+            }, 3000);
+          })
+          .catch((err) => console.log(err));
 
-    //   if (response.data.exists) {
-    //     toast.error("Email already registered. Please use a different email.");
-    //   } else {
-    //     axios
-    //       .post("http://localhost:4000/User/register", {
-    //         firstName,
-    //         lastName,
-    //         email,
-    //         password,
-    //          contact,
-    //          gender,
-    //          addLine1,
-    //          addLine2,
-    //          addLine3
-    //       })
-    //       .then(() => {
-    //         toast.success("Registration Success!!");
-    //         setTimeout(() => {
-    //           navigate("/");
-    //         }, 3000);
-    //       })
-    //       .catch((err) => console.log(err));
-
-    //     // Reset the form after submission
-    //     setEmail("");
-    //     setFirstName("");
-    //     setLastName("");
-    //     setPassword("");
-    //      setAddLine1("");
-    //      setAddLine2("");
-    //      setAddLine3("");
-    //      setContact("");
-    //      setGender("");
-    //   }
-    // } catch (err) {
-    //   console.log(err);
-    // }
+        // Reset the form after submission
+        setFirstName("");
+        setLastName("");
+        setContact("");
+        setAddLine1("");
+        setAddLine2("");
+        setAddLine3("");
+        setGender("");
+        setEmail("");
+        setPassword("");
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -79,7 +80,7 @@ const Register = () => {
               <input
                 id="firstname"
                 type="text"
-                value={firstName}
+                value={firstname}
                 onChange={(e) => setFirstName(e.target.value)}
                 required
               />
@@ -88,7 +89,7 @@ const Register = () => {
               <input
                 id="lastname"
                 type="text"
-                value={lastName}
+                value={lastname}
                 onChange={(e) => setLastName(e.target.value)}
                 required
               />
@@ -104,7 +105,7 @@ const Register = () => {
               <br></br>
               <label>Address:</label>
               <input
-              placeholder="Address line 1"
+                placeholder="Address line 1"
                 id="add-line1"
                 type="text"
                 value={addLine1}
@@ -113,7 +114,7 @@ const Register = () => {
               />
               <br></br>
               <input
-              placeholder="Address line 2"
+                placeholder="Address line 2"
                 id="add-line2"
                 type="text"
                 value={addLine2}
@@ -122,7 +123,7 @@ const Register = () => {
               />
               <br></br>
               <input
-              placeholder="Address line 3"
+                placeholder="Address line 3"
                 id="add-line3"
                 type="text"
                 value={addLine3}
@@ -131,13 +132,26 @@ const Register = () => {
               />
               <br></br>
               <label>Gender:</label>
-              <input
-                id="gender"
-                type="text"
-                value={gender}
-                onChange={(e) => setGender(e.target.value)}
-                required
-              />
+              <label>
+                <input
+                  type="radio"
+                  name="gender"
+                  value="male"
+                  checked={gender === "male"}
+                  onChange={(e) => setGender(e.target.value)}
+                />
+                Male
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  name="gender"
+                  value="female"
+                  checked={gender === "female"}
+                  onChange={(e) => setGender(e.target.value)}
+                />
+                Female
+              </label>
               <br></br>
               <label>Email:</label>
               <input
