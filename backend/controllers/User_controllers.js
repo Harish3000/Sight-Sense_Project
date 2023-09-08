@@ -75,8 +75,32 @@ const loginUser = async (req, res) => {
   }
 };
 
+// Get single user data
+const readUser = async (req, res) => {
+  const { email } = req.params;
+
+  try {
+    // Find the user by email
+    const user = await User.findOne({ email });
+
+    // If user is not found, return a 404 error
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    // Respond with the user object if found
+    res.status(200).json(user);
+  } catch (error) {
+    // Handle unexpected errors and return a 500 Internal Server Error
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
+
+
 module.exports = {
   createUser,
   checkUserByEmail,
-  loginUser
+  loginUser,
+  readUser
 };
