@@ -486,7 +486,9 @@ class play extends React.Component {
         </Fragment>
 
         <div className="questions">
-          <h2>Test Mode</h2>
+          <b>
+            <h2>Test Mode</h2>
+          </b>
           <div className="linfeline-container">
             {currentQuestionIndex < 15 && (
               <p>
