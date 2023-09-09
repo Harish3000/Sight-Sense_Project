@@ -47,7 +47,6 @@ const userSchema = new Schema({
   },
 });
 
-//static register method
 userSchema.statics.register = async function (
   firstname,
   lastname,
@@ -59,27 +58,70 @@ userSchema.statics.register = async function (
   email,
   password
 ) {
-  
-  const salt = await bcrypt.genSalt(10);
-  const hash = await bcrypt.hash(password, salt);
+  try {
+    const salt = await bcrypt.genSalt(10);
+    const hash = await bcrypt.hash(password, salt);
 
-  const user = await this.create({
-    firstname,
-    lastname,
-    contact,
-    addLine1,
-    addLine2,
-    addLine3,
-    gender,
-    email,
-    password: hash,
-  });
+    const user = await this.create({
+      firstname,
+      lastname,
+      contact,
+      addLine1,
+      addLine2,
+      addLine3,
+      gender,
+      email,
+      password: hash,
+    });
 
-  return user;
+    return user;
+  } catch (error) {
+    // Handle any errors that occur during user creation
+    throw error;
+  }
 };
+
+
+// //static register method
+// userSchema.statics.register = async function (
+//   firstname,
+//   lastname,
+//   contact,
+//   addLine1,
+//   addLine2,
+//   addLine3,
+//   gender,
+//   email,
+//   password
+// ) {
+  
+//   const salt = await bcrypt.genSalt(10);
+//   const hash = await bcrypt.hash(password, salt);
+
+//   const user = await this.create({
+//     firstname,
+//     lastname,
+//     contact,
+//     addLine1,
+//     addLine2,
+//     addLine3,
+//     gender,
+//     email,
+//     password: hash,
+//   });
+
+//   return user;
+// };
 
 //static login method
 userSchema.statics.login = async function(email, password) {
+  
+  const user = await this.findOne({ email }); // Find the user by email
+
+  if (!user) {
+    throw Error("User not found");
+  }
+  
   const match = await bcrypt.compare(password, user.password)
 
   if(!match) {
