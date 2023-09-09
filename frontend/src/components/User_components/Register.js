@@ -112,6 +112,7 @@ const Register = () => {
             <div
               style={{
                 padding: "40px", // Add padding to the outside of the form
+                
               }}
             >
               <form
