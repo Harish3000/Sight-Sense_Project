@@ -8,6 +8,8 @@ export const AuthReducer = (state, action) => {
             return { user: action.payload }
         case 'LOGOUT' : 
             return { user: null }
+        case 'UPDATE_USER':
+            return { user: action.payload };
         default : 
             return state
     }
@@ -27,10 +29,15 @@ useEffect (() => {
     }
 }, [])
 
+// Function to update user data
+const updateUser = (userData) => {
+    dispatch({ type: 'UPDATE_USER', payload: userData });
+};
+
 console.log("AuthContext state : ",state) //keep track of login and logout in the console
 
 return (
-    <AuthContext.Provider value={{...state, dispatch}}>
+    <AuthContext.Provider value={{...state, dispatch, updateUser}}>
         { children }
     </AuthContext.Provider>
 )

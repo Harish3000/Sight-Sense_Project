@@ -21,7 +21,7 @@ export default function UserProfile() {
     });
     
     const { logout } = useLogOut();
-    const { user } = useContext(AuthContext);
+    const { user, UpdateUser } = useContext(AuthContext);
 
     //logout function
     const handleLogOut = () => {
@@ -35,6 +35,15 @@ export default function UserProfile() {
     //update function
     const handleEdit = async(UserId) => {
         console.log("Update button clicked")
+
+        setUpdatedUser({
+          firstname: user.user.firstname,
+          lastname: user.user.lastname,
+          contact: user.user.contact,
+          addLine1: user.user.addLine1,
+          addLine2: user.user.addLine2,
+          addLine3: user.user.addLine3,
+        });
     }
 
     //delete function
