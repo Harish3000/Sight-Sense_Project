@@ -3,7 +3,6 @@ import { Helmet } from "react-helmet";
 import Icon from "@mdi/react";
 import { mdiEyeCircleOutline } from "@mdi/js";
 import { Link } from "react-router-dom";
-//import "../../../node_modules/materialize-css/dist/css/materialize.min.css";
 
 const Qhome = () => (
   <Fragment>
@@ -28,7 +27,7 @@ const Qhome = () => (
         <br /> <br />
         <div className="play-button-container">
           <ul>
-            <li>
+            <li style={{ listStyleType: "none" }}>
               <Link className="play-btn" to="/general-test/quiz-instruction">
                 Lets Test Your Eyes
               </Link>
