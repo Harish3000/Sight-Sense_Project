@@ -6,6 +6,7 @@ const cors = require("cors");
 const UserBase = require("./routes/User/User_base");
 const AdvancedTest_base = require("./routes/AdvancedTest/AdvancedTest_base");
 const GeneralTestBase = require("./routes/Generaltest/GeneralTest_base");
+const ClinicBase = require("./routes/Clinical/Clinic_base");
 
 //express app
 const app = express();
@@ -28,7 +29,7 @@ app.use(cors());
 //routes
 UserBase(app);
 AdvancedTest_base(app);
-
+ClinicBase(app);
 GeneralTestBase(app);
 
 //connect to DB
