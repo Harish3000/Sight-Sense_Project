@@ -27,7 +27,7 @@ const Qhome = () => (
         <br /> <br />
         <div className="play-button-container">
           <ul>
-            <li style={{ listStyleType: "none" }}>
+            <li style={{ listStyleType: "none", fontSize: "17px" }}>
               <Link className="play-btn" to="/general-test/quiz-instruction">
                 Lets Test Your Eyes
               </Link>
