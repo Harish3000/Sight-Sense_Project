@@ -1,5 +1,13 @@
 import React, { useState, useRef } from "react";
-import { Upload, Button, Spin, message, Image, Modal } from "antd";
+import {
+  Upload,
+  Button,
+  Spin,
+  message,
+  Image,
+  Modal,
+  notification,
+} from "antd";
 import { UploadOutlined, CameraOutlined } from "@ant-design/icons";
 import axios from "axios";
 import Webcam from "react-webcam";
@@ -11,6 +19,7 @@ function ImageUploader() {
   const [loading, setLoading] = useState(false);
   const [cameraVisible, setCameraVisible] = useState(false);
   const [disableButtons, setDisableButtons] = useState(false);
+  const [isApproved, setIsApproved] = useState(false);
   const webcamRef = useRef(null);
 
   const handleFileChange = (info) => {
@@ -88,6 +97,59 @@ function ImageUploader() {
             cancelText: "Find Clinics",
             onOk: redoTest,
           });
+        }
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      message.error("An error occurred while processing the image.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleVerify = async () => {
+    try {
+      if (!selectedFile) {
+        message.error("Please select a file first.");
+        return;
+      }
+
+      setLoading(true);
+
+      const formData = new FormData();
+      formData.append("image", selectedFile);
+
+      const response = await axios.post(
+        "http://localhost:4000/api/advancedTest/ImageQuality",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+
+      // Check if any prediction has a probability greater than 0.75
+      const highProbabilityPrediction = response.data.predictions.find(
+        (prediction) => prediction.probability > 0.7
+      );
+
+      if (highProbabilityPrediction) {
+        if (highProbabilityPrediction.tagName === "Approved") {
+          // Display congratulations message with two buttons
+          notification.success({
+            message: "Congratulations!",
+            description: "your Image approved - Upload the image to analyze!",
+            duration: 5,
+          });
+          setIsApproved(true);
+        } else {
+          notification.info({
+            message: `Sorry your image is ${highProbabilityPrediction.tagName}`,
+            description: "Try again uploading a better image",
+            duration: 5,
+          });
+          setIsApproved(false);
         }
       }
     } catch (error) {
@@ -180,10 +242,19 @@ function ImageUploader() {
       <div style={{ marginTop: "10px" }}>
         <Button
           type="primary"
-          onClick={handleUpload}
+          onClick={handleVerify}
           disabled={!selectedFile || disableButtons}
         >
-          Upload
+          Verify the Image
+        </Button>
+      </div>
+      <div style={{ marginTop: "10px" }}>
+        <Button
+          type="primary"
+          onClick={handleUpload}
+          disabled={!selectedFile || disableButtons || !isApproved}
+        >
+          Upload the image to analyze
         </Button>
       </div>
       {loading && (
