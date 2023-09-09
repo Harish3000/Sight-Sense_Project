@@ -76,54 +76,19 @@ export default function UserProfile() {
         Pacient Profile
       </h1>
       {user && (
-        <div
-        style={{
-          border: "1px solid #ccc",
-          borderRadius: "5px",
-          padding: "20px",
-          boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
-          backgroundColor: "#fff",
-          width: "300px",
-          margin: "0 auto", // Center the content horizontally
-          textAlign: "center", // Center the text within the div
-        }}
-      >
-        <p style={{ fontSize: "24px", marginBottom: "10px" }}>
-          {user.user.firstname} {user.user.lastname}
-        </p>
-        <p style={{ fontSize: "20px", marginBottom: "10px" }}>
-          Contact: {user.user.contact}
-        </p>
-        <p style={{ fontSize: "20px", marginBottom: "10px" }}>
-          Email: {user.user.email}
-        </p>
-        <p style={{ fontSize: "20px", marginBottom: "10px" }}>Address:</p>
-        <p
-          style={{
-            fontSize: "20px",
-            marginBottom: "5px",
-          }}
-        >
-          {user.user.addLine1}
-        </p>
-        <p
-          style={{
-            fontSize: "20px",
-            marginBottom: "5px",
-          }}
-        >
-          {user.user.addLine2}
-        </p>
-        <p
-          style={{
-            fontSize: "20px",
-            marginBottom: "10px",
-          }}
-        >
-          {user.user.addLine3}
-        </p>
-      </div>
-      
+         <div>
+         {user.user.firstname} {user.user.lastname}
+         <br></br>
+         {user.user.contact}
+         <br></br>
+         {user.user.email}
+         <br></br>
+         {user.user.addLine1}
+         <br></br>
+         {user.user.addLine2}
+         <br></br>
+         {user.user.addLine3}
+         </div>
       )}
 
       <div
@@ -144,9 +109,10 @@ export default function UserProfile() {
             border: "none",
             marginRight: "10px",
             cursor: "pointer",
+            fontSize: '18px'
           }}
         >
-          Edit
+          Update
         </button>
 
         <button
@@ -160,6 +126,7 @@ export default function UserProfile() {
             border: "none",
             marginRight: "10px",
             cursor: "pointer",
+            fontSize: '18px'
           }}
         >
           Delete
@@ -175,6 +142,7 @@ export default function UserProfile() {
             borderRadius: "5px",
             border: "none",
             cursor: "pointer",
+            fontSize: '18px'
           }}
         >
           Logout
