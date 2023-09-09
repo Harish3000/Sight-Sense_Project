@@ -63,34 +63,91 @@ const Login = () => {
               flexDirection: "column",
               alignItems: "center",
               justifyContent: "center",
-              height: "20vh",
+              height: "30vh",
             }}
           >
-            <form onSubmit={handleLoginFormSubmit}>
-              <div>
-                <label>Email:</label>
+            <form
+              onSubmit={handleLoginFormSubmit}
+              style={{
+                width: "100%",
+                maxWidth: "500px",
+                padding: "20px", // Adjust padding as needed
+                border: "1px solid #ccc",
+                borderRadius: "5px",
+                boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
+                backgroundColor: "#fff",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "flex-start", // Align labels and inputs to the start of the container
+              }}
+            >
+              <div style={{ marginBottom: "10px" }}>
+                <label style={{ fontSize: "20px", marginRight: "10px" }}>
+                  Email
+                </label>
                 <input
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
+                  style={{
+                    fontSize: "20px",
+                    width: "350px",
+                    border: "1px solid #ccc",
+                    borderRadius: "5px",
+                    padding: "5px",
+                    marginLeft: "34px",
+                  }}
                 />
               </div>
-              <div>
-                <label>Password :</label>
+              <div style={{ marginBottom: "10px" }}>
+                <label style={{ fontSize: "20px", marginRight: "10px" }}>
+                  Password
+                </label>
                 <input
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
+                  style={{
+                    fontSize: "20px",
+                    width: "350px",
+                    border: "1px solid #ccc",
+                    borderRadius: "5px",
+                    padding: "5px",
+                  }}
                 />
               </div>
-              <div className="btns-div">
-                <button type="submit" disabled={isLoading}>
+              <div
+                className="btns-div"
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <Button
+                  type="primary"
+                  htmlType="submit"
+                  size="large"
+                  loading={isLoading}
+                  style={{
+                    color: "#ffffff",
+                    marginRight: "20px",
+                    marginLeft: "120px",
+                  }}
+                >
                   Login
-                </button>
+                </Button>
                 <Link to="/register">
-                  <button type="button">Register</button>
+                  <Button
+                    type="primary"
+                    size="large"
+                    style={{ color: "#ffffff" }}
+                  >
+                    Register
+                  </Button>
                 </Link>
               </div>
+
               {errorMessage && (
                 <Alert
                   message="Error"
