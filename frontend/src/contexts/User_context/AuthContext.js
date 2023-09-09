@@ -1,4 +1,5 @@
 import { createContext, useReducer, useEffect } from "react";
+import axios from "axios";
 
 export const AuthContext = createContext();
 
@@ -8,8 +9,6 @@ export const AuthReducer = (state, action) => {
             return { user: action.payload }
         case 'LOGOUT' : 
             return { user: null }
-        case 'UPDATE_USER':
-            return { user: action.payload };
         default : 
             return state
     }
@@ -20,6 +19,18 @@ const [state, dispatch] = useReducer(AuthReducer, {
     users : null
 })
 
+// Function to fetch and update user data
+const fetchAndUpdateUserData = async (userId) => {
+    try {
+      const response = await axios.get(`http://localhost:4000/api/users/${userId}`);
+      if (response.status === 200) {
+        dispatch({ type: 'LOGIN', payload: response.data });
+      }
+    } catch (error) {
+      console.error("Error fetching user data:", error);
+    }
+  };
+
 //Set the Initial Auth Status 
 useEffect (() => {
     const user = JSON.parse(localStorage.getItem('user'))
@@ -29,15 +40,10 @@ useEffect (() => {
     }
 }, [])
 
-// Function to update user data
-const updateUser = (userData) => {
-    dispatch({ type: 'UPDATE_USER', payload: userData });
-};
-
 console.log("AuthContext state : ",state) //keep track of login and logout in the console
 
 return (
-    <AuthContext.Provider value={{...state, dispatch, updateUser}}>
+    <AuthContext.Provider value={{...state, dispatch, fetchAndUpdateUserData}}>
         { children }
     </AuthContext.Provider>
 )

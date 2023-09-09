@@ -1,7 +1,7 @@
 import React from 'react';
 import { useContext } from 'react';
 import axios from "axios";
-import { useEffect, useState } from 'react';
+// import { useEffect, useState } from 'react';
 import { ToastContainer as ReactToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useLogOut } from '../../hooks/User_hooks/useLogOut';
@@ -11,17 +11,17 @@ import { AuthContext } from '../../contexts/User_context/AuthContext';
 export default function UserProfile() {
     
     const navigate = useNavigate();
-    const [updatedUser, setUpdatedUser] = useState({
-      firstname: "",
-      lastname: "",
-      contact: "",
-      addLine1: "",
-      addLine2: "",
-      addLine3: "",
-    });
+    // const [updatedUser, setUpdatedUser] = useState({
+    //   firstname: "",
+    //   lastname: "",
+    //   contact: "",
+    //   addLine1: "",
+    //   addLine2: "",
+    //   addLine3: "",
+    // });
     
     const { logout } = useLogOut();
-    const { user, UpdateUser } = useContext(AuthContext);
+    const { user } = useContext(AuthContext);
 
     //logout function
     const handleLogOut = () => {
@@ -35,15 +35,6 @@ export default function UserProfile() {
     //update function
     const handleEdit = async(UserId) => {
         console.log("Update button clicked")
-
-        setUpdatedUser({
-          firstname: user.user.firstname,
-          lastname: user.user.lastname,
-          contact: user.user.contact,
-          addLine1: user.user.addLine1,
-          addLine2: user.user.addLine2,
-          addLine3: user.user.addLine3,
-        });
     }
 
     //delete function
@@ -71,7 +62,7 @@ export default function UserProfile() {
 
     return (
         <div>
-            <h1>User Profile</h1>
+            <h1 style={{ fontFamily: 'Poppins', textAlign: 'center',paddingTop: '200px', fontSize: '60px'}}>User Profile</h1>
             {user && (
                 <div>
                     {user.user.firstname}{user.user.lastname}

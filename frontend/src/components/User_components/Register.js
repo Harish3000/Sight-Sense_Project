@@ -5,6 +5,8 @@ import { ToastContainer as ReactToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useSignUp } from "../../hooks/User_hooks/useSignUp";
 import validator from "validator";
+import { Form, Input, Button, Radio } from 'antd'; // Import Ant Design form components
+import { UserOutlined, LockOutlined, MailOutlined } from '@ant-design/icons'; // Import Ant Design icons
 
 const Register = () => {
   const [firstname, setFirstName] = useState("");
