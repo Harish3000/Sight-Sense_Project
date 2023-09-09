@@ -1,7 +1,6 @@
 import React from "react";
 import { useContext } from "react";
 import axios from "axios";
-// import { useEffect, useState } from 'react';
 import { ToastContainer as ReactToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useLogOut } from "../../hooks/User_hooks/useLogOut";
@@ -10,14 +9,6 @@ import { AuthContext } from "../../contexts/User_context/AuthContext";
 
 export default function UserProfile() {
   const navigate = useNavigate();
-  // const [updatedUser, setUpdatedUser] = useState({
-  //   firstname: "",
-  //   lastname: "",
-  //   contact: "",
-  //   addLine1: "",
-  //   addLine2: "",
-  //   addLine3: "",
-  // });
 
   const { logout } = useLogOut();
   const { user } = useContext(AuthContext);
@@ -33,7 +24,7 @@ export default function UserProfile() {
 
   //update function
   const handleEdit = async (UserId) => {
-    console.log("Update button clicked");
+    navigate("/update");
   };
 
   //delete function
