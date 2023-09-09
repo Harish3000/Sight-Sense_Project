@@ -1,5 +1,6 @@
 import React from 'react';
 import { useContext } from 'react';
+import axios from "axios";
 import { useEffect, useState } from 'react';
 import { ToastContainer as ReactToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -14,6 +15,7 @@ export default function UserProfile() {
     const { logout } = useLogOut();
     const { user } = useContext(AuthContext);
 
+    //logout function
     const handleLogOut = () => {
         logout();
         toast.success("Logging out...");
@@ -21,6 +23,34 @@ export default function UserProfile() {
             navigate("/");
           }, 3000);
     }
+
+    //update function
+    const handleEdit = async(UserId) => {
+        console.log("Update button clicked")
+    }
+
+    //delete function
+    const handleDelete = async () => {
+        const confirmDelete = window.confirm('Are you sure you want to delete your account?');
+    
+        if (confirmDelete) {
+          try {
+            // Send a DELETE request to delete the user's account
+            const response = await axios.delete(`http://localhost:4000/api/users/${user.user._id}`);
+    
+            if (response.status === 200) {
+              // Logout the user and redirect to the homepage
+              logout();
+              toast.success("Profile has been successfully deleted");
+              setTimeout(() => {
+                navigate("/");
+              }, 3000);
+            }
+          } catch (error) {
+            console.error('Error deleting user:', error);
+          }
+        }
+      };
 
     return (
         <div>
@@ -41,11 +71,11 @@ export default function UserProfile() {
                     </div>
             )}
             <div>
-                <button type='button'>edit</button>
+            <button type='button' onClick={() => handleEdit(user.user._id)}>edit</button>
             </div>
 
             <div>
-                <button type='button'>delete</button>
+            <button type='button' onClick={() => handleDelete(user.user._id)}>delete</button>
             </div>
 
             <div>
