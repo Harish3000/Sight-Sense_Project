@@ -81,38 +81,6 @@ userSchema.statics.register = async function (
   }
 };
 
-
-// //static register method
-// userSchema.statics.register = async function (
-//   firstname,
-//   lastname,
-//   contact,
-//   addLine1,
-//   addLine2,
-//   addLine3,
-//   gender,
-//   email,
-//   password
-// ) {
-  
-//   const salt = await bcrypt.genSalt(10);
-//   const hash = await bcrypt.hash(password, salt);
-
-//   const user = await this.create({
-//     firstname,
-//     lastname,
-//     contact,
-//     addLine1,
-//     addLine2,
-//     addLine3,
-//     gender,
-//     email,
-//     password: hash,
-//   });
-
-//   return user;
-// };
-
 //static login method
 userSchema.statics.login = async function(email, password) {
   

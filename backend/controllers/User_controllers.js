@@ -53,7 +53,7 @@ const loginUser = async (req, res) => {
     //create a token
     const token = createToken(user._id);
 
-    res.status(200).json({ email, token }); // sending JWT back to the browser
+    res.status(200).json({ user, token }); // sending JWT back to the browser
   } catch (err) {
     res.status(400).json({ err: err.message });
   }
