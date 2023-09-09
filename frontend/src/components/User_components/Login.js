@@ -19,12 +19,19 @@ const Login = () => {
     // Client-side email format validation
     if (!validator.isEmail(email)) {
       toast.error("Email is not valid");
+      setTimeout(() => {
+        navigate("/login");
+      }, 3000);
       return;
     }
 
     //Client-side all fields filled checking
     if (!email || !password) {
       toast.error("Please fill out all the fields");
+      setTimeout(() => {
+        navigate("/login");
+      }, 3000);
+      return;
     }
 
     try {

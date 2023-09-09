@@ -76,6 +76,9 @@ const Register = () => {
       } else {
         // If it's not from the backend, display a generic error message
         toast.error("Registration failed. Please try again.");
+        setTimeout(() => {
+          navigate("/register");
+        }, 3000);
       }
     }
   };
