@@ -67,19 +67,34 @@ export default function UserProfile() {
         Pacient Profile
       </h1>
       {user && (
-         <div>
+         <div
+         style={{
+           display: "flex",
+           flexDirection: "column",
+           alignItems: "center",
+           justifyContent: "center",
+           width: "50%",
+           margin: "auto",
+           padding: "20px",
+           border: "1px solid #ccc",
+           borderRadius: "10px",
+           boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
+           fontSize: "20px",
+           textAlign: "center",
+         }}
+       >
          {user.user.firstname} {user.user.lastname}
-         <br></br>
+         <br />
          {user.user.contact}
-         <br></br>
+         <br />
          {user.user.email}
-         <br></br>
+         <br />
          {user.user.addLine1}
-         <br></br>
+         <br />
          {user.user.addLine2}
-         <br></br>
+         <br />
          {user.user.addLine3}
-         </div>
+       </div>
       )}
 
       <div

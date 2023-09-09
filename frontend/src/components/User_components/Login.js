@@ -6,6 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useLogIn } from "../../hooks/User_hooks/useLogIn";
 import validator from "validator";
 import { Input, Button, Alert } from "antd";
+import VideoBG from '../../assets/Backround_video.mp4';
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -41,6 +42,22 @@ const Login = () => {
 
   return (
     <div className="login-body">
+      <video
+        src={VideoBG}
+        autoPlay
+        loop
+        muted
+        style={{
+          width: '100%',
+          height: '100%',
+          objectFit: 'cover',
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          zIndex: -1,
+        }}
+        title="Background Video"
+      />
       <div className="div-for-login-box">
         <div className="login">
           <div className="login-heading-div">

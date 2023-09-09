@@ -294,6 +294,7 @@ export default function UpdateUser() {
               size="large"
               style={{
                 color: "#ffffff",
+                backgroundColor: "#dc3545",
                 fontSize: "18px",
                 width: "100px",
                 height: "50px",

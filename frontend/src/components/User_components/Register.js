@@ -6,7 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useSignUp } from "../../hooks/User_hooks/useSignUp";
 import validator from "validator";
 import { Button } from "antd";
-
+import VideoBG from '../../assets/Backround_video.mp4';
 const Register = () => {
   const [firstname, setFirstName] = useState("");
   const [lastname, setLastName] = useState("");
@@ -92,8 +92,25 @@ const Register = () => {
         justifyContent: "center",
         alignItems: "center",
         height: "100vh",
+        
       }}
     >
+      <video
+        src={VideoBG}
+        autoPlay
+        loop
+        muted
+        style={{
+          width: "100%",
+          height: "160%",
+          objectFit: "cover",
+          position: "absolute",
+          top: 0,
+          left: 0,
+          zIndex: -1,
+        }}
+        title="Background Video"
+      />
       <div className="div-for-reg-box">
         <div className="reg">
           <div className="reg-heading">
@@ -322,7 +339,7 @@ const Register = () => {
                   <Button
                     type="primary"
                     size="large"
-                    style={{ color: "#ffffff" , fontSize: '20px' ,width: '100px', height: '50px' }}
+                    style={{ color: "#ffffff", backgroundColor: "#dc3545" , fontSize: '20px' ,width: '100px', height: '50px' }}
                   >Cancel</Button>
                   </Link>
                 </div>
