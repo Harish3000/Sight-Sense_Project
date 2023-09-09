@@ -1,16 +1,10 @@
 /* Base styling */
 
-* {
-  padding: 0;
-  margin: 0;
-  font-family: "Roboto Mono", monospace;
-}
 
 .add-form-body,
 .text-area,
 #clinicName-input {
   font-family: "Roboto Mono", monospace;
-
 }
 
 #clinicName-input{

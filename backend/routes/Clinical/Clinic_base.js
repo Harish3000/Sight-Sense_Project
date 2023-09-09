@@ -1,5 +1,5 @@
-const clinicRoutes = require("./Clinic");
+const clinicRouter = require("./Clinic.js");
 
 module.exports = (app) => {
-  app.use("/api/Clinics", clinicRoutes);
+  app.use("/Clinics", clinicRouter);
 };

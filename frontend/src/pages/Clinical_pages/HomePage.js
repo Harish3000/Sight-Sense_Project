@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import "../Styles/HomePage.css";
+import "../../styles/GeneralTest/Clinical/HomePage.css";
 import { ToastContainer as ReactToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import cancelimg from "../Images/cancel.png";
-import deleteimg from "../Images/delete.png";
-import editimg from "../Images/edit.png";
-import saveimg from "../Images/save.png";
-
+import cancelimg from "../../assets/Clinical_assets/cancel.png";
+import deleteimg from "../../assets/Clinical_assets/delete.png";
+import editimg from "../../assets/Clinical_assets/edit.png";
+import saveimg from "../../assets/Clinical_assets/save.png";
 
 export default function HomePage() {
   const [clinics, setClinics] = useState([]);
@@ -99,16 +98,14 @@ export default function HomePage() {
     }
   };
 
-
-
   return (
     <div className="home-body">
       <div className="header-section-1">
         <h1 className="app-name">Clinical Management</h1>
-        <br/>
-     
-        <br/>
-        <br/>
+        <br />
+
+        <br />
+        <br />
       </div>
       <div className="div-home-body">
         <table className="table-display">
@@ -117,75 +114,70 @@ export default function HomePage() {
               <React.Fragment key={n.id}>
                 <tr className="card1" onClick={() => setSelectedClinic(n)}>
                   <div className="card1-container">
-                    <td className="clinicName-column">{n.clinicName}</td><br/>
-                    <td className="clinicLocation-column">{n.clinicLocation}</td>
+                    <td className="clinicName-column">{n.clinicName}</td>
+                    <br />
+                    <td className="clinicLocation-column">
+                      {n.clinicLocation}
+                    </td>
                   </div>
                 </tr>
                 {index < clinics.length - 1 && (
                   <tr key={index}>
-                    <td className="spacer"  style={{ height: "5px",
-                                 width:'10px' }}></td>
+                    <td
+                      className="spacer"
+                      style={{ height: "5px", width: "10px" }}
+                    ></td>
                   </tr>
-                
                 )}
               </React.Fragment>
             ))}
-             <br/>
+            <br />
           </tbody>
         </table>
-
-
-
-
 
         {selectedClinic && (
           <div className="div-for-paddding-card2">
             <div className="card2">
-            <div className="icon-div">
-                  {editingClinicId === selectedClinic._id ? (
-                    <>
-                      <span
-                        className="icon save-icon"
-                        onClick={() => handleSave(selectedClinic)}
-                      >
-                        <img src={saveimg} className="icons" />
-                      </span>
-                      <span
-                        className="icon cancel-icon"
-                        onClick={() => handleEditCancel()}
-                      >
-                        <img src={cancelimg} className="icons" />
-                      </span>
-                    </>
-                  ) : (
-                    <>
-                      <span
-                        className="icon edit-icon"
-                        onClick={() => handleEdit(selectedClinic._id)}
-                      >
-                        <img src={editimg} className="icons" />
-                      </span>
-                      <span
-                        className="icon delete-icon"
-                        onClick={() =>
-                          showDeleteConfirmation(selectedClinic._id)
-                        }
-                      >
-                        <img src={deleteimg} className="icons" />
-                      </span>
-                    </>
-                  )}
-                </div>
+              <div className="icon-div">
+                {editingClinicId === selectedClinic._id ? (
+                  <>
+                    <span
+                      className="icon save-icon"
+                      onClick={() => handleSave(selectedClinic)}
+                    >
+                      <img src={saveimg} className="icons" />
+                    </span>
+                    <span
+                      className="icon cancel-icon"
+                      onClick={() => handleEditCancel()}
+                    >
+                      <img src={cancelimg} className="icons" />
+                    </span>
+                  </>
+                ) : (
+                  <>
+                    <span
+                      className="icon edit-icon"
+                      onClick={() => handleEdit(selectedClinic._id)}
+                    >
+                      <img src={editimg} className="icons" />
+                    </span>
+                    <span
+                      className="icon delete-icon"
+                      onClick={() => showDeleteConfirmation(selectedClinic._id)}
+                    >
+                      <img src={deleteimg} className="icons" />
+                    </span>
+                  </>
+                )}
+              </div>
               <div className="card-2-padding">
-
                 <div className="clinicName-div">
                   {/* Edit name */}
                   {!editingClinicId ||
                   editingClinicId !== selectedClinic._id ? (
                     <h3 className="clinic-column-display">
-                      {ClinicSelected
-                        ? ""
-                        : selectedClinic.clinicName}
+                      {ClinicSelected ? "" : selectedClinic.clinicName}
                     </h3>
                   ) : (
                     <input
@@ -259,7 +251,7 @@ export default function HomePage() {
                 </div>
               </div>
             </div>
-          </div> 
+          </div>
         )}
       </div>
       <div className="add-new-btn-div">

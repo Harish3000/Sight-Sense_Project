@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import "../Styles/AddForm.css";
+import "../../styles/GeneralTest/Clinical/AddForm.css";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer as ReactToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
 
 export default function AddForm() {
   const [clinicName, setclinicName] = useState("");
@@ -43,7 +42,7 @@ export default function AddForm() {
         .then(() => {
           toast.success("New Clinic Created!");
           setTimeout(() => {
-            navigate("/");
+            navigate("/clinicHome");
           }, 3000);
         })
         .catch((err) => {
@@ -110,8 +109,12 @@ export default function AddForm() {
                 <button className="btns-in-add-form create" type="submit">
                   Create
                 </button>
-                <Link to="/">
-                  <button className="btns-in-add-form cancle" type="button" link>
+                <Link to="/clinicHome">
+                  <button
+                    className="btns-in-add-form cancle"
+                    type="button"
+                    link
+                  >
                     Cancel
                   </button>
                 </Link>
