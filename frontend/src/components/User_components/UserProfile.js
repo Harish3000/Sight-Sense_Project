@@ -11,7 +11,15 @@ import { AuthContext } from '../../contexts/User_context/AuthContext';
 export default function UserProfile() {
     
     const navigate = useNavigate();
-
+    const [updatedUser, setUpdatedUser] = useState({
+      firstname: "",
+      lastname: "",
+      contact: "",
+      addLine1: "",
+      addLine2: "",
+      addLine3: "",
+    });
+    
     const { logout } = useLogOut();
     const { user } = useContext(AuthContext);
 
