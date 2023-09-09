@@ -5,8 +5,7 @@ import { ToastContainer as ReactToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useSignUp } from "../../hooks/User_hooks/useSignUp";
 import validator from "validator";
-import { Form, Input, Button, Radio } from 'antd'; // Import Ant Design form components
-import { UserOutlined, LockOutlined, MailOutlined } from '@ant-design/icons'; // Import Ant Design icons
+import { Button } from "antd";
 
 const Register = () => {
   const [firstname, setFirstName] = useState("");
@@ -38,13 +37,13 @@ const Register = () => {
       !email ||
       !password
     ) {
-      toast.error("Please fill out all the fields")
+      toast.error("Please fill out all the fields");
     }
-      if (!validator.isEmail(email)) {
-        // Client-side email format validation
-        toast.error("Email is not valid");
-        return;
-      }
+    if (!validator.isEmail(email)) {
+      // Client-side email format validation
+      toast.error("Email is not valid");
+      return;
+    }
 
     // Client-side password strength checking
     if (!validator.isStrongPassword(password)) {
@@ -86,121 +85,250 @@ const Register = () => {
   };
 
   return (
-    <div className="reg-body">
+    <div
+      className="reg-body"
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "100vh",
+      }}
+    >
       <div className="div-for-reg-box">
         <div className="reg">
           <div className="reg-heading">
-            <h2>Registration Form</h2>
+            <h2
+              style={{
+                fontFamily: "Poppins",
+                textAlign: "center",
+                paddingTop: "520px",
+                fontSize: "44px",
+              }}
+            >
+              Registration Form
+            </h2>
           </div>
           <div className="reg-form-container">
-            <form onSubmit={handleSubmit}>
-              <label>First Name:</label>
-              <input
-                id="firstname"
-                type="text"
-                value={firstname}
-                onChange={(e) => setFirstName(e.target.value)}
-                required
-              />
-              <br></br>
-              <label>Last Name:</label>
-              <input
-                id="lastname"
-                type="text"
-                value={lastname}
-                onChange={(e) => setLastName(e.target.value)}
-                required
-              />
-              <br></br>
-              <label>Contact Number:</label>
-              <input
-                id="contact"
-                type="text"
-                value={contact}
-                onChange={(e) => setContact(e.target.value)}
-                required
-              />
-              <br></br>
-              <label>Address:</label>
-              <input
-                placeholder="Address line 1"
-                id="add-line1"
-                type="text"
-                value={addLine1}
-                onChange={(e) => setAddLine1(e.target.value)}
-                required
-              />
-              <br></br>
-              <input
-                placeholder="Address line 2"
-                id="add-line2"
-                type="text"
-                value={addLine2}
-                onChange={(e) => setAddLine2(e.target.value)}
-                required
-              />
-              <br></br>
-              <input
-                placeholder="Address line 3"
-                id="add-line3"
-                type="text"
-                value={addLine3}
-                onChange={(e) => setAddLine3(e.target.value)}
-                required
-              />
-              <br></br>
-              <label>Gender:</label>
-              <label>
+            <div
+              style={{
+                padding: "40px", // Add padding to the outside of the form
+              }}
+            >
+              <form
+                onSubmit={handleSubmit}
+                style={{
+                  width: "800px",
+                  padding: "40px", // Adjust padding as needed
+                  border: "1px solid #ccc",
+                  borderRadius: "5px",
+                  boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
+                  backgroundColor: "#fff",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "flex-start", // Align labels and inputs to the start of the container
+                }}
+              >
+                <label style={{ fontSize: "20px", marginRight: "10px" }}>
+                  First Name
+                </label>
                 <input
-                  type="radio"
-                  name="gender"
-                  value="male"
-                  checked={gender === "male"}
-                  onChange={(e) => setGender(e.target.value)}
+                  id="firstname"
+                  type="text"
+                  value={firstname}
+                  onChange={(e) => setFirstName(e.target.value)}
+                  style={{
+                    fontSize: "20px",
+                    width: "650px",
+                    border: "1px solid #ccc",
+                    borderRadius: "5px",
+                    padding: "5px",
+                    marginLeft: "34px",
+                  }}
+                  required
                 />
-                Male
-              </label>
-              <label>
+                <br></br>
+                <label style={{ fontSize: "20px", marginRight: "10px" }}>
+                  Last Name
+                </label>
                 <input
-                  type="radio"
-                  name="gender"
-                  value="female"
-                  checked={gender === "female"}
-                  onChange={(e) => setGender(e.target.value)}
+                  id="lastname"
+                  type="text"
+                  value={lastname}
+                  onChange={(e) => setLastName(e.target.value)}
+                  style={{
+                    fontSize: "20px",
+                    width: "650px",
+                    border: "1px solid #ccc",
+                    borderRadius: "5px",
+                    padding: "5px",
+                    marginLeft: "34px",
+                  }}
+                  required
                 />
-                Female
-              </label>
-              <br></br>
-              <label>Email:</label>
-              <input
-                id="email"
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
-              <br></br>
-              <label>Password:</label>
-              <input
-                id="pwd"
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
+                <br></br>
+                <label style={{ fontSize: "20px", marginRight: "10px" }}>
+                  Contact Number
+                </label>
+                <input
+                  id="contact"
+                  type="text"
+                  value={contact}
+                  onChange={(e) => setContact(e.target.value)}
+                  style={{
+                    fontSize: "20px",
+                    width: "650px",
+                    border: "1px solid #ccc",
+                    borderRadius: "5px",
+                    padding: "5px",
+                    marginLeft: "34px",
+                  }}
+                  required
+                />
+                <br></br>
+                <label style={{ fontSize: "20px", marginRight: "10px" }}>
+                  Address
+                </label>
+                <input
+                  placeholder="Address line 1"
+                  id="add-line1"
+                  type="text"
+                  value={addLine1}
+                  onChange={(e) => setAddLine1(e.target.value)}
+                  style={{
+                    fontSize: "20px",
+                    width: "650px",
+                    border: "1px solid #ccc",
+                    borderRadius: "5px",
+                    padding: "5px",
+                    marginLeft: "34px",
+                  }}
+                  required
+                />
+                <br></br>
+                <input
+                  placeholder="Address line 2"
+                  id="add-line2"
+                  type="text"
+                  value={addLine2}
+                  onChange={(e) => setAddLine2(e.target.value)}
+                  style={{
+                    fontSize: "20px",
+                    width: "650px",
+                    border: "1px solid #ccc",
+                    borderRadius: "5px",
+                    padding: "5px",
+                    marginLeft: "34px",
+                  }}
+                  required
+                />
+                <br></br>
+                <input
+                  placeholder="Address line 3"
+                  id="add-line3"
+                  type="text"
+                  value={addLine3}
+                  onChange={(e) => setAddLine3(e.target.value)}
+                  style={{
+                    fontSize: "20px",
+                    width: "650px",
+                    border: "1px solid #ccc",
+                    borderRadius: "5px",
+                    padding: "5px",
+                    marginLeft: "34px",
+                  }}
+                  required
+                />
+                <br></br>
+                <label style={{ fontSize: "20px", marginRight: "10px" }}>
+                  Gender
+                </label>
+                <label style={{ fontSize: "20px", marginRight: "10px" }}>
+                  <input
+                    type="radio"
+                    name="gender"
+                    value="male"
+                    checked={gender === "male"}
+                    onChange={(e) => setGender(e.target.value)}
+                    style={{ marginRight: "5px" }}
+                  />
+                  Male
+                </label>
+                <label style={{ fontSize: "20px", marginRight: "10px" }}>
+                  <input
+                    type="radio"
+                    name="gender"
+                    value="female"
+                    checked={gender === "female"}
+                    onChange={(e) => setGender(e.target.value)}
+                    style={{ marginRight: "5px" }}
+                  />
+                  Female
+                </label>
+                <br></br>
+                <label style={{ fontSize: "20px", marginRight: "10px" }}>
+                  Email
+                </label>
+                <input
+                  id="email"
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  style={{
+                    fontSize: "20px",
+                    width: "650px",
+                    border: "1px solid #ccc",
+                    borderRadius: "5px",
+                    padding: "5px",
+                    marginLeft: "34px",
+                  }}
+                  required
+                />
+                <br></br>
+                <label style={{ fontSize: "20px", marginRight: "10px" }}>
+                  Password
+                </label>
+                <input
+                  id="pwd"
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  style={{
+                    fontSize: "20px",
+                    width: "650px",
+                    border: "1px solid #ccc",
+                    borderRadius: "5px",
+                    padding: "5px",
+                    marginLeft: "34px",
+                  }}
+                  required
+                />
 
-              <br></br>
-              <div className="btns-div">
-                <button type="submit" disabled={isLoading}>
-                  Register
-                </button>
-                <Link to="/login">
-                  <button type="button">Cancel</button>
-                </Link>
-              </div>
+                <br></br>
+                <div className="btns-div">
+                <Button
+                  type="primary"
+                  htmlType="submit"
+                  size="large"
+                  loading={isLoading}
+                  style={{
+                    color: "#ffffff",
+                    marginRight: "20px",
+                    marginLeft: "230px", fontSize: '20px' ,width: '100px', height: '50px' 
+                  }}>
+                    Register
+                  </Button>
+                  <Link to="/login">
+                  <Button
+                    type="primary"
+                    size="large"
+                    style={{ color: "#ffffff" , fontSize: '20px' ,width: '100px', height: '50px' }}
+                  >Cancel</Button>
+                  </Link>
+                </div>
 
-              {err && <div className="err">{err}</div>}
-            </form>
+                {err && <div className="err">{err}</div>}
+              </form>
+            </div>
           </div>
         </div>
       </div>

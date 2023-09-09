@@ -133,6 +133,7 @@ const Login = () => {
                     color: "#ffffff",
                     marginRight: "20px",
                     marginLeft: "120px",
+                    fontSize: '20px' ,width: '100px', height: '50px'
                   }}
                 >
                   Login
@@ -141,7 +142,7 @@ const Login = () => {
                   <Button
                     type="primary"
                     size="large"
-                    style={{ color: "#ffffff" }}
+                    style={{ color: "#ffffff" ,fontSize: '20px' ,width: '100px', height: '50px'}}
                   >
                     Register
                   </Button>
