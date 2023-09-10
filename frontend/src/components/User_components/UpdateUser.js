@@ -7,6 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useLogOut } from "../../hooks/User_hooks/useLogOut";
 import { Button } from "antd";
+import VideoBG from "../../assets/Backround_video.mp4";
 
 export default function UpdateUser() {
   const { logout } = useLogOut();
@@ -86,6 +87,22 @@ export default function UpdateUser() {
         minHeight: "100vh", // Set the minimum height of the container to the viewport height
       }}
     >
+      <video
+        src={VideoBG}
+        autoPlay
+        loop
+        muted
+        style={{
+          width: "100%",
+          height: "160%",
+          objectFit: "cover",
+          position: "absolute",
+          top: 0,
+          left: 0,
+          zIndex: -1,
+        }}
+        title="Background Video"
+      />
       <div>
         <h2
           style={{
@@ -272,37 +289,37 @@ export default function UpdateUser() {
               }}
             />
           </div>
-<div style={{padding:'20px'}}>
-          <Button
-            type="primary"
-            htmlType="submit"
-            size="large"
-            style={{
-              color: "#ffffff",
-              marginRight: "20px",
-              marginLeft: "230px",
-              fontSize: "18px",
-              width: "100px",
-              height: "50px",
-            }}
-          >
-            Update
-          </Button>
-          <Link to="/home">
+          <div style={{ padding: "20px" }}>
             <Button
               type="primary"
+              htmlType="submit"
               size="large"
               style={{
                 color: "#ffffff",
-                backgroundColor: "#dc3545",
+                marginRight: "20px",
+                marginLeft: "230px",
                 fontSize: "18px",
                 width: "100px",
                 height: "50px",
               }}
             >
-              Cancel
+              Update
             </Button>
-          </Link>
+            <Link to="/home">
+              <Button
+                type="primary"
+                size="large"
+                style={{
+                  color: "#ffffff",
+                  backgroundColor: "#dc3545",
+                  fontSize: "18px",
+                  width: "100px",
+                  height: "50px",
+                }}
+              >
+                Cancel
+              </Button>
+            </Link>
           </div>
         </form>
       </div>

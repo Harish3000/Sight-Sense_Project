@@ -7,6 +7,7 @@ import { useSignUp } from "../../hooks/User_hooks/useSignUp";
 import validator from "validator";
 import { Button } from "antd";
 import VideoBG from '../../assets/Backround_video.mp4';
+
 const Register = () => {
   const [firstname, setFirstName] = useState("");
   const [lastname, setLastName] = useState("");
