@@ -62,8 +62,8 @@ hr {
 /* Card Styling in div 1 */
 .card1 {
   margin: top 100px !important;;
-  background-color: transparent;
-  box-shadow: 4px 4px 4px 4px #e0b415;
+  background-color: whitesmoke;
+  /* box-shadow: 4px 4px 4px 4px #e0b415; */
   transition: 0.3s;
   height: 200px;
   font-size: 20px;
