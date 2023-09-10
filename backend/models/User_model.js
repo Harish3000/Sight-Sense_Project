@@ -47,7 +47,6 @@ const userSchema = new Schema({
   },
 });
 
-//static register method
 userSchema.statics.register = async function (
   firstname,
   lastname,
@@ -59,66 +58,38 @@ userSchema.statics.register = async function (
   email,
   password
 ) {
-  //email format validation
-  if (!validator.isEmail(email)) {
-    throw Error("Email is not valid");
+  try {
+    const salt = await bcrypt.genSalt(10);
+    const hash = await bcrypt.hash(password, salt);
+
+    const user = await this.create({
+      firstname,
+      lastname,
+      contact,
+      addLine1,
+      addLine2,
+      addLine3,
+      gender,
+      email,
+      password: hash,
+    });
+
+    return user;
+  } catch (error) {
+    // Handle any errors that occur during user creation
+    throw error;
   }
-
-  //password strngth checking
-  if (!validator.isStrongPassword(password)) {
-    throw Error("Password is not strong enough!!");
-  }
-
-  if (
-    !firstname ||
-    !lastname ||
-    !contact ||
-    !addLine1 ||
-    !addLine2 ||
-    !addLine3 ||
-    !gender ||
-    !email ||
-    !password
-  ) {
-    throw Error("All fields must be filled!!");
-  }
-
-  const exists = await this.findOne({ email });
-
-  if (exists) {
-    throw Error("Email Already In Use!!");
-  }
-
-  const salt = await bcrypt.genSalt(10);
-  const hash = await bcrypt.hash(password, salt);
-
-  const user = await this.create({
-    firstname,
-    lastname,
-    contact,
-    addLine1,
-    addLine2,
-    addLine3,
-    gender,
-    email,
-    password: hash,
-  });
-
-  return user;
 };
 
 //static login method
 userSchema.statics.login = async function(email, password) {
-  if (!email || !password) {
-    throw Error("All fields must be filled!!");
-  }
-
-  const user = await this.findOne({ email });
+  
+  const user = await this.findOne({ email }); // Find the user by email
 
   if (!user) {
-    throw Error("Incorrect Email!!");
+    throw Error("User not found");
   }
-
+  
   const match = await bcrypt.compare(password, user.password)
 
   if(!match) {

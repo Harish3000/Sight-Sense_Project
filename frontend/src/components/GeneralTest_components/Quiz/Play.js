@@ -14,6 +14,7 @@ import isEmpty from "../../../utils/is-empty";
 import axios from "axios";
 import Icon from "@mdi/react";
 import { mdiFormatListBulleted } from "@mdi/js";
+import { Link } from "react-router-dom";
 
 class play extends React.Component {
   constructor(props) {
@@ -454,34 +455,30 @@ class play extends React.Component {
                 Score Percentage:{" "}
                 {((state.score / state.numberOfQuestions) * 100).toFixed(2)}%
               </p>
+              <center>
+                <b>If your score is below 50% please take the Advanced Test</b>
+              </center>
             </Modal.Body>
             <Modal.Footer style={{ minHeight: "16vh" }}>
-              <b>
-                If your score below 8 please Test adavance Test in our System
-              </b>
               <button
                 className="btn btn-primary"
                 onClick={this.generatePDF}
-                style={{ marginRight: "5px" }}
+                style={{ marginRight: "7px" }}
               >
                 Download PDF
               </button>
               <button
                 className="btn btn-success"
                 onClick={this.handleSaveButtonClick}
-                style={{ marginRight: "5px" }}
+                style={{ marginRight: "7px" }}
               >
                 Save
               </button>
+              <Link to="/advanced-test/upload-image">
+                <button className="btn btn-warning">Advance Test</button>
+              </Link>
               <button
                 className="btn btn-danger"
-                onClick={this.handleClose}
-                style={{ marginRight: "5px" }}
-              >
-                Close
-              </button>
-              <button
-                className="btn btn-warning"
                 onClick={this.handleDeleteAllDataClick}
               >
                 Reset Stats

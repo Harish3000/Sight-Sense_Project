@@ -1,9 +1,18 @@
 import React, { useState, useRef } from "react";
-import { Upload, Button, Spin, message, Image, Modal } from "antd";
+import {
+  Upload,
+  Button,
+  Spin,
+  message,
+  Image,
+  Modal,
+  notification,
+} from "antd";
 import { UploadOutlined, CameraOutlined } from "@ant-design/icons";
 import axios from "axios";
 import Webcam from "react-webcam";
 import "./ImageUploader.css";
+import VideoBG from "../../assets/Backround_video.mp4";
 
 function ImageUploader() {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -11,6 +20,7 @@ function ImageUploader() {
   const [loading, setLoading] = useState(false);
   const [cameraVisible, setCameraVisible] = useState(false);
   const [disableButtons, setDisableButtons] = useState(false);
+  const [isApproved, setIsApproved] = useState(false);
   const webcamRef = useRef(null);
 
   const handleFileChange = (info) => {
@@ -98,6 +108,59 @@ function ImageUploader() {
     }
   };
 
+  const handleVerify = async () => {
+    try {
+      if (!selectedFile) {
+        message.error("Please select a file first.");
+        return;
+      }
+
+      setLoading(true);
+
+      const formData = new FormData();
+      formData.append("image", selectedFile);
+
+      const response = await axios.post(
+        "http://localhost:4000/api/advancedTest/ImageQuality",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+
+      // Check if any prediction has a probability greater than 0.75
+      const highProbabilityPrediction = response.data.predictions.find(
+        (prediction) => prediction.probability > 0.7
+      );
+
+      if (highProbabilityPrediction) {
+        if (highProbabilityPrediction.tagName === "Approved") {
+          // Display congratulations message with two buttons
+          notification.success({
+            message: "Congratulations!",
+            description: "your Image approved - Upload the image to analyze!",
+            duration: 5,
+          });
+          setIsApproved(true);
+        } else {
+          notification.info({
+            message: `Sorry your image is ${highProbabilityPrediction.tagName}`,
+            description: "Try again uploading a better image",
+            duration: 5,
+          });
+          setIsApproved(false);
+        }
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      message.error("An error occurred while processing the image.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const openCamera = () => {
     setCameraVisible(true);
   };
@@ -149,89 +212,116 @@ function ImageUploader() {
   };
 
   return (
-    <div className="card">
-      <h1>Azure Advanced Analysis</h1>
-      <h2>Image Preview:</h2>
-      {renderImagePreview()}
-      <div style={{ marginTop: "20px" }}>
-        <Button
-          icon={<UploadOutlined />}
-          onClick={openCamera}
-          disabled={disableButtons}
-        >
-          Open Camera
-        </Button>
-      </div>
-      <div style={{ marginTop: "20px" }}>
-        <Upload
-          accept="image/*"
-          customRequest={() => {}}
-          showUploadList={false}
-          onChange={(info) => {
-            setSelectedFile(info.file.originFileObj);
-            handleFileChange(info);
-          }}
-        >
-          <Button icon={<UploadOutlined />} disabled={disableButtons}>
-            Select Image
-          </Button>
-        </Upload>
-      </div>
-      <div style={{ marginTop: "10px" }}>
-        <Button
-          type="primary"
-          onClick={handleUpload}
-          disabled={!selectedFile || disableButtons}
-        >
-          Upload
-        </Button>
-      </div>
-      {loading && (
+    <div>
+      <video
+        src={VideoBG}
+        autoPlay
+        loop
+        muted
+        style={{
+          width: "100%",
+          height: "100%",
+          objectFit: "cover",
+          position: "absolute",
+          top: 0,
+          left: 0,
+          zIndex: -1,
+        }}
+        title="Background Video"
+      />
+      <div className="card">
+        <h1>Azure Advanced Analysis</h1>
+        <h2>Image Preview:</h2>
+        {renderImagePreview()}
         <div style={{ marginTop: "20px" }}>
-          <Spin tip="Processing..." />
-        </div>
-      )}
-      {predictionResult && (
-        <div>
-          <h2>Predictions:</h2>
-          <pre>{predictionResult}</pre>
-        </div>
-      )}
-      {disableButtons && (
-        <div style={{ marginTop: "20px" }}>
-          <Button type="primary" onClick={redoTest}>
-            Re-Do Test
-          </Button>
-        </div>
-      )}
-      <Modal
-        title="Camera"
-        visible={cameraVisible}
-        onCancel={closeCamera}
-        footer={[
-          <Button key="back" onClick={closeCamera}>
-            Cancel
-          </Button>,
           <Button
-            key="submit"
-            type="primary"
-            onClick={takePicture}
+            icon={<UploadOutlined />}
+            onClick={openCamera}
             disabled={disableButtons}
           >
-            Take Picture
-          </Button>,
-        ]}
-        width={800}
-        bodyStyle={{ height: 500 }}
-      >
-        <Webcam
-          audio={false}
-          ref={webcamRef}
-          screenshotFormat="image/png"
-          width={768}
-          height={476}
-        />
-      </Modal>
+            Open Camera
+          </Button>
+        </div>
+        <div style={{ marginTop: "20px" }}>
+          <Upload
+            accept="image/*"
+            customRequest={() => {}}
+            showUploadList={false}
+            onChange={(info) => {
+              setSelectedFile(info.file.originFileObj);
+              handleFileChange(info);
+            }}
+          >
+            <Button icon={<UploadOutlined />} disabled={disableButtons}>
+              Select Image
+            </Button>
+          </Upload>
+        </div>
+        <div style={{ marginTop: "10px" }}>
+          <Button
+            type="primary"
+            onClick={handleVerify}
+            disabled={!selectedFile || disableButtons}
+          >
+            Verify the Image
+          </Button>
+        </div>
+        <div style={{ marginTop: "10px" }}>
+          <Button
+            type="primary"
+            onClick={handleUpload}
+            disabled={!selectedFile || disableButtons || !isApproved}
+          >
+            Upload the image to analyze
+          </Button>
+        </div>
+        {loading && (
+          <div style={{ marginTop: "20px" }}>
+            <Spin tip="Processing..." />
+          </div>
+        )}
+        {predictionResult && (
+          <div>
+            <h2>Predictions:</h2>
+            <pre>{predictionResult}</pre>
+          </div>
+        )}
+        {disableButtons && (
+          <div style={{ marginTop: "20px" }}>
+            <Button type="primary" onClick={redoTest}>
+              Re-Do Test
+            </Button>
+          </div>
+        )}
+        <Modal
+          title="Camera"
+          visible={cameraVisible}
+          onCancel={closeCamera}
+          footer={[
+            <Button key="back" onClick={closeCamera}>
+              Cancel
+            </Button>,
+            <Button
+              key="submit"
+              type="primary"
+              onClick={takePicture}
+              disabled={disableButtons}
+            >
+              Take Picture
+            </Button>,
+          ]}
+          width={800}
+          bodyStyle={{ height: 500 }}
+        >
+          <Webcam
+            audio={false}
+            ref={webcamRef}
+            screenshotFormat="image/png"
+            width={768}
+            height={476}
+          />
+        </Modal>
+      </div>
     </div>
   );
 }
