@@ -10,7 +10,6 @@ function App() {
     <BrowserRouter>
       <div className="App">
         <div className="Content">
-          <h1>Sight Sense</h1>
           <UserRoutes />
           <HomePageRoutes />
           <ClinicalRoutes />
