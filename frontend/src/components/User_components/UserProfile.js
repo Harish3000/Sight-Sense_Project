@@ -6,6 +6,8 @@ import "react-toastify/dist/ReactToastify.css";
 import { useLogOut } from "../../hooks/User_hooks/useLogOut";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/User_context/AuthContext";
+import VideoBG from "../../assets/Backround_video.mp4";
+import { Link } from "react-router-dom";
 
 export default function UserProfile() {
   const navigate = useNavigate();
@@ -56,6 +58,22 @@ export default function UserProfile() {
 
   return (
     <div>
+      <video
+        src={VideoBG}
+        autoPlay
+        loop
+        muted
+        style={{
+          width: "100%",
+          height: "160%",
+          objectFit: "cover",
+          position: "absolute",
+          top: 0,
+          left: 0,
+          zIndex: -1,
+        }}
+        title="Background Video"
+      />
       <h1
         style={{
           fontFamily: "Poppins",
@@ -64,38 +82,39 @@ export default function UserProfile() {
           fontSize: "40px",
         }}
       >
-        Pacient Profile
+        User Profile
       </h1>
       {user && (
-         <div
-         style={{
-           display: "flex",
-           flexDirection: "column",
-           alignItems: "center",
-           justifyContent: "center",
-           width: "50%",
-           margin: "auto",
-           padding: "20px",
-           border: "1px solid #ccc",
-           borderRadius: "10px",
-           boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
-           fontSize: "20px",
-           textAlign: "center",
-         }}
-       >
-         {user.user.firstname} {user.user.lastname}
-         <br />
-         {user.user.contact}
-         <br />
-         {user.user.email}
-         <br />
-         {user.user.addLine1}
-         <br />
-         {user.user.addLine2}
-         <br />
-         {user.user.addLine3}
-       </div>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            width: "50%",
+            margin: "auto",
+            padding: "20px",
+            border: "1px solid #ccc",
+            borderRadius: "10px",
+            boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
+            fontSize: "20px",
+            textAlign: "center",
+          }}
+        >
+          {user.user.firstname} {user.user.lastname}
+          <br />
+          {user.user.contact}
+          <br />
+          {user.user.email}
+          <br />
+          {user.user.addLine1}
+          <br />
+          {user.user.addLine2}
+          <br />
+          {user.user.addLine3}
+        </div>
       )}
+      <br></br>
 
       <div
         style={{
@@ -115,7 +134,7 @@ export default function UserProfile() {
             border: "none",
             marginRight: "10px",
             cursor: "pointer",
-            fontSize: '18px'
+            fontSize: "18px",
           }}
         >
           Update
@@ -132,7 +151,7 @@ export default function UserProfile() {
             border: "none",
             marginRight: "10px",
             cursor: "pointer",
-            fontSize: '18px'
+            fontSize: "18px",
           }}
         >
           Delete
@@ -148,11 +167,38 @@ export default function UserProfile() {
             borderRadius: "5px",
             border: "none",
             cursor: "pointer",
-            fontSize: '18px'
+            fontSize: "18px",
           }}
         >
           Logout
         </button>
+      </div>
+
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <Link to="/general-test/QuizHome">
+          <br></br>
+          <button
+            type="button"
+            style={{
+              backgroundColor: "#dc3545",
+              color: "#fff",
+              padding: "10px 20px",
+              borderRadius: "5px",
+              border: "none",
+              marginRight: "10px",
+              cursor: "pointer",
+              fontSize: "18px",
+            }}
+          >
+            Go Testing !
+          </button>
+        </Link>
       </div>
 
       <ReactToastContainer />
