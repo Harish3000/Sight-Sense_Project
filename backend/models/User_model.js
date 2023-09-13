@@ -1,7 +1,6 @@
 //This file contains the schema for the user collection in the database
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
-const validator = require("validator");
 
 //declare schema
 const Schema = mongoose.Schema;
