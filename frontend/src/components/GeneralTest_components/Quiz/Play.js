@@ -15,6 +15,8 @@ import axios from "axios";
 import Icon from "@mdi/react";
 import { mdiFormatListBulleted } from "@mdi/js";
 import { Link } from "react-router-dom";
+// import { AuthContext } from "../../contexts/User_context/AuthContext";
+// import { useAuthContext } from "../../../hooks/User_hooks/useAuthContext";
 
 class play extends React.Component {
   constructor(props) {
@@ -368,30 +370,54 @@ class play extends React.Component {
   showSummaryModal = () => {
     this.setState({ showModal: true });
   };
+  
   handleSaveButtonClick = () => {
     const { score } = this.state;
+    const user = JSON.parse(localStorage.getItem('user')); // Retrieve the user object from localStorage
+  
+    if (user && user.token) {
+      const token = user.token;
+      const data = {
+        test_name: "General Test",
+        user_id: user.firstname,
+        test_date: new Date(),
+        test_score: score,
+      };
+  
+      const headers = {
+        Authorization: `Bearer ${token}`, // Include the token in the request headers
+      };
+  
+      console.log("Data:", data);
+      console.log("Headers:", headers);
+  
+      axios
+        .post("http://localhost:4000/GeneralTest/addTest", data, { headers })
+        .then((response) => {
+          message.success("Test Data saved successfully");
+          console.log("Data saved successfully:", response.data);
+        })
+        .catch((error) => {
+          console.error("Error saving data:", error);
+        });
+    } else {
+      console.error("Token not found in user object in localStorage");
+    }
+};
 
-    const data = {
-      test_name: "General Test",
-      user_id: Math.random(),
-      test_date: new Date(),
-      test_score: score,
+handleDeleteAllDataClick = () => {
+  const user = JSON.parse(localStorage.getItem('user')); // Retrieve the user object from localStorage
+
+  if (user && user.token) {
+    const token = user.token;
+
+    // Include the token in the request headers
+    const headers = {
+      Authorization: `Bearer ${token}`,
     };
 
     axios
-      .post("http://localhost:4000/GeneralTest/addTest", data)
-      .then((response) => {
-        message.success("Test Data saved successfully");
-        console.log("Data saved successfully:", response.data);
-      })
-      .catch((error) => {
-        console.error("Error saving data:", error);
-      });
-  };
-
-  handleDeleteAllDataClick = () => {
-    axios
-      .delete("http://localhost:4000/GeneralTest/delete-all")
+      .delete("http://localhost:4000/GeneralTest/delete-all", { headers })
       .then((response) => {
         message.warning("All General Test data deleted successfully");
         console.log("Data deleted successfully:", response.data);
@@ -399,7 +425,12 @@ class play extends React.Component {
       .catch((error) => {
         console.error("Error deleting data:", error);
       });
-  };
+  } else {
+    console.error("Token not found in user object in localStorage");
+  }
+};
+
+
   render() {
     const { showModal } = this.state;
     const { showAlert } = this.state;

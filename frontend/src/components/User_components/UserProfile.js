@@ -6,22 +6,73 @@ import "react-toastify/dist/ReactToastify.css";
 import { useLogOut } from "../../hooks/User_hooks/useLogOut";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/User_context/AuthContext";
-import VideoBG from "../../assets/Backround_video.mp4";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import { useState } from "react";
 
 export default function UserProfile() {
   const navigate = useNavigate();
 
   const { logout } = useLogOut();
   const { user } = useContext(AuthContext);
+  const [testData, setTestData] = useState([]);
+  const [correctTest, setCorrectTest] = useState([]);
+
+  //Fetch test data
+  useEffect(() => {
+    const userString = localStorage.getItem("user");
+    if (!userString) {
+      // Handle the case where there's no user in localStorage, e.g., redirect to login
+      navigate("/login"); // Replace with your login route
+      return;
+    }
+
+    const user = JSON.parse(userString);
+    const token = user.token;
+
+    const getTestData = () => {
+      const headers = {
+        Authorization: `Bearer ${token}`, // Include the token in the request headers
+      };
+      axios
+        .get(`http://localhost:4000/api/users/read-all`, { headers })
+        .then((res) => {
+          setTestData(res.data);
+          console.log(res.data); // Use 'res.data' instead of 'testData' as it may not be updated immediately
+        })
+        .catch((err) => {
+          alert(err.message);
+        });
+    };
+
+    getTestData();
+  }, []);
+
+  //To fetch the correct test data
+  useEffect(() => {
+    const userString = localStorage.getItem("user");
+    if (!userString) {
+      // Handle the case where there's no user in localStorage, e.g., redirect to login
+      navigate("/login"); // Replace with your login route
+      return;
+    }
+
+    const user = JSON.parse(userString);
+    const userFirstName = user.user.firstname;
+
+    // Filter the test data to only include tests with the user's first name
+    const filteredTest = testData.filter(
+      (test) => test.user_id === userFirstName
+    );
+
+    // Update the state with the filtered test data
+    setCorrectTest(filteredTest);
+  }, [testData]); // Include testData in the dependencies array so that this effect runs when testData changes
 
   //logout function
   const handleLogOut = () => {
     logout();
-    toast.success("Logging out...");
-    setTimeout(() => {
-      navigate("/");
-    }, 3000);
+    navigate("/");
   };
 
   //update function
@@ -48,7 +99,7 @@ export default function UserProfile() {
           toast.success("Profile has been successfully deleted");
           setTimeout(() => {
             navigate("/");
-          }, 3000);
+          }, 2000);
         }
       } catch (error) {
         console.error("Error deleting user:", error);
@@ -58,22 +109,6 @@ export default function UserProfile() {
 
   return (
     <div>
-      <video
-        src={VideoBG}
-        autoPlay
-        loop
-        muted
-        style={{
-          width: "100%",
-          height: "160%",
-          objectFit: "cover",
-          position: "absolute",
-          top: 0,
-          left: 0,
-          zIndex: -1,
-        }}
-        title="Background Video"
-      />
       <h1
         style={{
           fontFamily: "Poppins",
@@ -85,22 +120,7 @@ export default function UserProfile() {
         User Profile
       </h1>
       {user && (
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-            width: "50%",
-            margin: "auto",
-            padding: "20px",
-            border: "1px solid #ccc",
-            borderRadius: "10px",
-            boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
-            fontSize: "20px",
-            textAlign: "center",
-          }}
-        >
+        <div>
           {user.user.firstname} {user.user.lastname}
           <br />
           {user.user.contact}

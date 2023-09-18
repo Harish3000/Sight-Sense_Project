@@ -1,8 +1,8 @@
 const User = require("../models/User_model");
-const mongoose = require("mongoose");
+const test = require("../models/GeneralTest_Modal");
 const jwt = require("jsonwebtoken");
 
-//Generate JWT
+// Generate JWT
 const createToken = (_id) => {
   return jwt.sign({_id}, process.env.SECRET, {expiresIn: '1d'})
 }
@@ -59,7 +59,7 @@ const loginUser = async (req, res) => {
   }
 }
 
-//Update User
+//Update user
 const updateUser = async (req, res) => {
   const { userId } = req.params;
   const {
@@ -99,6 +99,7 @@ const updateUser = async (req, res) => {
   }
 };
 
+//Delete user
 const deleteUser = async (req, res) => {
   const { userId } = req.params;
 
@@ -115,9 +116,24 @@ const deleteUser = async (req, res) => {
   }
 };
 
+//Read test data
+const readTest = async (req, res) => {
+  const token = req.headers.authorization.split(" ")[1];
+  try {
+    const user = jwt.verify(token, process.env.SECRET);
+    const testData = await test.find();
+
+    res.status(200).json(testData);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
 module.exports = {
   createUser,
   loginUser,
   updateUser,
-  deleteUser
+  deleteUser,
+  readTest
 };
