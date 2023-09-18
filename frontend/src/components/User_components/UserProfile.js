@@ -7,6 +7,9 @@ import { useLogOut } from "../../hooks/User_hooks/useLogOut";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/User_context/AuthContext";
 import { Link } from "react-router-dom";
+import edit from '../../assets/User_assets/img/edit.png';
+import deleteI from '../../assets/User_assets/img/delete.png';
+import profileimg from "../../assets/User_assets/img/profile_img.png";
 import { useEffect } from "react";
 import { useState } from "react";
 
@@ -18,7 +21,7 @@ export default function UserProfile() {
   const [testData, setTestData] = useState([]);
   const [correctTest, setCorrectTest] = useState([]);
 
-  //Fetch test data
+  // Fetch test data
   useEffect(() => {
     const userString = localStorage.getItem("user");
     if (!userString) {
@@ -48,7 +51,7 @@ export default function UserProfile() {
     getTestData();
   }, []);
 
-  //To fetch the correct test data
+  // To fetch the correct test data
   useEffect(() => {
     const userString = localStorage.getItem("user");
     if (!userString) {
@@ -69,18 +72,18 @@ export default function UserProfile() {
     setCorrectTest(filteredTest);
   }, [testData]); // Include testData in the dependencies array so that this effect runs when testData changes
 
-  //logout function
+  // logout function
   const handleLogOut = () => {
     logout();
     navigate("/");
   };
 
-  //update function
+  // update function
   const handleEdit = async (UserId) => {
     navigate("/update");
   };
 
-  //delete function
+  // delete function
   const handleDelete = async () => {
     const confirmDelete = window.confirm(
       "Are you sure you want to delete your account?"
@@ -109,118 +112,101 @@ export default function UserProfile() {
 
   return (
     <div>
-      <h1
-        style={{
-          fontFamily: "Poppins",
-          textAlign: "center",
-          paddingTop: "80px",
-          fontSize: "40px",
-        }}
-      >
-        User Profile
-      </h1>
-      {user && (
-        <div>
-          {user.user.firstname} {user.user.lastname}
-          <br />
-          {user.user.contact}
-          <br />
-          {user.user.email}
-          <br />
-          {user.user.addLine1}
-          <br />
-          {user.user.addLine2}
-          <br />
-          {user.user.addLine3}
+      <div style={{ display: "flex" }}>
+        <div style={{ flex: 1 }}>
+          <div style={{ display: "flex" }}>
+            <div
+              style={{ flex: 0.5, paddingTop: "80px", paddingLeft: "100px" }}
+            >
+              <img
+                src={profileimg}
+                alt="Profile Image"
+                style={{ height: "100px", width: "100px" }}
+              />
+            </div>
+            <div style={{ flex: 1 }}>
+              <h1
+                style={{
+                  paddingTop: "80px",
+                  fontSize: "44px",
+                }}
+              >
+                {user && (<div>{user.user.firstname} {user.user.lastname}</div>)}
+              </h1>
+            </div>
+          </div>
+
+          <div style={{ display: "flex" }}>
+            <div style={{ flex: 1 }}>
+              {/* Your profile details */}
+              {user && (
+                <div style={{ paddingTop: "50px", fontSize: "18px", paddingLeft: "100px" }}>
+                  <h4>Contact</h4> {user.user.contact}
+                  <br />
+                  <br />
+                  <h4>Email</h4> {user.user.email}
+                  <br />
+                  <br />
+                  <h4>Address</h4> {user.user.addLine1}, {user.user.addLine2}, {user.user.addLine3}
+                  <br />
+                </div>
+              )}
+            </div>
+            <div style={{ flex: 0.4 , paddingTop: "60px"}}>
+              <div>
+                <button
+                  type="button"
+                  onClick={() => handleEdit(user.user._id)}
+                  style={{
+                    backgroundColor: "#007bff",
+                    color: "#fff",
+                    padding: "5px 10px",
+                    borderRadius: "5px",
+                    border: "none",
+                    marginRight: "10px",
+                    cursor: "pointer",
+                    fontSize: "18px",
+                  }}
+                >
+                  <img
+                src={edit}
+                alt="Edit icon"
+                style={{ height: "20px", width: "20px" }}
+              />
+                </button>
+              </div>
+
+              <br></br>
+              <div>
+                <button
+                  type="button"
+                  onClick={() => handleDelete(user.user._id)}
+                  style={{
+                    backgroundColor: "#dc3545",
+                    color: "#fff",
+                    padding: "5px 10px",
+                    borderRadius: "5px",
+                    border: "none",
+                    marginRight: "10px",
+                    cursor: "pointer",
+                    fontSize: "18px",
+                  }}
+                >
+                  <img
+                src={deleteI}
+                alt="Delete icon"
+                style={{ height: "20px", width: "20px" }}
+              />
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
-      )}
-      <br></br>
 
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <button
-          type="button"
-          onClick={() => handleEdit(user.user._id)}
-          style={{
-            backgroundColor: "#007bff",
-            color: "#fff",
-            padding: "10px 20px",
-            borderRadius: "5px",
-            border: "none",
-            marginRight: "10px",
-            cursor: "pointer",
-            fontSize: "18px",
-          }}
-        >
-          Update
-        </button>
-
-        <button
-          type="button"
-          onClick={() => handleDelete(user.user._id)}
-          style={{
-            backgroundColor: "#dc3545",
-            color: "#fff",
-            padding: "10px 20px",
-            borderRadius: "5px",
-            border: "none",
-            marginRight: "10px",
-            cursor: "pointer",
-            fontSize: "18px",
-          }}
-        >
-          Delete
-        </button>
-
-        <button
-          type="button"
-          onClick={handleLogOut}
-          style={{
-            backgroundColor: "#6c757d",
-            color: "#fff",
-            padding: "10px 20px",
-            borderRadius: "5px",
-            border: "none",
-            cursor: "pointer",
-            fontSize: "18px",
-          }}
-        >
-          Logout
-        </button>
+        <div style={{ flex: 1 }}>
+          <p>div for chart and test results details</p>
+        </div>
       </div>
-
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <Link to="/general-test/QuizHome">
-          <br></br>
-          <button
-            type="button"
-            style={{
-              backgroundColor: "#dc3545",
-              color: "#fff",
-              padding: "10px 20px",
-              borderRadius: "5px",
-              border: "none",
-              marginRight: "10px",
-              cursor: "pointer",
-              fontSize: "18px",
-            }}
-          >
-            Go Testing !
-          </button>
-        </Link>
-      </div>
-
       <ReactToastContainer />
     </div>
   );
