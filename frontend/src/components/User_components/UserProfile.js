@@ -1,14 +1,16 @@
 import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 import { ToastContainer as ReactToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useLogOut } from "../../hooks/User_hooks/useLogOut";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/User_context/AuthContext";
-import edit from "../../assets/User_assets/img/edit.png";
-import deleteI from "../../assets/User_assets/img/delete.png";
 import profileimg from "../../assets/User_assets/img/profile_img.png";
-import DonutChart from "react-donut-chart";
+import { Chart } from "react-google-charts";
+import ProgressBar from "@ramonak/react-progress-bar";
+import { CircularProgressbar } from "react-circular-progressbar";
+import "react-circular-progressbar/dist/styles.css";
 
 export default function UserProfile() {
   const navigate = useNavigate();
@@ -56,6 +58,7 @@ export default function UserProfile() {
     const cachedTestData = localStorage.getItem("testData");
     if (cachedTestData) {
       setTestData(JSON.parse(cachedTestData));
+      console.log("Cached Test Data:", JSON.parse(cachedTestData));
     }
   }, []);
 
@@ -85,12 +88,79 @@ export default function UserProfile() {
     console.log("Test Score : ", testScore);
   }, [correctTest]);
 
-  // Pie chart data
+  // Donought chart data
   let totalQuestions = 15; // Total of 15 questions
   let correctAns = Number((testScore / totalQuestions) * 100); // Correct answers percentage
   let wrongAns = 100 - correctAns; // Wrong answers percentage
 
   // logout function
+
+  const data = [
+    ["Category", "Value"],
+    ["correct Answers", correctAns],
+    ["Wrong Answers", wrongAns],
+  ];
+
+  // Options for the chart
+  const options = {
+    title: "Previous General Test Stats",
+    backgroundColor: "transparent",
+    titleTextStyle: {
+      fontSize: 22, // Adjust the font size as needed
+    },
+    legend: {
+      textStyle: {
+        fontSize: 14, // Adjust the font size as needed
+      },
+    },
+    pieHole: 0.7, // Controls the size of the hole in the center (0 to 1)
+    pieSliceText: "none",
+    colors: ["#1F3F49", "#6AB187"], // Colors for the segments
+  };
+
+  //Line Chart
+  const Linedata = [
+    ["X", "✔", "✘"],
+    [1, 10, 3],
+    [2, 15, 0],
+    [3, 8, 7],
+    [4, testScore, 15 - testScore],
+    // Add more data points as needed
+  ];
+
+  const Lineoptions = {
+    title: "Score Board Latest Tests",
+    legend: {
+      textStyle: {
+        fontSize: 14, // Adjust the font size as needed
+      },
+    },
+    backgroundColor: "transparent",
+    titleTextStyle: {
+      fontSize: 22,
+    },
+    hAxis: {
+      title: "Round",
+      titleTextStyle: {
+        fontSize: 16, // Adjust the font size for the X-axis title
+      },
+      textStyle: {
+        color: "#1F3F49", // Change the Y-axis text color to red (#FF0000)
+        fontSize: 14, // You can also adjust the font size if needed
+      },
+    },
+    vAxis: {
+      title: "Score",
+      titleTextStyle: {
+        fontSize: 16, // Adjust the font size for the X-axis title
+      },
+      textStyle: {
+        color: "#1F3F49", // Change the Y-axis text color to red (#FF0000)
+        fontSize: 14, // You can also adjust the font size if needed
+      },
+    },
+  };
+
   const handleLogOut = () => {
     logout();
     navigate("/");
@@ -126,19 +196,6 @@ export default function UserProfile() {
     }
   };
 
-  //Donought chart data
-  const chartData = {
-    labels: ["Correct Answers", "Wrong Answers"],
-    datasets: [
-      {
-        label: "Last Updated Test Results",
-        data: [correctAns, wrongAns],
-        backgroundColor: ["rgb(255, 99, 132)", "rgb(54, 162, 235)"],
-        hoverOffset: 4,
-      },
-    ],
-  };
-
   const [Conclusion, setConclusion] = useState(false);
   const [message, setMessage] = useState("");
 
@@ -153,22 +210,71 @@ export default function UserProfile() {
     }
   }, [correctAns]);
 
+  //Scatter plot
+  const scatterData = [
+    ["Attempt", "Score"],
+    [1, 8],
+    [2, 10],
+    [3, 12],
+    [4, 10],
+    [5, 11],
+    [6, 7],
+    [7, 9],
+    [8, 12],
+    [9, 14],
+    [10, 11],
+    [11, 8],
+    [12, 10],
+    [13, 12],
+    [14, 10],
+    [15, testScore],
+  ];
+
+  const Scatteroptions = {
+    title: "Attempt vs. Score Performance Trend",
+    titleTextStyle: {
+      fontSize: 22,
+    },
+    hAxis: {
+      title: "Attempt",
+      titleTextStyle: {
+        fontSize: 16, // Adjust the font size for the X-axis title
+      },
+    },
+    vAxis: {
+      title: "Score",
+      titleTextStyle: {
+        fontSize: 16, // Adjust the font size for the X-axis title
+      },
+    },
+    backgroundColor: "transparent",
+  };
+
   return (
-    <div style={{ paddingTop: "30px", paddingLeft:"70px", paddingRight:"70px" }}>
+    <div style={{ padding: "40px", backgroundColor: "#CED2CC" }}>
       <div style={{ display: "flex" }}>
-        <div style={{ flex: 1 }}>
+        <div
+          style={{
+            flex: "0.25",
+            backgroundColor: "#6AB187",
+            padding: "20px",
+            height: "980px",
+          }}
+        >
+          <div style={{}}></div>
           <div style={{ display: "flex" }}>
-            <div style={{ flex: 0.6 }}>
+            <div style={{ flex: "1" }}>
               <img
                 src={profileimg}
                 alt="Profile Image"
                 style={{ height: "100px", width: "100px" }}
               />
             </div>
-            <div style={{ flex: 2 }}>
+            <div style={{ flex: "1" }}>
               <h1
                 style={{
-                  fontSize: "44px",
+                  fontSize: "40px",
+                  color: "white",
                 }}
               >
                 {user && (
@@ -179,174 +285,297 @@ export default function UserProfile() {
               </h1>
             </div>
           </div>
-          <div>
-            <div style={{ display: "flex" }}>
-              <div style={{ paddingLeft: "30px", paddingTop: "40px" }}>
+
+          <div style={{ display: "flex" }}>
+            <div>
+              {/* Profile details */}
+              {user && (
                 <div
                   style={{
-                    flex: 1,
-                    border: "2px solid #000",
-                    padding: "10px",
-                    backgroundColor: "#F0F8FF",
-                    boxShadow: " 0 4px 8px 0 rgba(0,0,0,0.2)",
-                    transition: "0.3s",
-                    height: "450px",
-                    fontSize: "20px",
-                    cursor: "pointer",
+                    paddingTop: "30px",
+                    fontSize: "18px",
+                    paddingLeft: "30px",
+                    paddingBottom: "40px",
+                    paddingRight: "20px",
                   }}
                 >
-                  {/* Profile details */}
-                  {user && (
-                    <div
-                      style={{
-                        paddingTop: "30px",
-                        fontSize: "18px",
-                        paddingLeft: "30px",
-                        paddingBottom: "40px",
-                        paddingRight: "20px",
-                      }}
-                    >
-                      <div>
-                        <div style={{ paddingLeft: "300px" }}>
-                          <div style={{ paddingBottom: "10px" }}>
-                            <button
-                              type="button"
-                              onClick={() => handleEdit(user.user._id)}
-                              style={{
-                                backgroundColor: "#007bff",
-                                color: "#fff",
-                                padding: "5px 10px",
-                                borderRadius: "5px",
-                                border: "none",
-                                marginRight: "10px",
-                                cursor: "pointer",
-                                fontSize: "18px",
-                              }}
-                            >
-                              <img
-                                src={edit}
-                                alt="Edit icon"
-                                style={{ height: "20px", width: "20px" }}
-                              />
-                            </button>
-                          </div>
-                          <div>
-                            <button
-                              type="button"
-                              onClick={() => handleDelete(user.user._id)}
-                              style={{
-                                backgroundColor: "#dc3545",
-                                color: "#fff",
-                                padding: "5px 10px",
-                                borderRadius: "5px",
-                                border: "none",
-                                marginRight: "10px",
-                                cursor: "pointer",
-                                fontSize: "18px",
-                              }}
-                            >
-                              <img
-                                src={deleteI}
-                                alt="Delete icon"
-                                style={{ height: "20px", width: "20px" }}
-                              />
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                      <h4>Contact</h4> {user.user.contact}
-                      <br />
-                      <br />
-                      <h4>Email</h4> {user.user.email}
-                      <br />
-                      <br />
-                      <h4>Address</h4> {user.user.addLine1},{" "}
-                      {user.user.addLine2}, {user.user.addLine3}
-                      <br />
-                    </div>
-                  )}
+                  <h4 style={{ color: "white" }}>Contact</h4>{" "}
+                  <h5 style={{ color: "#1F3F49" }}>{user.user.contact}</h5>
+                  <br></br>
+                  <h4 style={{ color: "white" }}>Email</h4>{" "}
+                  <h5 style={{ color: "#1F3F49" }}>{user.user.email}</h5>
+                  <br></br>
+                  <h4 style={{ color: "white" }}>Address</h4>{" "}
+                  <h5 style={{ color: "#1F3F49" }}>{user.user.addLine1},</h5>{" "}
+                  <h5 style={{ color: "#1F3F49" }}>
+                    {user.user.addLine2}, {user.user.addLine3}
+                  </h5>
+                  <br />
+                </div>
+              )}
+              <div
+                style={{
+                  display: "flex",
+                  paddingTop: "410px",
+                  paddingLeft: "17px",
+                }}
+              >
+                <div>
+                  <button
+                    type="button"
+                    onClick={() => handleEdit(user.user._id)}
+                    style={{
+                      backgroundColor: "#1F3F49",
+                      color: "#fff",
+                      padding: "5px 10px",
+                      borderRadius: "5px",
+                      border: "none",
+                      marginRight: "10px",
+                      cursor: "pointer",
+                      fontSize: "18px",
+                    }}
+                  >
+                    Update
+                  </button>
                 </div>
                 <div>
-                <div style={{ padding: "20px" }}>
-              
-              <br></br>
-            </div>
+                  <button
+                    type="button"
+                    onClick={() => handleDelete(user.user._id)}
+                    style={{
+                      backgroundColor: "#dc3545",
+                      color: "#fff",
+                      padding: "5px 12px",
+                      borderRadius: "5px",
+                      border: "none",
+                      marginRight: "10px",
+                      cursor: "pointer",
+                      fontSize: "18px",
+                    }}
+                  >
+                    Delete
+                  </button>
+                </div>
+                <div>
+                  <button
+                    type="button"
+                    onClick={handleLogOut}
+                    style={{
+                      backgroundColor: "#6c757d",
+                      color: "#fff",
+                      padding: "5px 10px",
+                      borderRadius: "5px",
+                      border: "none",
+                      cursor: "pointer",
+                      fontSize: "18px",
+                    }}
+                  >
+                    Logout
+                  </button>
                 </div>
               </div>
             </div>
           </div>
         </div>
         <div style={{ flex: "1" }}>
-          something
-        </div>
-      <div style={{display:"flex"}}>
-        <div>
-        <button
-          type="button"
-          onClick={handleLogOut}
-          style={{
-            backgroundColor: "#6c757d",
-            color: "#fff",
-            padding: "10px 20px",
-            borderRadius: "5px",
-            border: "none",
-            cursor: "pointer",
-            fontSize: "18px",
-          }}
-        >
-          Logout
-        </button>
-        </div>
-
-      </div> 
-      </div>
-
-<div style={{display:"flex"}}>
-  <div style={{flex:1}}>
-
-  <div>
-            <h4 style={{ paddingTop: "60px", paddingLeft: "40px" }}>Previous Basic Test Stats</h4>
-            <DonutChart
-              data={[
-                {
-                  label: "CorrectAnswers",
-                  value: correctAns,
-                },
-                {
-                  label: "Wrong Answers",
-                  value: wrongAns,
-                },
-              ]}
-            />
-
-            <div>
-            <h6 style={{ fontStyle: "italic" , paddingLeft:"45px", paddingBottom:"40px"}}>
-                This data is last updated on : {testDate}
-              </h6>
+          <div style={{ display: "flex" }}>
+            <div style={{ flex: "1", paddingLeft: "10px" }}>
+              <div
+                style={{
+                  paddingLeft: "20px",
+                  width: "550px",
+                  height: "450px",
+                  border: "2px solid #f0f0f0",
+                  backgroundColor: "#f0f0f0",
+                }}
+              >
+                <Chart
+                  width={"100%"}
+                  height={"400px"}
+                  chartType="PieChart"
+                  loader={<div>Loading Chart</div>}
+                  data={data}
+                  options={options}
+                />
+                <div>
+                  <h6
+                    style={{
+                      fontStyle: "italic",
+                      paddingLeft: "45px",
+                    }}
+                  >
+                    This data is last updated on : {testDate}
+                  </h6>
+                </div>
+              </div>
+            </div>
+            <div style={{ flex: "1" }}>
+              <div style={{ paddingLeft: "10px", paddingRight: "20px" }}>
+                <div
+                  style={{
+                    paddingLeft: "20px",
+                    paddingBottom: "20px",
+                    width: "580px",
+                    height: "450px",
+                    border: "2px solid #f0f0f0",
+                    backgroundColor: "#f0f0f0",
+                  }}
+                >
+                  <Chart
+                    width={"100%"}
+                    height={"400px"}
+                    chartType="LineChart"
+                    loader={<div>Loading Chart</div>}
+                    data={Linedata}
+                    options={Lineoptions}
+                  />
+                  <div>
+                    <h6
+                      style={{
+                        fontStyle: "italic",
+                        paddingLeft: "45px",
+                        paddingBottom: "40px",
+                      }}
+                    >
+                      This data is last updated on : {testDate}
+                    </h6>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
+          <div style={{ display: "flex" }}>
+            <div style={{ flex: "1" }}>
+              <div style={{ paddingLeft: "10px", paddingTop: "10px" }}>
+                <div
+                  style={{
+                    paddingLeft: "20px",
+                    paddingBottom: "20px",
+                    width: "550px",
+                    height: "520px",
+                    border: "2px solid #f0f0f0",
+                    backgroundColor: "#f0f0f0",
+                  }}
+                >
+                  <h4 style={{ color: "#1F3F49", padding: "20px" }}>SUMMERY</h4>
+                  <div style={{ display: "flex" }}>
+                    <div style={{ flex: "1" }}>
+                      <div style={{ paddingLeft: "20px" }}>
+                        <h5>Total number of basic test questions </h5>
+                        <h5>Total Number of Correct Answers </h5>
+                        <br></br>
+                        <div>
+                          <ProgressBar
+                            completed={correctAns}
+                            bgColor="#1F3F49"
+                            height="15px"
+                          />
+                        </div>
+                        <br></br>
+                        <h5>Total Number of Wrong Answers </h5>
+                        <br></br>
+                        <div>
+                          <ProgressBar
+                            completed={wrongAns}
+                            bgColor="#6AB187"
+                            height="15px"
+                          />
+                        </div>
 
-  </div>
-      <div style={{paddingTop: "120px", paddingBottom: "40px", flex: 1}}>
-        <h4>SUMMERY OF BASIC TESTING</h4>
-        <br></br>
-        <h5>
-                Total number of basic test questions -
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;15
-              </h5>
-              <h5>Number of correctly answered questions - {testScore}</h5>
-              <h5>Number of wrongly answered questions - &nbsp;&nbsp;{15 - testScore}</h5>
-              <h5>
-                Precentage of correct answers -
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                {correctAns.toFixed(2)} %
-              </h5>
+                        <br></br>
+                      </div>
+                    </div>
 
-              <h4 style={{color: "#007bff", paddingTop: "20px"}}> Conclusion</h4>
-              <h4>{message}</h4>
+                    <div style={{ flex: "0.4" }}>
+                      <div>
+                        <h5>{totalQuestions} </h5>
+                        <h5>{testScore} </h5>
+                        <br></br>
+                        <br></br>
+                        <br></br>
+                        <h5>{15 - testScore} </h5>
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <h4 style={{ paddingLeft: "20px", color: "#23282D" }}>
+                      Conclusion
+                    </h4>
+                    <h5 style={{ paddingLeft: "20px", color: "#23282D" }}>
+                      {message}
+                    </h5>
+                  </div>
+                  <div style={{ paddingLeft: "180px", paddingTop: "10px" }}>
+                    <div
+                      style={{
+                        width: "120px",
+                        height: "120px",
+                      }}
+                    >
+                      <CircularProgressbar
+                        value={correctAns}
+                        text={`${correctAns}%`}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              style={{ flex: "1", paddingTop: "10px", paddingRight: "20px" }}
+            >
+              <div
+                style={{
+                  width: "580px",
+                  height: "520px",
+                  border: "2px solid #f0f0f0",
+                  backgroundColor: "#f0f0f0",
+                }}
+              >
+                <div>
+                  <Chart
+                    chartType="ScatterChart"
+                    width={"100%"}
+                    height={"400px"}
+                    data={scatterData}
+                    options={Scatteroptions}
+                  />
+                  <div>
+                    <h6
+                      style={{
+                        fontStyle: "italic",
+                        paddingLeft: "45px",
+                      }}
+                    >
+                      This data is last updated on : {testDate}
+                    </h6>
+                  </div>
+                </div>
+                <div style={{ paddingLeft: "430px" }}>
+                  <Link to="/general-test/QuizHome">
+                    <br></br>
+                    <button
+                      type="button"
+                      style={{
+                        backgroundColor: "#dc3545",
+                        color: "#fff",
+                        padding: "10px 20px",
+                        borderRadius: "5px",
+                        border: "none",
+                        marginRight: "10px",
+                        cursor: "pointer",
+                        fontSize: "18px",
+                      }}
+                    >
+                      Go Testing
+                    </button>
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      </div>
-      <ReactToastContainer />
     </div>
   );
 }
