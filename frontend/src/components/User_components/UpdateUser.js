@@ -78,25 +78,15 @@ export default function UpdateUser() {
   };
 
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        minHeight: "100vh", // Set the minimum height of the container to the viewport height
-      }}
-    >
+    <div style={{ padding: "40px", backgroundColor: "#6AB187" }}>
       <div>
-        <h2
-          style={{
-            fontFamily: "Poppins",
-            textAlign: "center",
-            fontSize: "44px",
-          }}
-        >
+        <h2 style={{ textAlign: "center", fontSize: "44px", padding: "20px", color:"#ffffff" }}>
           Update Profile
         </h2>
-        <form
+      </div>
+
+      <div style={{paddingLeft: "300px"}}>
+      <form
           onSubmit={handleSubmit}
           style={{
             width: "800px",
@@ -116,12 +106,13 @@ export default function UpdateUser() {
               htmlFor="firstname"
               style={{ fontSize: "20px", marginRight: "10px" }}
             >
-              First Name:
+              First Name
             </label>
             <input
               type="text"
               id="firstname"
               name="firstname"
+              disabled="true"
               value={formData.firstname}
               onChange={handleChange}
               style={{
@@ -139,7 +130,7 @@ export default function UpdateUser() {
               htmlFor="lastname"
               style={{ fontSize: "20px", marginRight: "10px" }}
             >
-              Last Name:
+              Last Name
             </label>
             <input
               type="text"
@@ -162,7 +153,7 @@ export default function UpdateUser() {
               htmlFor="contact"
               style={{ fontSize: "20px", marginRight: "10px" }}
             >
-              Contact:
+              Contact
             </label>
             <input
               type="text"
@@ -185,7 +176,7 @@ export default function UpdateUser() {
               htmlFor="addLine1"
               style={{ fontSize: "20px", marginRight: "10px" }}
             >
-              Address Line 1:
+              Address Line 1
             </label>
             <input
               type="text"
@@ -208,7 +199,7 @@ export default function UpdateUser() {
               htmlFor="addLine2"
               style={{ fontSize: "20px", marginRight: "10px" }}
             >
-              Address Line 2:
+              Address Line 2
             </label>
             <input
               type="text"
@@ -231,7 +222,7 @@ export default function UpdateUser() {
               htmlFor="addLine3"
               style={{ fontSize: "20px", marginRight: "10px" }}
             >
-              Address Line 3:
+              Address Line 3
             </label>
             <input
               type="text"
@@ -254,12 +245,13 @@ export default function UpdateUser() {
               htmlFor="email"
               style={{ fontSize: "20px", marginRight: "10px" }}
             >
-              Email:
+              Email
             </label>
             <input
               type="email"
               id="email"
               name="email"
+              disabled="true"
               value={formData.email}
               onChange={handleChange}
               style={{
@@ -279,6 +271,7 @@ export default function UpdateUser() {
               size="large"
               style={{
                 color: "#ffffff",
+                backgroundColor: "#1F3F49",
                 marginRight: "20px",
                 marginLeft: "230px",
                 fontSize: "18px",
@@ -294,7 +287,7 @@ export default function UpdateUser() {
                 size="large"
                 style={{
                   color: "#ffffff",
-                  backgroundColor: "#dc3545",
+                  backgroundColor: "#D32D41",
                   fontSize: "18px",
                   width: "100px",
                   height: "50px",
@@ -306,6 +299,7 @@ export default function UpdateUser() {
           </div>
         </form>
       </div>
+
       <ReactToastContainer />
     </div>
   );
