@@ -4,7 +4,6 @@ import HomePageRoutes from "./routes/Home_routes";
 import ClinicalRoutes from "./routes/Clinical_routes";
 import GeneralTestRoutes from "./routes/GeneralTest_routes";
 import AdvancedTestRoutes from "./routes/AdvancedTest_routes";
-import Footer from "./components/Footer";
 
 function App() {
   return (
