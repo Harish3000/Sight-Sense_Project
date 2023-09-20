@@ -148,6 +148,7 @@ const Login = () => {
                   loading={isLoading}
                   style={{
                     color: "#ffffff",
+                    backgroundColor: "#6AB187",
                     marginRight: "20px",
                     marginLeft: "120px",
                     fontSize: '20px' ,width: '100px', height: '50px'
@@ -159,7 +160,7 @@ const Login = () => {
                   <Button
                     type="primary"
                     size="large"
-                    style={{ color: "#ffffff" ,fontSize: '20px' ,width: '100px', height: '50px'}}
+                    style={{ color: "#ffffff" ,fontSize: '20px' ,width: '100px', height: '50px', backgroundColor: "#1F3F49"}}
                   >
                     Register
                   </Button>
