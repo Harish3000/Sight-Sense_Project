@@ -251,7 +251,7 @@ export default function UserProfile() {
   };
 
   return (
-    <div style={{ padding: "40px", backgroundColor: "#CED2CC" }}>
+    <div style={{ paddingLeft: "20px", paddingTop:"20px", backgroundColor: "#CED2CC" }}>
       <div style={{ display: "flex" }}>
         <div
           style={{
