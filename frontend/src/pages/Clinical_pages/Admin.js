@@ -7,10 +7,6 @@ import VideoBG from "../../assets/Backround_video.mp4";
 
 function Admin() {
   const [admins, setAdmins] = useState([]);
-  // const [clinics, setClinics] = useState([]);
-  // const [selectedClinic, setSelectedClinic] = useState(null);
-  // const [editingClinicId, setEditingClinicId] = useState(null);
-  // const [ClinicSelected, setClinicSelected] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -30,11 +26,12 @@ function Admin() {
       .delete(`http://localhost:4000/Clinics/delete/` + id)
       .then((res) => {
         console.log(res);
+        toast.success("Clinic Deleted!");
         setTimeout(() => {
           navigate("/admin");
         }, 3000);
         window.location.reload();
-        toast.success("Clinic Deleted!");
+        
       })
       .catch((error) => console.log(error));
   };

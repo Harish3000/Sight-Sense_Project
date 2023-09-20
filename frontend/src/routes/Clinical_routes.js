@@ -1,6 +1,5 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import "remixicon/fonts/remixicon.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import ClinicHome from "../pages/Clinical_pages/ClinicHome";
 import CreateClinic from "../pages/Clinical_pages/CreateClinic";
