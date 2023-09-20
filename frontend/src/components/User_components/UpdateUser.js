@@ -7,7 +7,6 @@ import "react-toastify/dist/ReactToastify.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useLogOut } from "../../hooks/User_hooks/useLogOut";
 import { Button } from "antd";
-import VideoBG from "../../assets/Backround_video.mp4";
 
 export default function UpdateUser() {
   const { logout } = useLogOut();
@@ -87,22 +86,6 @@ export default function UpdateUser() {
         minHeight: "100vh", // Set the minimum height of the container to the viewport height
       }}
     >
-      <video
-        src={VideoBG}
-        autoPlay
-        loop
-        muted
-        style={{
-          width: "100%",
-          height: "160%",
-          objectFit: "cover",
-          position: "absolute",
-          top: 0,
-          left: 0,
-          zIndex: -1,
-        }}
-        title="Background Video"
-      />
       <div>
         <h2
           style={{
