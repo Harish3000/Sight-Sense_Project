@@ -17,10 +17,6 @@ function App() {
           <GeneralTestRoutes />
           <AdvancedTestRoutes />
         </div>
-
-        <div className="footer">
-          <Footer />
-        </div>
       </div>
     </BrowserRouter>
   );
