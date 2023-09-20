@@ -1,4 +1,4 @@
-* {
+/* * {
   padding: 0;
   margin: 0;
   font-family: "Roboto Mono", monospace;
@@ -9,7 +9,7 @@
 .app-name {
   font-family: "Roboto Mono", monospace;
   /* color: #008080; */
-  color: white;
+  color: rgb(19, 88, 218);
   text-align: center;
   font-size: 70px;
 }
@@ -19,47 +19,18 @@ hr {
   border: none; /* Remove the default border */
   border-top: 2px solid black; /* Set the thickness and color of the horizontal rule */
 }
-
+/*
 /* Body styling */
 .home-body {
   font-family: "Roboto Mono", monospace;
   padding: 0;
-  background-image: linear-gradient(
-    90deg,
-    rgba(15, 77, 157, 0.918),
-    rgba(7, 67, 245, 0.705),
-    rgba(71, 7, 245, 0.571)
-  );
   object-fit: cover;
   width: 100%;
   height: 100%;
 }
 
-/* Button Styling */
-.add-new-clinics-btn {
-  position: fixed;
-  top: 120px; /* Adjust the top position as needed */
-  right: 80px;
-}
+/*
 
-/* Add New Button */
-.add-new-btn {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  background-image: linear-gradient(
-    90deg,
-    rgb(15, 77, 157),
-    rgba(36, 182, 222, 0.957)
-  );
-  color: white;
-  border: none;
-  font-family: "Poppins";
-  font-size: 30px;
-  line-height: 50px;
-  text-align: center;
-  cursor: pointer;
-}
 
 /* Card Styling in div 1 */
 .card1 {
@@ -98,110 +69,14 @@ hr {
   margin-left: 400px !important;
 }
 
-/* Card 2 styling */
-.card2 {
-  padding: 60px;
-  transition: 0.3s;
-  width: 350px;
-  height: 300px;
-  font-size: 20px;
-  margin: 0 auto;
-  border-radius: 70px; /* Add rounded corners */
-}
 
-.card2:hover {
-  /* box-shadow: 0 8px 16px 0 #f0e130; */
-}
-
-/* Add padding to center the card content */
-.div-for-paddding-card2 {
-  padding: 60px 60px; /* Adjust the padding as needed */
-  width: 500px;
-  height: 500px;
-}
-
-/* Column styling */
-.title-column {
-  font-size: 10px;
-  font-weight: bold;
-}
-
-.title-column-display {
-  font-size: 35px;
-}
-
-.content-column {
-  font-size: 25px;
-}
-
-/* Textarea styling */
-.content-textarea {
-  height: 100px;
-  font-size: 20px;
-  background: whitesmoke;
-}
-/* Textarea styling */
-/* .content-textarea {
-  height: 100px;
-  font-size: 20px;
-  font-family: "Poppins";
-} */
-/* Media Queries for Responsiveness */
-@media (max-width: 1023px) {
+/* Media Queries for Responsiveness*/
+/*@media (max-width: 1023px) {
   .div-home-body {
     flex-direction: column; /* Stack divs vertically */
-  }
-
-  .card2 {
-    width: 100%; /* Set card2 to full width on smaller screens */
-    height: auto; /* Reset height for content adjustment */
-  }
-
-  .div-for-paddding-card2 {
-    padding: 0 20px; /* Adjust padding for smaller screens */
-  }
-}
-
-input[type="text"] {
-  font-family: "Poppins";
-  font-size: 20px;
-  background: whitesmoke;
-  border-color: #002080;
-  border-radius: 10px;
-}
-
-/* icon styling*/
-
-.icon-div .icon {
-  margin-left: 10px; /* Add some space between icons */
-  cursor: pointer;
-}
-
-.icon-div {
-  position: absolute;
-  top: 210px;
-  right: 120px;
-  display: flex;
-}
-
-/* Adjust the width of the input and textarea within card2 */
-.card2 input[type="text"],
-.card2 textarea {
-  margin-left: 20px;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  width: 100%; /* You can adjust this value as needed */
-  max-width: 800px; /* Set a maximum width to prevent excessive expansion */
-  box-sizing: border-box; /* Include padding and border in the total width */
-}
-
-/*icons styling*/
-.icons {
-  height: 40px;
-  width: 40px;
-}
-
-/*confirmation box buttons */
+ /*}
+}*/
+/*confirmation box buttons */ /*
 .confirm-btns {
   font-family: "Poppins";
   font-size: 18px;
@@ -240,4 +115,6 @@ input[type="text"] {
   border-radius: 10px;
   margin-left: 10px;
   margin-top: 5px;
-}
+}  */
+
+
