@@ -203,7 +203,7 @@ export default function UserProfile() {
     // Check the condition and update Conclusion and message accordingly
     if (correctAns > 50) {
       setConclusion(true);
-      setMessage("Your vision appears promising and holds great potential.");
+      setMessage("Your vision shows promise and potential.");
     } else {
       setConclusion(false);
       setMessage("Opting for advanced testing is the preferred choice.");
