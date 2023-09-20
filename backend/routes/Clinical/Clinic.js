@@ -3,7 +3,7 @@ const Clinics = require("../../models/ClinicsModel");
 const router = express.Router();
 
 // create ~ http://localhost:4000/api/Clinics/newClinic
-router.route("/newClinic").post((req, res) => {
+router.route("/createClinic").post((req, res) => {
   const clinicName = req.body.clinicName;
   const clinicLocation = req.body.clinicLocation;
   const clinicContact = req.body.clinicContact;
@@ -27,8 +27,8 @@ router.route("/newClinic").post((req, res) => {
     });
 });
 
-// read ~ http://localhost:4000/api/Clinics/clinics
-router.route("/clinics").get((req, res) => {
+// read ~ http://localhost:4000/api/Clinics/admin
+router.route("/admin").get((req, res) => {
   // fetch all Clinics
   Clinics.find()
     .then((clinicData) => {
@@ -40,46 +40,28 @@ router.route("/clinics").get((req, res) => {
     });
 });
 
-// update ~ http://localhost:4000/api/Clinics/edit/id
-router.route("/edit/:clinicId").put(async (req, res) => {
-  let ClinicID = req.params.clinicId; // Use req.params to get the ID from the URL
-
-  const { clinicName, clinicLocation, clinicContact, clinicWebsite } = req.body;
-
-  const editClinic = {
-    clinicName,
-    clinicLocation,
-    clinicContact,
-    clinicWebsite,
-  };
-
-  //checking for an existing record
-  try {
-    const updatedClinic = await Clinics.findByIdAndUpdate(
-      ClinicID,
-      editClinic,
-      {
-        new: true, // This ensures that the updated document is returned
-      }
-    );
-    if (updatedClinic) {
-      res
-        .status(200)
-        .json({ status: "Clinic Edited!!", Clinic: updatedClinic });
-    } else {
-      res.status(404).json({ error: "Clinic not found" });
-    }
-  } catch (err) {
-    console.log(err);
-    res
-      .status(500)
-      .json({ status: "Error in editing Clinics!!", error: err.message });
-  }
+router.route("/getClinic/:id").get((req, res) => {
+  const id = req.params.id;
+  Clinics.findById({_id:id})
+    .then((clinicData) => res.json(clinicData))
+    .catch((err) => res.json(err));
 });
 
+// update ~ http://localhost:4000/api/Clinics/getClinic/id
+router.route('/updateClinic/:id').put(async (req, res) => {
+  const id = req.params.id;
+  Clinics.findByIdAndUpdate({_id:id},{
+    clinicName: req.body.clinicName,
+    clinicLocation: req.body.clinicLocation,
+    clinicContact: req.body.clinicContact,
+    clinicWebsite: req.body.clinicWebsite})
+  .then((clinicData) => res.json(clinicData))
+    .catch((err) => res.json(err));
+})
+
 //delete ~ http://localhost:4000/api/Clinics/delete/id
-router.route("/delete/:clinicId").delete(async (req, res) => {
-  let ClinicID = req.params.clinicId;
+router.route("/delete/:id").delete(async (req, res) => {
+  let ClinicID = req.params.id;
   await Clinics.findByIdAndDelete(ClinicID)
     .then(() => {
       res.status(200).send({ status: "Clinic Deleted" });
