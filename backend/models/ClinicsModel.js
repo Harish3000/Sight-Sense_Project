@@ -4,21 +4,21 @@ const Schema = mongoose.Schema;
 const ClinicsSchema = new Schema({
   clinicName: {
     type: String,
-    requred: true, //validating title field
+    required: true, //validating title field
   },
   clinicLocation: {
     type: String,
-    requred: true, //validating content field
+    required: true, //validating content field
   },
   clinicContact: {
     type: String,
-    requred: true, //validating content field
+    required: true, //validating content field
   },
   clinicWebsite: {
     type: String,
-    requred: true, //validating content field
+    required: true, //validating content field
   },
 });
 
-const Clinics = mongoose.model("NewClinic", ClinicsSchema);
-module.exports = Clinics;
+const ClinicModel = mongoose.model("Clinic", ClinicsSchema);
+module.exports = ClinicModel;
