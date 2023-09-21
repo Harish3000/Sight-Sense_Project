@@ -466,7 +466,7 @@ export default function UserProfile() {
                         <br></br>
                         <div>
                           <ProgressBar
-                            completed={`${correctAns.toFixed(2)}%`}
+                            completed={correctAns.toFixed(2)}
                             bgColor="#1F3F49"
                             height="15px"
                           />
@@ -476,7 +476,7 @@ export default function UserProfile() {
                         <br></br>
                         <div>
                           <ProgressBar
-                            completed={`${wrongAns.toFixed(2)}%`}
+                            completed={wrongAns.toFixed(2)}
                             bgColor="#6AB187"
                             height="15px"
                           />
