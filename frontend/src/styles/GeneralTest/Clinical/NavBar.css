@@ -13,22 +13,10 @@
 }
 
 .Inner {
-  width: 50%;
+  width: 100%;
   display: flex;
   align-items: center;
 }
-/* .cliniclogo {
-  
-  cursor: pointer;
-  width: 20px;
-  height: 20px;
-  margin-top: 30px;
-  background-color: azure;
-}
-
-.ri-eye-fill{
-width :100px;
-} */
 .SearchBar {
   height: 35px;
   width: 300px;
@@ -50,7 +38,7 @@ width :100px;
 
 .SearchIcon {
   display: flex;
-  background-color: #75e2ea;
+  background-color: #becbd7;
   height: 100%;
   width: 40px;
   align-items: center;

@@ -1,4 +1,8 @@
 /* Example: Linear Gradient */
+*{
+  font-family: 'Brush Script MT', cursive !important
+}
+
 .custom-gradient {
   background: linear-gradient(
     to right,
@@ -63,7 +67,7 @@
 
 
 .header-admin{
-  font-family: "Roboto Mono", monospace;
+  font-family: 'Brush Script MT', cursive;
   color:#1b51d8;
   margin-left: 120px;
   font-weight: 500px;
@@ -72,7 +76,7 @@
 
 .table-header-admin{
   font-size: 24px;
-  font-family: "Roboto Mono", monospace;
+  /* font-family: "Roboto Mono", monospace; */
   margin-left: 20px;
 }
 
@@ -114,4 +118,5 @@
 
 .table-data-admin{
   font-size: medium;
+
 }

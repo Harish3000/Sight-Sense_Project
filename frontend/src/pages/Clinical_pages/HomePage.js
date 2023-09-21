@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import "../../styles/GeneralTest/Clinical/HomePage.css";
+import "../../styles/GeneralTest/Clinical/homePage.css";
 import { ToastContainer as ReactToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import VideoBG from "../../assets/Backround_video.mp4";
