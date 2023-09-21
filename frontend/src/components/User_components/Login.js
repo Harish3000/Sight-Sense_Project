@@ -67,7 +67,6 @@ const Login = () => {
             style={{
               border: "2px solid #1F3F49", // Border style and color
               backgroundColor: "rgba(255, 255, 255, 0.5)", // Background color
-              
               borderRadius: "5px", // Border radius (optional)
               paddingBottom: "120px", // Padding (optional)
             }}
