@@ -136,8 +136,16 @@ export default function UpdateUser() {
               type="text"
               id="lastname"
               name="lastname"
+              required="true"
               value={formData.lastname}
-              onChange={handleChange}
+              onChange={(e) => {
+                const inputValue = e.target.value;
+                const nameRegex = /^[A-Za-z\s]+$/; // Regular expression for alphabetic characters and spaces
+            
+                if (inputValue === "" || nameRegex.test(inputValue)) {
+                  setFormData({ ...formData, lastname: inputValue });
+                }
+              }}
               style={{
                 fontSize: "20px",
                 width: "650px",
@@ -159,8 +167,17 @@ export default function UpdateUser() {
               type="text"
               id="contact"
               name="contact"
+              required="true"
+
               value={formData.contact}
-              onChange={handleChange}
+              onChange={(e) => {
+                const inputValue = e.target.value;
+                const contactNumberRegex = /^0\d{0,9}$/; // Regular expression for 10 digits with 0 initially
+            
+                if (inputValue === "" || contactNumberRegex.test(inputValue)) {
+                  setFormData({ ...formData, contact: inputValue });
+                }
+              }}
               style={{
                 fontSize: "20px",
                 width: "650px",
@@ -182,6 +199,7 @@ export default function UpdateUser() {
               type="text"
               id="addLine1"
               name="addLine1"
+              required="true"
               value={formData.addLine1}
               onChange={handleChange}
               style={{
@@ -205,6 +223,7 @@ export default function UpdateUser() {
               type="text"
               id="addLine2"
               name="addLine2"
+              required="true"
               value={formData.addLine2}
               onChange={handleChange}
               style={{
