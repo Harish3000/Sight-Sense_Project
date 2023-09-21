@@ -23,6 +23,9 @@ const Register = () => {
 
   const navigate = useNavigate();
 
+  const nameRegex = /^[A-Za-z\s]+$/;
+  const contactNumberRegex = /^0\d{0,9}$/;
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -117,7 +120,6 @@ const Register = () => {
           <div className="reg-heading">
             <h2
               style={{
-                fontFamily: "Poppins",
                 textAlign: "center",
                 paddingTop: "520px",
                 fontSize: "44px",
@@ -154,7 +156,12 @@ const Register = () => {
                   id="firstname"
                   type="text"
                   value={firstname}
-                  onChange={(e) => setFirstName(e.target.value)}
+                  onChange={(e) => {
+                    const inputValue = e.target.value;
+                    if (inputValue === "" || nameRegex.test(e.target.value)) {
+                      setFirstName(e.target.value);
+                    }
+                  }}
                   style={{
                     fontSize: "20px",
                     width: "650px",
@@ -173,7 +180,12 @@ const Register = () => {
                   id="lastname"
                   type="text"
                   value={lastname}
-                  onChange={(e) => setLastName(e.target.value)}
+                  onChange={(e) => {
+                    const inputValue = e.target.value;
+                    if (inputValue === "" || nameRegex.test(e.target.value)) {
+                      setLastName(e.target.value);
+                    }
+                  }}
                   style={{
                     fontSize: "20px",
                     width: "650px",
@@ -192,7 +204,12 @@ const Register = () => {
                   id="contact"
                   type="text"
                   value={contact}
-                  onChange={(e) => setContact(e.target.value)}
+                  onChange={(e) => {
+                    const inputValue = e.target.value;
+                    if (inputValue === "" || contactNumberRegex.test(e.target.value)) {
+                      setContact(e.target.value);
+                    }
+                  }}
                   style={{
                     fontSize: "20px",
                     width: "650px",
@@ -332,7 +349,7 @@ const Register = () => {
                   style={{
                     color: "#ffffff",
                     marginRight: "20px",
-                    marginLeft: "230px", fontSize: '20px' ,width: '100px', height: '50px' 
+                    marginLeft: "230px", fontSize: '20px' ,width: '100px', height: '50px', backgroundColor: "#1F3F49" 
                   }}>
                     Register
                   </Button>
@@ -340,12 +357,10 @@ const Register = () => {
                   <Button
                     type="primary"
                     size="large"
-                    style={{ color: "#ffffff", backgroundColor: "#dc3545" , fontSize: '20px' ,width: '100px', height: '50px' }}
+                    style={{ color: "#ffffff", backgroundColor: "#D32D41" , fontSize: '20px' ,width: '100px', height: '50px' }}
                   >Cancel</Button>
                   </Link>
                 </div>
-
-                {err && <div className="err">{err}</div>}
               </form>
             </div>
           </div>
