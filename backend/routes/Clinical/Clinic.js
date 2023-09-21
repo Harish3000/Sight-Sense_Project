@@ -42,22 +42,26 @@ router.route("/admin").get((req, res) => {
 
 router.route("/getClinic/:id").get((req, res) => {
   const id = req.params.id;
-  Clinics.findById({_id:id})
+  Clinics.findById({ _id: id })
     .then((clinicData) => res.json(clinicData))
     .catch((err) => res.json(err));
 });
 
 // update ~ http://localhost:4000/api/Clinics/getClinic/id
-router.route('/updateClinic/:id').put(async (req, res) => {
+router.route("/updateClinic/:id").put(async (req, res) => {
   const id = req.params.id;
-  Clinics.findByIdAndUpdate({_id:id},{
-    clinicName: req.body.clinicName,
-    clinicLocation: req.body.clinicLocation,
-    clinicContact: req.body.clinicContact,
-    clinicWebsite: req.body.clinicWebsite})
-  .then((clinicData) => res.json(clinicData))
+  Clinics.findByIdAndUpdate(
+    { _id: id },
+    {
+      clinicName: req.body.clinicName,
+      clinicLocation: req.body.clinicLocation,
+      clinicContact: req.body.clinicContact,
+      clinicWebsite: req.body.clinicWebsite,
+    }
+  )
+    .then((clinicData) => res.json(clinicData))
     .catch((err) => res.json(err));
-})
+});
 
 //delete ~ http://localhost:4000/api/Clinics/delete/id
 router.route("/delete/:id").delete(async (req, res) => {
@@ -72,6 +76,16 @@ router.route("/delete/:id").delete(async (req, res) => {
         .status(500)
         .send({ status: "Error with deleting Clinic", error: err.message });
     });
+});
+
+router.route("/getClinic").get((req, res) => {
+  Clinics.find((err, data) => {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      res.status(200).send(data);
+    }
+  });
 });
 
 module.exports = router;
