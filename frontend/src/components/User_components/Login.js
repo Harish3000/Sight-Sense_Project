@@ -6,8 +6,8 @@ import "react-toastify/dist/ReactToastify.css";
 import { useLogIn } from "../../hooks/User_hooks/useLogIn";
 import validator from "validator";
 import { Button } from "antd";
-import VideoBG from "../../assets/Backround_video.mp4";
 import "react-toastify/dist/ReactToastify.css";
+import bg from "../../assets/User_assets/img/bg.jpg";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -42,144 +42,142 @@ const Login = () => {
   };
 
   return (
-    <div className="login-body">
-      <video
-        src={VideoBG}
-        autoPlay
-        loop
-        muted
+    <div>
+      <div
+        className="login-body"
         style={{
-          width: "100%",
-          height: "100%",
-          objectFit: "cover",
-          position: "absolute",
-          top: 0,
-          left: 0,
-          zIndex: -1,
+          backgroundImage: `url(${bg})`,
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+          backgroundPosition: "center center",
+          height: "100vh", // Set height to 100% of the viewport height
+          width: "100vw", // Set width to 100% of the viewport width
         }}
-        title="Background Video"
-      />
-      <div className="div-for-login-box">
-        <div className="login">
-          <div className="login-heading-div">
-            <h2
-              style={{
-                fontFamily: "Poppins",
-                textAlign: "center",
-                paddingTop: "200px",
-                fontSize: "44px",
-              }}
-            >
-              Login
-            </h2>
-          </div>
-
+      >
+        <div
+          className="div-for-login-box"
+          style={{
+            paddingTop: "100px",
+            paddingLeft: "250px",
+            paddingRight: "250px",
+          }}
+        >
           <div
-            className="login-form-container-div"
+            className="login"
             style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-              height: "30vh",
+              border: "2px solid #1F3F49", // Border style and color
+              backgroundColor: "rgba(255, 255, 255, 0.5)", // Background color
+              
+              borderRadius: "5px", // Border radius (optional)
+              paddingBottom: "120px", // Padding (optional)
             }}
           >
-            <form
-              onSubmit={handleLoginFormSubmit}
-              style={{
-                width: "100%",
-                maxWidth: "500px",
-                padding: "20px", // Adjust padding as needed
-                border: "1px solid #ccc",
-                borderRadius: "5px",
-                boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
-                backgroundColor: "#fff",
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "flex-start", // Align labels and inputs to the start of the container
-              }}
-            >
-              <div style={{ marginBottom: "10px" }}>
-                <label style={{ fontSize: "20px", marginRight: "10px" }}>
-                  Email
-                </label>
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  style={{
-                    fontSize: "20px",
-                    width: "350px",
-                    border: "1px solid #ccc",
-                    borderRadius: "5px",
-                    padding: "5px",
-                    marginLeft: "34px",
-                  }}
-                />
-              </div>
-              <div style={{ marginBottom: "10px" }}>
-                <label style={{ fontSize: "20px", marginRight: "10px" }}>
-                  Password
-                </label>
-                <input
-                  type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  style={{
-                    fontSize: "20px",
-                    width: "350px",
-                    border: "1px solid #ccc",
-                    borderRadius: "5px",
-                    padding: "5px",
-                  }}
-                />
-              </div>
-              <div
-                className="btns-div"
+            <div className="login-heading-div">
+              <h2
                 style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
+                  textAlign: "center",
+                  paddingTop: "100px",
+                  fontSize: "44px",
+                  color: "#1F3F49",
                 }}
               >
-                <Button
-                  type="primary"
-                  htmlType="submit"
-                  size="large"
-                  loading={isLoading}
+                Login
+              </h2>
+            </div>
+
+            <div
+              className="login-form-container-div"
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+                marginTop: "50px",
+              }}
+            >
+              <form onSubmit={handleLoginFormSubmit}>
+                <div style={{ marginBottom: "10px" }}>
+                  <label style={{ fontSize: "20px", marginRight: "10px" }}>
+                    Email
+                  </label>
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    style={{
+                      fontSize: "20px",
+                      width: "350px",
+                      border: "1px solid #ccc",
+                      borderRadius: "5px",
+                      padding: "5px",
+                      marginLeft: "34px",
+                    }}
+                  />
+                </div>
+                <div style={{ marginBottom: "10px" }}>
+                  <label style={{ fontSize: "20px", marginRight: "10px" }}>
+                    Password
+                  </label>
+                  <input
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    style={{
+                      fontSize: "20px",
+                      width: "350px",
+                      border: "1px solid #ccc",
+                      borderRadius: "5px",
+                      padding: "5px",
+                    }}
+                  />
+                </div>
+                <div
+                  className="btns-div"
                   style={{
-                    color: "#ffffff",
-                    backgroundColor: "#6AB187",
-                    marginRight: "20px",
-                    marginLeft: "120px",
-                    fontSize: "20px",
-                    width: "100px",
-                    height: "50px",
+                    display: "flex",
+                    paddingTop: "40px",
+                    paddingRight: "10px",
                   }}
                 >
-                  Login
-                </Button>
-                <Link to="/register">
                   <Button
                     type="primary"
+                    htmlType="submit"
                     size="large"
+                    loading={isLoading}
                     style={{
                       color: "#ffffff",
+                      backgroundColor: "#6AB187",
+                      marginRight: "20px",
+                      marginLeft: "120px",
                       fontSize: "20px",
                       width: "100px",
                       height: "50px",
-                      backgroundColor: "#1F3F49",
                     }}
                   >
-                    Register
+                    Login
                   </Button>
-                </Link>
-              </div>
-            </form>
+                  <Link to="/register">
+                    <Button
+                      type="primary"
+                      size="large"
+                      style={{
+                        color: "#ffffff",
+                        fontSize: "20px",
+                        width: "100px",
+                        height: "50px",
+                        backgroundColor: "#1F3F49",
+                      }}
+                    >
+                      Register
+                    </Button>
+                  </Link>
+                </div>
+              </form>
+            </div>
           </div>
         </div>
+        <ReactToastContainer />
       </div>
-      <ReactToastContainer />
     </div>
   );
 };
