@@ -11,6 +11,8 @@ import { Chart } from "react-google-charts";
 import ProgressBar from "@ramonak/react-progress-bar";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
+import { confirmAlert } from "react-confirm-alert";
+import "react-confirm-alert/src/react-confirm-alert.css";
 
 export default function UserProfile() {
   const navigate = useNavigate();
@@ -173,27 +175,72 @@ export default function UserProfile() {
 
   // delete function
   const handleDelete = async () => {
-    const confirmDelete = window.confirm(
-      "Are you sure you want to delete your account?"
-    );
+    confirmAlert({
+      customUI: ({ onClose }) => {
+        return (
+          <div>
+            <h1 style={{ fontSize: "24px", textAlign: "center" }}>
+              Confirm Deletion
+            </h1>
+            <p style={{ fontSize: "18px", textAlign: "center" }}>
+              Are you sure you want to delete your account?
+            </p>
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              <button
+                style={{
+                  backgroundColor: "#dc3545",
+                  color: "#fff",
+                  padding: "10px 20px",
+                  borderRadius: "5px",
+                  border: "none",
+                  marginRight: "10px",
+                  cursor: "pointer",
+                  fontSize: "18px",
+                }}
+                onClick={async () => {
+                  try {
+                    const response = await axios.delete(
+                      `http://localhost:4000/api/users/${user.user._id}`
+                    );
 
-    if (confirmDelete) {
-      try {
-        const response = await axios.delete(
-          `http://localhost:4000/api/users/${user.user._id}`
+                    if (response.status === 200) {
+                      logout();
+                      toast.success("Profile has been successfully deleted");
+                      setTimeout(() => {
+                        navigate("/");
+                      }, 1000);
+                    }
+                  } catch (error) {
+                    console.error("Error deleting user:", error);
+                  }
+
+                  onClose();
+                }}
+              >
+                Yes
+              </button>
+              <button
+                style={{
+                  backgroundColor: "#6c757d",
+                  color: "#fff",
+                  padding: "10px 20px",
+                  borderRadius: "5px",
+                  border: "none",
+                  marginRight: "10px",
+                  cursor: "pointer",
+                  fontSize: "18px",
+                }}
+                onClick={() => {
+                  onClose();
+                }}
+              >
+                No
+              </button>
+            </div>
+          </div>
         );
-
-        if (response.status === 200) {
-          logout();
-          toast.success("Profile has been successfully deleted");
-          setTimeout(() => {
-            navigate("/");
-          }, 2000);
-        }
-      } catch (error) {
-        console.error("Error deleting user:", error);
-      }
-    }
+      },
+    });
   };
 
   const [Conclusion, setConclusion] = useState(false);
@@ -251,7 +298,14 @@ export default function UserProfile() {
   };
 
   return (
-    <div style={{ paddingLeft: "20px", paddingTop:"20px", paddingBottom:"20px", backgroundColor: "#CED2CC" }}>
+    <div
+      style={{
+        paddingLeft: "20px",
+        paddingTop: "20px",
+        paddingBottom: "20px",
+        backgroundColor: "#CED2CC",
+      }}
+    >
       <div style={{ display: "flex" }}>
         <div
           style={{
