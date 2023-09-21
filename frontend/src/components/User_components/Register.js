@@ -89,32 +89,7 @@ const Register = () => {
   };
 
   return (
-    <div
-      className="reg-body"
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        height: "100vh",
-        
-      }}
-    >
-      <video
-        src={VideoBG}
-        autoPlay
-        loop
-        muted
-        style={{
-          width: "100%",
-          height: "160%",
-          objectFit: "cover",
-          position: "absolute",
-          top: 0,
-          left: 0,
-          zIndex: -1,
-        }}
-        title="Background Video"
-      />
+    <div>
       <div className="div-for-reg-box">
         <div className="reg">
           <div className="reg-heading">
