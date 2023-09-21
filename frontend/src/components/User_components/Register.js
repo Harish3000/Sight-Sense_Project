@@ -6,7 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useSignUp } from "../../hooks/User_hooks/useSignUp";
 import validator from "validator";
 import { Button } from "antd";
-import VideoBG from '../../assets/Backround_video.mp4';
+import bg from "../../assets/User_assets/img/bg.jpg";
 
 const Register = () => {
   const [firstname, setFirstName] = useState("");
@@ -90,35 +90,54 @@ const Register = () => {
 
   return (
     <div>
-      <div className="div-for-reg-box">
-        <div className="reg">
-          <div className="reg-heading">
+      <div
+        style={{
+          backgroundImage: `url(${bg})`,
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+          backgroundPosition: "center center",
+          height: "210vh", // Set height to 100% of the viewport height
+          width: "100vw", // Set width to 100% of the viewport width
+        }}
+      >
+        <div style={{paddingRight:"300px", paddingLeft:"300px", paddingTop:"100px", paddingBottom:"200px"}}>
+          <div style={{
+              border: "2px solid #1F3F49", // Border style and color
+              backgroundColor: "rgba(255, 255, 255, 0.5)", // Background color
+              borderRadius: "5px", // Border radius (optional)
+              paddingBottom: "80px", // Padding (optional)
+            }}>
             <h2
               style={{
                 textAlign: "center",
-                paddingTop: "520px",
+                paddingTop: "60px",
                 fontSize: "44px",
+                color: "#1F3F49",
               }}
             >
               Registration Form
             </h2>
-          </div>
-          <div className="reg-form-container">
+          
+          <div
+            className="reg-form-container"
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              marginTop: "50px",
+            }}
+          >
             <div
               style={{
-                padding: "40px", // Add padding to the outside of the form
-                
+                paddingLeft: "40px", // Add padding to the outside of the form
               }}
             >
               <form
                 onSubmit={handleSubmit}
                 style={{
                   width: "800px",
-                  padding: "40px", // Adjust padding as needed
-                  border: "1px solid #ccc",
-                  borderRadius: "5px",
-                  boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
-                  backgroundColor: "#fff",
+                  padding: "20px", // Adjust padding as needed
                   display: "flex",
                   flexDirection: "column",
                   alignItems: "flex-start", // Align labels and inputs to the start of the container
@@ -181,7 +200,10 @@ const Register = () => {
                   value={contact}
                   onChange={(e) => {
                     const inputValue = e.target.value;
-                    if (inputValue === "" || contactNumberRegex.test(e.target.value)) {
+                    if (
+                      inputValue === "" ||
+                      contactNumberRegex.test(e.target.value)
+                    ) {
                       setContact(e.target.value);
                     }
                   }}
@@ -271,7 +293,7 @@ const Register = () => {
                     value="female"
                     checked={gender === "female"}
                     onChange={(e) => setGender(e.target.value)}
-                    style={{ marginRight: "5px" }}
+                    style={{ marginRight: "5px" , paddingLeft:"100px"}}
                   />
                   Female
                 </label>
@@ -316,28 +338,42 @@ const Register = () => {
 
                 <br></br>
                 <div className="btns-div">
-                <Button
-                  type="primary"
-                  htmlType="submit"
-                  size="large"
-                  loading={isLoading}
-                  style={{
-                    color: "#ffffff",
-                    marginRight: "20px",
-                    marginLeft: "230px", fontSize: '20px' ,width: '100px', height: '50px', backgroundColor: "#1F3F49" 
-                  }}>
+                  <Button
+                    type="primary"
+                    htmlType="submit"
+                    size="large"
+                    loading={isLoading}
+                    style={{
+                      color: "#ffffff",
+                      marginRight: "20px",
+                      marginLeft: "230px",
+                      fontSize: "20px",
+                      width: "100px",
+                      height: "50px",
+                      backgroundColor: "#1F3F49",
+                    }}
+                  >
                     Register
                   </Button>
                   <Link to="/login">
-                  <Button
-                    type="primary"
-                    size="large"
-                    style={{ color: "#ffffff", backgroundColor: "#D32D41" , fontSize: '20px' ,width: '100px', height: '50px' }}
-                  >Cancel</Button>
+                    <Button
+                      type="primary"
+                      size="large"
+                      style={{
+                        color: "#ffffff",
+                        backgroundColor: "#D32D41",
+                        fontSize: "20px",
+                        width: "100px",
+                        height: "50px",
+                      }}
+                    >
+                      Cancel
+                    </Button>
                   </Link>
                 </div>
               </form>
             </div>
+          </div>
           </div>
         </div>
       </div>
