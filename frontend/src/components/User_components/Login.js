@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { ToastContainer as ReactToastContainer , toast } from "react-toastify";
+import { ToastContainer as ReactToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useLogIn } from "../../hooks/User_hooks/useLogIn";
 import validator from "validator";
 import { Button } from "antd";
-import VideoBG from '../../assets/Backround_video.mp4';
+import VideoBG from "../../assets/Backround_video.mp4";
 import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
@@ -32,7 +32,10 @@ const Login = () => {
 
     try {
       await login(email, password);
-      navigate("/home");
+      toast.success("Login Successful");
+      setTimeout(() => {
+        navigate("/home");
+      }, 1000);
     } catch (Error) {
       toast.error("Incorrect Password");
     }
@@ -46,10 +49,10 @@ const Login = () => {
         loop
         muted
         style={{
-          width: '100%',
-          height: '100%',
-          objectFit: 'cover',
-          position: 'absolute',
+          width: "100%",
+          height: "100%",
+          objectFit: "cover",
+          position: "absolute",
           top: 0,
           left: 0,
           zIndex: -1,
@@ -149,7 +152,9 @@ const Login = () => {
                     backgroundColor: "#6AB187",
                     marginRight: "20px",
                     marginLeft: "120px",
-                    fontSize: '20px' ,width: '100px', height: '50px'
+                    fontSize: "20px",
+                    width: "100px",
+                    height: "50px",
                   }}
                 >
                   Login
@@ -158,7 +163,13 @@ const Login = () => {
                   <Button
                     type="primary"
                     size="large"
-                    style={{ color: "#ffffff" ,fontSize: '20px' ,width: '100px', height: '50px', backgroundColor: "#1F3F49"}}
+                    style={{
+                      color: "#ffffff",
+                      fontSize: "20px",
+                      width: "100px",
+                      height: "50px",
+                      backgroundColor: "#1F3F49",
+                    }}
                   >
                     Register
                   </Button>
