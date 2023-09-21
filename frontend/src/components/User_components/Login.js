@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { ToastContainer as ReactToastContainer } from "react-toastify";
+import { ToastContainer as ReactToastContainer , toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useLogIn } from "../../hooks/User_hooks/useLogIn";
 import validator from "validator";
-import { Input, Button, Alert } from "antd";
+import { Button } from "antd";
 import VideoBG from '../../assets/Backround_video.mp4';
+import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -20,23 +21,20 @@ const Login = () => {
     setErrorMessage(""); // Clear any previous error message
 
     if (!validator.isEmail(email)) {
-      setErrorMessage("Email is not valid");
+      toast.error("Email is not valid");
       return;
     }
 
     if (!email || !password) {
-      setErrorMessage("Please fill out all the fields");
+      toast.error("Please fill out all the fields");
       return;
     }
 
     try {
       await login(email, password);
-
-      // If no errors occurred, navigate to the home page
       navigate("/home");
-    } catch (err) {
-      // Handle errors from the hook
-      setErrorMessage(err.message || "An error occurred. Please try again.");
+    } catch (Error) {
+      toast.error("Incorrect Password");
     }
   };
 
@@ -166,24 +164,6 @@ const Login = () => {
                   </Button>
                 </Link>
               </div>
-
-              {errorMessage && (
-                <Alert
-                  message="Error"
-                  description={errorMessage}
-                  type="error"
-                  showIcon
-                  style={{
-                    position: "fixed",
-                    top: "30px",
-                    left: "50%",
-                    transform: "translateX(-50%)",
-                    zIndex: "9999",
-                  }}
-                  closable
-                  onClose={() => setErrorMessage("")}
-                />
-              )}
             </form>
           </div>
         </div>

@@ -576,6 +576,7 @@ export default function UserProfile() {
           </div>
         </div>
       </div>
+      <ReactToastContainer />
     </div>
   );
 }
