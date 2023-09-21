@@ -7,6 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useLogOut } from "../../hooks/User_hooks/useLogOut";
 import { Button } from "antd";
+import bg from "../../assets/User_assets/img/bg.jpg";
 
 export default function UpdateUser() {
   const { logout } = useLogOut();
@@ -78,23 +79,38 @@ export default function UpdateUser() {
   };
 
   return (
-    <div style={{ padding: "40px", backgroundColor: "#6AB187" }}>
-      <div>
-        <h2 style={{ textAlign: "center", fontSize: "44px", padding: "20px", color:"#ffffff" }}>
+    <div style={{
+      backgroundImage: `url(${bg})`,
+      backgroundRepeat: "no-repeat",
+      backgroundSize: "cover",
+      backgroundPosition: "center center",
+      height: "150vh", // Set height to 100% of the viewport height
+      width: "100vw", // Set width to 100% of the viewport width
+    }}>
+      <div style={{
+            paddingTop: "100px",
+            paddingLeft: "250px",
+            paddingRight: "350px",
+          }}>
+        <div style={{
+          paddingTop: "60px",
+              border: "2px solid #1F3F49", // Border style and color
+              backgroundColor: "rgba(255, 255, 255, 0.5)", // Background color
+              borderRadius: "5px", // Border radius (optional)
+              paddingBottom: "60px", // Padding (optional)
+            }}>
+        <h2 style={{ textAlign: "center", fontSize: "44px", padding: "20px", color:"#1F3F49", textAlign:"center" }}>
           Update Profile
         </h2>
-      </div>
+      
 
-      <div style={{paddingLeft: "300px"}}>
+      <div style={{paddingLeft: "80px"}}>
       <form
           onSubmit={handleSubmit}
           style={{
-            width: "800px",
+            width: "600px",
             padding: "40px",
-            border: "1px solid #ccc",
             borderRadius: "5px",
-            boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
-            backgroundColor: "#fff",
             display: "flex",
             flexDirection: "column",
             alignItems: "flex-start",
@@ -317,8 +333,9 @@ export default function UpdateUser() {
             </Link>
           </div>
         </form>
+        </div>
       </div>
-
+      </div>
       <ReactToastContainer />
     </div>
   );
