@@ -40,8 +40,8 @@ function UpdateClinic() {
       })
       .then((response) => {
         console.log(response);
-        toast.success("Clinic Updated Successfully");
         navigate("/admin");
+        toast.success("Clinic Updated ");
       })
       .catch((error) => {
         console.log(error);
@@ -128,9 +128,10 @@ function UpdateClinic() {
               </label>
               <br />
               <input
-                type="text"
-                pattern="^\www.[a-zA-Z0-9]+.com"
-                placeholder="Website (Ex:www.example.com)"
+                // type="text"
+                // pattern="^\www.[a-zA-Z0-9]+.(com|lk)$"
+                type="url"
+                placeholder="Website (Ex:http://www.example.lk)"
                 className="form-conrol"
                 value={clinicWebsite}
                 onChange={(e) => setclinicWebsite(e.target.value)}
