@@ -78,14 +78,10 @@ router.route("/delete/:id").delete(async (req, res) => {
     });
 });
 
-router.route("/getClinic").get((req, res) => {
-  Clinics.find((err, data) => {
-    if (err) {
-      res.status(500).send(err);
-    } else {
-      res.status(200).send(data);
-    }
-  });
+router.route("/getAll").get(async(req, res) => {
+  const clinic= await Clinics.find({}).sort({createdAt:-1}) 
+
+res.status(200).json(clinic)
 });
 
 module.exports = router;
