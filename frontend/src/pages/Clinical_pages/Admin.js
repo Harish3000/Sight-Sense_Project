@@ -4,13 +4,10 @@ import axios from "axios";
 import { ToastContainer as ReactToastContainer, toast } from "react-toastify";
 import "../../styles/GeneralTest/Clinical/forms.css";
 import VideoBG from "../../assets/Backround_video.mp4";
+import { Button, Modal, Form, Input, message } from "antd";
 
 function Admin() {
   const [admins, setAdmins] = useState([]);
-  // const [clinics, setClinics] = useState([]);
-  // const [selectedClinic, setSelectedClinic] = useState(null);
-  // const [editingClinicId, setEditingClinicId] = useState(null);
-  // const [ClinicSelected, setClinicSelected] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -26,17 +23,24 @@ function Admin() {
   }, []);
 
   const handleDelete = (id) => {
-    axios
-      .delete(`http://localhost:4000/Clinics/delete/` + id)
-      .then((res) => {
-        console.log(res);
-        setTimeout(() => {
-          navigate("/admin");
-        }, 3000);
-        window.location.reload();
-        toast.success("Clinic Deleted!");
-      })
-      .catch((error) => console.log(error));
+    Modal.confirm({
+      title: "Do you want to delete this Account?",
+      onOk: () => {
+        axios
+          .delete(`http://localhost:4000/Clinics/delete/` + id)
+          .then((res) => {
+            message.success("Delete Successfully", 5000);
+            window.location.reload();
+          })
+          .catch((err) => {
+            message.error("Failed to delete Clinic");
+            console.error(err);
+          });
+      },
+      okButtonProps: {
+        style: { backgroundColor: "red", borderColor: "red" },
+      },
+    });
   };
 
   return (
