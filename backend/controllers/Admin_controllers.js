@@ -13,4 +13,21 @@ const readUser = async (req, res) => {
   
   };
 
-module.exports = {readUser};
+  //Delete one user
+  const deleteUser = async (req, res) => {
+    const id = req.params.id;
+    User
+      .findByIdAndDelete(id)
+      .then(() => {
+        res.json("User deleted");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  module.exports = {
+    deleteUser,
+    readUser
+  };
+  
