@@ -142,109 +142,125 @@ export default function AdminDashBoard() {
 
   return (
     <div>
-      <div style={{ display: "flex" }}>
-        <div style={{ flex: "1" }}>{/* div for logo */}</div>
-      </div>
       <div
-        style={{ display: "flex", padding: "20px", backgroundColor: "#DADADA" }}
+        style={{
+          paddingLeft: "350px",
+          paddingTop: "40px",
+          paddingBottom: "40px",
+        }}
       >
-        <div
+        <button
           style={{
-            flex: "0.3",
+            width: "500px",
+            marginRight: "1px",
+            padding: "20px",
+            fontSize: "22px",
+            borderRight: "none",
+            alignItems: "center",
+            backgroundColor: "#0E2954",
+            border: "0",
+            borderTopLeftRadius: "100px",
+            borderBottomLeftRadius: "100px",
+            boxSizing: "border-box",
+            color: "#ffffff",
+            cursor: "pointer",
+            display: "inline-flex",
+            fontWeight: "600",
+            justifyContent: "center",
+            lineHeight: "20px",
+            maxHeight: "40px",
+            minHeight: "40px",
+            minWidth: "0px",
+            overflow: "hidden",
+            paddingLeft: "20px",
             paddingRight: "20px",
-            backgroundColor: "#488A99",
-            height: "780px",
+            textAlign: "center",
+            touchAction: "manipulation",
+            transition:
+              "background-color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s, box-shadow 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s, color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s",
+            userSelect: "none",
+            WebkitUserSelect: "none",
+            verticalAlign: "middle",
+          }}
+          onClick={() => {
+            navigate("/admin-dashboard");
           }}
         >
-          <div style={{ padding: "20px" }}>
-            <h2 style={{ textAlign: "center" }}>Admin Dashboard</h2>
-          </div>
-
-          <div>
-            <Link to="/admin-dashboard" style={{ textDecoration: "none" }}>
-              <div style={{ padding: "20px" }}>
-                <div
+          Users
+        </button>
+        <button
+          style={{
+            width: "500px",
+            marginLeft: "1px",
+            padding: "20px",
+            fontSize: "22px",
+            alignItems: "center",
+            backgroundColor: "#0E2954",
+            border: "0",
+            borderTopRightRadius: "100px",
+            borderBottomRightRadius: "100px",
+            boxSizing: "border-box",
+            color: "#ffffff",
+            cursor: "pointer",
+            display: "inline-flex",
+            fontWeight: "600",
+            justifyContent: "center",
+            lineHeight: "20px",
+            maxHeight: "40px",
+            minHeight: "40px",
+            minWidth: "0px",
+            overflow: "hidden",
+            textAlign: "center",
+            touchAction: "manipulation",
+            transition:
+              "background-color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s, box-shadow 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s, color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s",
+            userSelect: "none",
+            WebkitUserSelect: "none",
+            verticalAlign: "middle",
+          }}
+          onClick={() => {
+            navigate("/clinics");
+          }}
+        >
+          Clinics
+        </button>
+      </div>
+      <div>
+        <h2 style={{ textAlign: "center" }}>Admin Dashboard</h2>
+      </div>
+      <div style={{ display: "flex" }}>
+        <div style={{ flex: "1" }}>
+          <div style={{ paddingTop: "20px", paddingLeft: "100px" }}>
+            <div
+              style={{
+                backgroundColor: "#1F6E8C",
+                width: "910px",
+                borderRadius: "200px",
+              }}
+            >
+              <div style={{ padding: "5px" }}>
+                <input
+                  type="text"
+                  placeholder="Search by email"
+                  value={searchEmail}
+                  onChange={handleSearchChange}
                   style={{
-                    backgroundColor: "#484848",
-                    padding: "20px",
+                    width: "900px",
+                    padding: "10px",
+                    borderRadius: "200px",
+                    border: "none",
+                    outline: "none",
                   }}
-                >
-                  <h4 style={{ color: "white", textAlign: "center" }}>
-                    {" "}
-                    USERS
-                  </h4>
-                </div>
+                />
               </div>
-            </Link>
-          </div>
-          <div>
-            <Link to="/clinics" style={{ textDecoration: "none" }}>
-              <div style={{ padding: "20px" }}>
-                <div
-                  style={{
-                    backgroundColor: "#484848",
-                    padding: "20px",
-                  }}
-                >
-                  <h4 style={{ color: "white", textAlign: "center" }}>
-                    CLINICS
-                  </h4>
-                </div>
-              </div>
-            </Link>
-
-            <div>
-              <button
-                type="button"
-                onClick={handleLogOut}
-                style={{
-                  backgroundColor: "#20283E",
-                  color: "#fff",
-                  padding: "5px 10px",
-                  borderRadius: "5px",
-                  border: "none",
-                  cursor: "pointer",
-                  fontSize: "20px",
-                  marginLeft: "150px",
-                  marginTop: "400px",
-                }}
-              >
-                Logout
-              </button>
             </div>
           </div>
         </div>
-
-        <div
-          style={{
-            flex: "1",
-            paddingLeft: "20px",
-            paddingRight: "20px",
-            paddingTop: "20px",
-          }}
-        >
-          <div
-            style={{ flex: "1", paddingBottom: "20px", paddingLeft: "650px" }}
-          >
-            {/* div for search bar */}
-            <input
-              type="text"
-              placeholder="Search by email"
-              value={searchEmail}
-              onChange={handleSearchChange}
-              style={{ padding: "10px", width: "350px", borderRadius: "10px" }}
-            />
-
-            <button
-              onClick={() => setSearchEmail("")}
-              style={{ padding: "10px", marginLeft: "15px" }}
-            >
-              Clear
-            </button>
-            <button
+        <div style={{ flex: "1", paddingTop: "20px", paddingLeft:"300px" }}>
+        <button
               onClick={handleDownload}
               style={{
-                backgroundColor: "#16a34a",
+                backgroundColor: "#1F6E8C",
                 color: "white",
                 padding: "10px 20px",
                 borderRadius: "5px",
@@ -256,71 +272,157 @@ export default function AdminDashBoard() {
             >
               Download Report
             </button>
-          </div>
+        </div>
+      </div>
+      <div >
+        <div style={{paddingTop:"40px", paddingBottom:"40px", display: "flex", justifyContent: "center", alignItems: "center"}}>
+        <table>
+  <thead>
+    <tr>
+      <th
+        style={{
+          padding: "20px",
+          fontSize: "20px",
+          minWidth: "170px", // Add MUI style
+          textAlign: "left", // Align text left
+          backgroundColor: "#f5f5f5", // Background color
+        }}
+      >
+        First Name
+      </th>
+      <th
+        style={{
+          padding: "20px",
+          fontSize: "20px",
+          minWidth: "100px", // Add MUI style
+          textAlign: "left", // Align text left
+          backgroundColor: "#f5f5f5", // Background color
+        }}
+      >
+        Last Name
+      </th>
+      <th
+        style={{
+          padding: "20px",
+          fontSize: "20px",
+          minWidth: "170px", // Add MUI style
+          textAlign: "left", // Align text left
+          backgroundColor: "#f5f5f5", // Background color
+        }}
+      >
+        Email
+      </th>
+      <th
+        style={{
+          padding: "20px",
+          fontSize: "20px",
+          minWidth: "170px", // Add MUI style
+          textAlign: "right", // Align text right
+          backgroundColor: "#f5f5f5", // Background color
+        }}
+      >
+        Contact
+      </th>
+      <th
+        style={{
+          padding: "20px",
+          fontSize: "20px",
+          minWidth: "170px", // Add MUI style
+          textAlign: "left", // Align text left
+          backgroundColor: "#f5f5f5", // Background color
+        }}
+      >
+        Address
+      </th>
+      <th style={{
+          padding: "20px",
+          fontSize: "20px",
+          minWidth: "170px", // Add MUI style
+          textAlign: "left", // Align text left
+          backgroundColor: "#f5f5f5", // Background color
+        }}></th>
+    </tr>
+  </thead>
+  <tbody>
+    {filteredUsers.map((user, index) => (
+      <tr key={index}>
+        <td
+          style={{
+            padding: "10px",
+            fontSize: "18px",
+            minWidth: "170px", // Add MUI style
+          }}
+        >
+          {user.firstname}
+        </td>
+        <td
+          style={{
+            padding: "10px",
+            fontSize: "18px",
+            minWidth: "100px", // Add MUI style
+          }}
+        >
+          {user.lastname}
+        </td>
+        <td
+          style={{
+            padding: "10px",
+            fontSize: "18px",
+            minWidth: "170px", // Add MUI style
+          }}
+        >
+          {user.email}
+        </td>
+        <td
+          style={{
+            padding: "10px",
+            fontSize: "18px",
+            minWidth: "170px", // Add MUI style
+            textAlign: "right", // Align text right
+          }}
+        >
+          {user.contact}
+        </td>
+        <td
+          style={{
+            padding: "10px",
+            fontSize: "18px",
+            minWidth: "170px", // Add MUI style
+            textAlign: "left", // Align text left
+          }}
+        >
+          {user.addLine1}, {user.addLine2}, {user.addLine3}
+        </td>
+        <td
+          style={{
+            padding: "10px",
+            fontSize: "18px",
+            minWidth: "170px", // Add MUI style
+          }}
+        >
+          <button
+            style={{
+              backgroundColor: "#dc3545",
+              color: "#fff",
+              padding: "5px 12px",
+              borderRadius: "5px",
+              border: "none",
+              marginRight: "10px",
+              cursor: "pointer",
+              fontSize: "18px",
+            }}
+            onClick={() => {
+              deleteUser(user._id);
+            }}
+          >
+            Delete User
+          </button>
+        </td>
+      </tr>
+    ))}
+  </tbody>
+</table>
 
-          <div style={{ paddingLeft: "120px", width: "1150px" }}>
-            <div style={{ padding: "20px", backgroundColor: "white" }}>
-              <table>
-                <thead>
-                  <tr>
-                    <th style={{ padding: "20px", fontSize: "20px" }}>
-                      First Name
-                    </th>
-                    <th style={{ padding: "20px", fontSize: "20px" }}>
-                      Last Name
-                    </th>
-                    <th style={{ padding: "20px", fontSize: "20px" }}>Email</th>
-                    <th style={{ padding: "20px", fontSize: "20px" }}>
-                      Contact
-                    </th>
-                    <th style={{ padding: "20px", fontSize: "20px" }}>
-                      Address
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {filteredUsers.map((user, index) => (
-                    <tr key={index}>
-                      <td style={{ padding: "10px", fontSize: "18px" }}>
-                        {user.firstname}
-                      </td>
-                      <td style={{ padding: "10px", fontSize: "18px" }}>
-                        {user.lastname}
-                      </td>
-                      <td style={{ padding: "10px", fontSize: "18px" }}>
-                        {user.email}
-                      </td>
-                      <td style={{ padding: "10px", fontSize: "18px" }}>
-                        {user.contact}
-                      </td>
-                      <td style={{ padding: "10px", fontSize: "18px" }}>
-                        {user.addLine1}, {user.addLine2}, {user.addLine3}
-                      </td>
-                      <td style={{ padding: "10px", fontSize: "18px" }}>
-                        <button
-                          style={{
-                            backgroundColor: "#dc3545",
-                            color: "#fff",
-                            padding: "5px 12px",
-                            borderRadius: "5px",
-                            border: "none",
-                            marginRight: "10px",
-                            cursor: "pointer",
-                            fontSize: "18px",
-                          }}
-                          onClick={() => {
-                            deleteUser(user._id);
-                          }}
-                        >
-                          Delete User
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
         </div>
       </div>
       <ReactToastContainer />
