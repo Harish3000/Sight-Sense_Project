@@ -6,6 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { Link } from "react-router-dom";
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
+import { saveAs } from "file-saver";
 
 export default function AdminDashBoard() {
   const [allUsers, setAllUsers] = useState([]);
@@ -13,7 +14,38 @@ export default function AdminDashBoard() {
   const navigate = useNavigate();
   const role = "admin";
 
-  //Delete one user
+  // Function to handle download report
+  const handleDownload = () => {
+    // Assuming you have a state variable called `filteredUsers` that contains the filtered users
+    const itemsToExport = filteredUsers || allUsers;
+    const now = new Date();
+    const timestamp = `${now.toLocaleDateString()} ${now.toLocaleTimeString()}`;
+    const csvData = [
+      ["Sight Sense"],
+      ["User Report"],
+      ["                                                  "],
+      ["First Name", "Last Name", "Email", "Contact", "Address"],
+      ...itemsToExport.map((user) => [
+        user.firstname,
+        user.lastname,
+        user.email,
+        user.contact,
+        `${user.addLine1}, ${user.addLine2}, ${user.addLine3}`,
+      ]),
+      [
+        "                                                                                           ",
+      ],
+      [`Report Generated at ${timestamp}`],
+      ["All Rights Reserved - SightSence.lk"],
+    ];
+
+    const csv = csvData.map((row) => row.join(",")).join("\n");
+
+    const file = new Blob([csv], { type: "text/csv;charset=utf-8" });
+    saveAs(file, "User_Report.csv");
+  };
+
+  // Delete one user
   const deleteUser = (id) => {
     confirmAlert({
       customUI: ({ onClose }) => {
@@ -39,7 +71,9 @@ export default function AdminDashBoard() {
                 }}
                 onClick={async () => {
                   try {
-                    await axios.delete(`http://localhost:4000/api/admin/delete/${id}`);
+                    await axios.delete(
+                      `http://localhost:4000/api/admin/delete/${id}`
+                    );
                     toast.success("User deleted successfully");
                   } catch (error) {
                     toast.error(error.message);
@@ -72,9 +106,8 @@ export default function AdminDashBoard() {
       },
     });
   };
-  
 
-    //Function to handle logout
+  // Function to handle logout
   const handleLogOut = () => {
     navigate("/");
   };
@@ -150,7 +183,7 @@ export default function AdminDashBoard() {
                 <div
                   style={{
                     backgroundColor: "#484848",
-                    padding: "20px"
+                    padding: "20px",
                   }}
                 >
                   <h4 style={{ color: "white", textAlign: "center" }}>
@@ -208,9 +241,24 @@ export default function AdminDashBoard() {
             >
               Clear
             </button>
+            <button
+              onClick={handleDownload}
+              style={{
+                backgroundColor: "#16a34a",
+                color: "white",
+                padding: "10px 20px",
+                borderRadius: "5px",
+                border: "none",
+                cursor: "pointer",
+                fontSize: "18px",
+                marginLeft: "15px",
+              }}
+            >
+              Download Report
+            </button>
           </div>
 
-          <div style={{ paddingLeft: "120px", width:"1150px" }}>
+          <div style={{ paddingLeft: "120px", width: "1150px" }}>
             <div style={{ padding: "20px", backgroundColor: "white" }}>
               <table>
                 <thead>
@@ -260,7 +308,9 @@ export default function AdminDashBoard() {
                             cursor: "pointer",
                             fontSize: "18px",
                           }}
-                          onClick={() => {deleteUser(user._id)}}
+                          onClick={() => {
+                            deleteUser(user._id);
+                          }}
                         >
                           Delete User
                         </button>
