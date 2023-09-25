@@ -120,7 +120,7 @@ export default function AdminDashBoard() {
             flex: "0.3",
             paddingRight: "20px",
             backgroundColor: "#488A99",
-            height: "710px",
+            height: "780px",
           }}
         >
           <div style={{ padding: "20px" }}>
@@ -172,8 +172,8 @@ export default function AdminDashBoard() {
                   border: "none",
                   cursor: "pointer",
                   fontSize: "20px",
-                  marginLeft: "120px",
-                  marginTop: "300px",
+                  marginLeft: "150px",
+                  marginTop: "400px",
                 }}
               >
                 Logout
@@ -210,7 +210,7 @@ export default function AdminDashBoard() {
             </button>
           </div>
 
-          <div style={{ paddingLeft: "30px" }}>
+          <div style={{ paddingLeft: "120px", width:"1150px" }}>
             <div style={{ padding: "20px", backgroundColor: "white" }}>
               <table>
                 <thead>
