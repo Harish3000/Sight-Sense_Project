@@ -75,6 +75,8 @@ export default function AdminDashBoard() {
                       `http://localhost:4000/api/admin/delete/${id}`
                     );
                     toast.success("User deleted successfully");
+                    //window reload
+                    window.location.reload();
                   } catch (error) {
                     toast.error(error.message);
                   }
