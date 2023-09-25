@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { ToastContainer as ReactToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Link } from "react-router-dom";
+import { confirmAlert } from "react-confirm-alert";
+import "react-confirm-alert/src/react-confirm-alert.css";
 
 export default function AdminDashBoard() {
   const [allUsers, setAllUsers] = useState([]);
@@ -12,16 +14,65 @@ export default function AdminDashBoard() {
   const role = "admin";
 
   //Delete one user
-    const deleteUser = (id) => {
-        axios
-            .delete(`http://localhost:4000/api/admin/delete/${id}`)
-            .then((res) => {
-            toast.success("User deleted successfully");
-            })
-            .catch((err) => {
-            toast.error(err.message);
-            });
-    }
+  const deleteUser = (id) => {
+    confirmAlert({
+      customUI: ({ onClose }) => {
+        return (
+          <div>
+            <h1 style={{ fontSize: "24px", textAlign: "center" }}>
+              Confirm Deletion
+            </h1>
+            <p style={{ fontSize: "18px", textAlign: "center" }}>
+              Are you sure you want to delete this user?
+            </p>
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              <button
+                style={{
+                  backgroundColor: "#dc3545",
+                  color: "#fff",
+                  padding: "10px 20px",
+                  borderRadius: "5px",
+                  border: "none",
+                  marginRight: "10px",
+                  cursor: "pointer",
+                  fontSize: "18px",
+                }}
+                onClick={async () => {
+                  try {
+                    await axios.delete(`http://localhost:4000/api/admin/delete/${id}`);
+                    toast.success("User deleted successfully");
+                  } catch (error) {
+                    toast.error(error.message);
+                  }
+                  onClose();
+                }}
+              >
+                Yes
+              </button>
+              <button
+                style={{
+                  backgroundColor: "#6c757d",
+                  color: "#fff",
+                  padding: "10px 20px",
+                  borderRadius: "5px",
+                  border: "none",
+                  marginRight: "10px",
+                  cursor: "pointer",
+                  fontSize: "18px",
+                }}
+                onClick={() => {
+                  onClose();
+                }}
+              >
+                No
+              </button>
+            </div>
+          </div>
+        );
+      },
+    });
+  };
+  
 
     //Function to handle logout
   const handleLogOut = () => {
@@ -209,7 +260,7 @@ export default function AdminDashBoard() {
                             cursor: "pointer",
                             fontSize: "18px",
                           }}
-                          onClick={() => {deleteUser(allUsers._id)}}
+                          onClick={() => {deleteUser(user._id)}}
                         >
                           Delete User
                         </button>
