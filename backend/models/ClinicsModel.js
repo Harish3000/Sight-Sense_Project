@@ -16,7 +16,7 @@ const ClinicsSchema = new Schema({
   },
   clinicWebsite: {
     type: String,
-    required: true, //validating content field
+    required: false, //validating content field
   },
 });
 
