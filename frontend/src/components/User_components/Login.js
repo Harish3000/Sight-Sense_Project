@@ -39,9 +39,9 @@ const Login = () => {
         // Redirect to the appropriate dashboard after a successful login
         if (email.startsWith("admin")) {
           navigate("/admin-dashboard");
-        } else {
+      } else {
           navigate("/home");
-        }
+      }
       }, 1000);
     } catch (Error) {
       toast.error("Incorrect Password");
