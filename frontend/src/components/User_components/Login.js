@@ -15,7 +15,7 @@ const Login = () => {
   const [errorMessage, setErrorMessage] = useState(""); // Declare errorMessage state
   const { login, isLoading } = useLogIn();
   const navigate = useNavigate();
-  
+
   const isUserAdmin = email.startsWith("admin_");
 
   const handleLoginFormSubmit = async (e) => {
@@ -39,9 +39,9 @@ const Login = () => {
         // Redirect to the appropriate dashboard after a successful login
         if (email.startsWith("admin")) {
           navigate("/admin-dashboard");
-      } else {
-          navigate("/user-dashboard");
-      }
+        } else {
+          navigate("/home");
+        }
       }, 1000);
     } catch (Error) {
       toast.error("Incorrect Password");
