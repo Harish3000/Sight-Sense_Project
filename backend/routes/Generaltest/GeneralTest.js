@@ -2,10 +2,14 @@ const router = require("express").Router();
 let Test = require("../../models/GeneralTest_Modal");
 const { route } = require("../User/User");
 
+//import middle ware function - require auth for all routes
+const requireAuth = require('../../middleware/requireAuth')
+router.use(requireAuth)
+
 // Update or add test
 router.route("/addTest").post((req, res) => {
   const test_name = "General Test";
-  const user_id = "User 1";
+  const user_id = req.user.firstname;
   const test_date = new Date();
   const test_score = req.body.test_score;
 
@@ -50,13 +54,16 @@ router.route("/addTest").post((req, res) => {
 
 //Clear histoty
 router.route("/delete-all").delete((req, res) => {
-  Test.deleteMany({})
+  // Assuming you have a user ID associated with the logged-in user
+  const userId = req.user.id; // Replace 'req.user.id' with how you access the user ID in your authentication system
+
+  Test.deleteMany({ user_id: userId }) // Delete records with matching user_id
     .then(() => {
-      res.json("All General Test data deleted successfully.");
+      res.json("All General Test data for the logged-in user deleted successfully.");
     })
     .catch((err) => {
       console.error(err);
-      res.status(500).json("Error deleting General Test data.");
+      res.status(500).json("Error deleting General Test data for the logged-in user.");
     });
 });
 

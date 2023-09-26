@@ -35,7 +35,7 @@ export default function ProfileHome() {
       >
         <h1 style={{ fontFamily: 'Poppins', fontSize: '60px', color: 'black' }}>Sight Sense</h1>
         <Link to="/login">
-          <Button type="primary" size="large" style={{ fontSize: '24px', width: '200px', height: '60px'}}>
+          <Button type="primary" size="large" style={{ fontSize: '24px', width: '200px', height: '60px', backgroundColor: "#6AB187"}}>
             Get Started!
           </Button>
         </Link>

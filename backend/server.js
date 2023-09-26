@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 
 const UserBase = require("./routes/User/User_base");
+const AdminBase = require("./routes/User/Admin_base");
 const AdvancedTest_base = require("./routes/AdvancedTest/AdvancedTest_base");
 const GeneralTestBase = require("./routes/Generaltest/GeneralTest_base");
 const ClinicBase = require("./routes/Clinical/Clinic_base");
@@ -28,6 +29,7 @@ app.use(cors());
 
 //routes
 UserBase(app);
+AdminBase(app);
 AdvancedTest_base(app);
 ClinicBase(app);
 GeneralTestBase(app);
