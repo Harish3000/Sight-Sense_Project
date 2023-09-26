@@ -74,7 +74,7 @@ function Admin() {
         <div className="d-flex vh-100   justify-content-center align-items-center">
           <div className="table-container">
             <div className="header-admin">
-              Admin Dashboard -Clinical management
+            Clinical Admin Dashboard
             </div>
             <br />
             <Link to="/createClinic" className="btn btn-add">

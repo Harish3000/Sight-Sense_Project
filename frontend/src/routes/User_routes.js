@@ -7,6 +7,7 @@ import UserProfile from "../components/User_components/UserProfile";
 import UpdateUser from "../components/User_components/UpdateUser";
 import AdminDashBoard from "../components/User_components/AdminDashBoard";
 
+
 export default function User_routes() {
   return (
     <Routes>
@@ -16,7 +17,7 @@ export default function User_routes() {
       <Route path="/register" element={<Register/>} />
       <Route path="/home" element={<UserProfile/>} />
       <Route path="/update" element={<UpdateUser/>} />
-
+     
       <Route path="/admin-dashboard" element={<AdminDashBoard/>} />
       </Route>
     </Routes>

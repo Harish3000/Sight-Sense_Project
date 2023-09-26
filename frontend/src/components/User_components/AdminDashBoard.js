@@ -221,7 +221,7 @@ export default function AdminDashBoard() {
             verticalAlign: "middle",
           }}
           onClick={() => {
-            navigate("/clinics");
+            navigate("/admin");
           }}
         >
           Clinics
