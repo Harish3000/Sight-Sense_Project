@@ -1,14 +1,13 @@
 import { React, useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import { ToastContainer as ReactToastContainer, toast } from "react-toastify";
 import "../../styles/GeneralTest/Clinical/forms.css";
 import VideoBG from "../../assets/Backround_video.mp4";
-import { Button, Modal, Form, Input, message } from "antd";
+import { Modal, message } from "antd";
 
 function Admin() {
   const [admins, setAdmins] = useState([]);
-  const navigate = useNavigate();
 
   useEffect(() => {
     axios
