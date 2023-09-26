@@ -40,7 +40,7 @@ const Login = () => {
         if (email.startsWith("admin")) {
           navigate("/admin-dashboard");
       } else {
-          navigate("/user-dashboard");
+          navigate("/home");
       }
       }, 1000);
     } catch (Error) {
