@@ -1,5 +1,5 @@
 import React from "react";
-import "../../styles/GeneralTest/Clinical/homePage.css";
+import "../../styles/GeneralTest/Clinical/HomePage.css";
 
 function ClinicCard(props) {
   return (
