@@ -3,7 +3,8 @@ const axios = require("axios");
 
 // Azure Custom Vision API Endpoint and Prediction Key
 const predictionEndpoint =
-  "https://imagequality-prediction.cognitiveservices.azure.com/customvision/v3.0/Prediction/504be7fd-f17e-4de6-8ca3-9d6a06755f1e/classify/iterations/Iteration1/image";
+  "https://imagequality-prediction.cognitiveservices.azure.com/customvision/v3.0/Prediction/504be7fd-f17e-4de6-8ca3-9d6a06755f1e/classify/iterations/Iteration2/image";
+
 const predictionKey = "a0d49abe649148338884e07910be2ddd";
 
 // Controller function to upload and analyze the image
