@@ -1,6 +1,7 @@
 /* Example: Linear Gradient */
 * {
-  font-family: "Brush Script MT", cursive ;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
 }
 
 .custom-gradient {
