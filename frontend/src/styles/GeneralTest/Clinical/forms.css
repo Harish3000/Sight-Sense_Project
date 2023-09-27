@@ -1,7 +1,4 @@
 /* Example: Linear Gradient */
-* {
-  font-family: "Brush Script MT", cursive !important;
-}
 
 .custom-gradient {
   background: linear-gradient(
