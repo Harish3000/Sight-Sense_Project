@@ -7,7 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useLogOut } from "../../hooks/User_hooks/useLogOut";
 import { Button } from "antd";
-import VideoBG from "../../assets/Backround_video.mp4";
+import bg from "../../assets/User_assets/img/bg.jpg";
 
 export default function UpdateUser() {
   const { logout } = useLogOut();
@@ -79,49 +79,38 @@ export default function UpdateUser() {
   };
 
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        minHeight: "100vh", // Set the minimum height of the container to the viewport height
-      }}
-    >
-      <video
-        src={VideoBG}
-        autoPlay
-        loop
-        muted
-        style={{
-          width: "100%",
-          height: "160%",
-          objectFit: "cover",
-          position: "absolute",
-          top: 0,
-          left: 0,
-          zIndex: -1,
-        }}
-        title="Background Video"
-      />
-      <div>
-        <h2
-          style={{
-            fontFamily: "Poppins",
-            textAlign: "center",
-            fontSize: "44px",
-          }}
-        >
+    <div style={{
+      backgroundImage: `url(${bg})`,
+      backgroundRepeat: "no-repeat",
+      backgroundSize: "cover",
+      backgroundPosition: "center center",
+      height: "150vh", // Set height to 100% of the viewport height
+      width: "100vw", // Set width to 100% of the viewport width
+    }}>
+      <div style={{
+            paddingTop: "100px",
+            paddingLeft: "250px",
+            paddingRight: "350px",
+          }}>
+        <div style={{
+          paddingTop: "60px",
+              border: "2px solid #1F3F49", // Border style and color
+              backgroundColor: "rgba(255, 255, 255, 0.5)", // Background color
+              borderRadius: "5px", // Border radius (optional)
+              paddingBottom: "60px", // Padding (optional)
+            }}>
+        <h2 style={{ textAlign: "center", fontSize: "44px", padding: "20px", color:"#1F3F49", textAlign:"center" }}>
           Update Profile
         </h2>
-        <form
+      
+
+      <div style={{paddingLeft: "80px"}}>
+      <form
           onSubmit={handleSubmit}
           style={{
-            width: "800px",
+            width: "600px",
             padding: "40px",
-            border: "1px solid #ccc",
             borderRadius: "5px",
-            boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
-            backgroundColor: "#fff",
             display: "flex",
             flexDirection: "column",
             alignItems: "flex-start",
@@ -133,12 +122,13 @@ export default function UpdateUser() {
               htmlFor="firstname"
               style={{ fontSize: "20px", marginRight: "10px" }}
             >
-              First Name:
+              First Name
             </label>
             <input
               type="text"
               id="firstname"
               name="firstname"
+              disabled="true"
               value={formData.firstname}
               onChange={handleChange}
               style={{
@@ -156,14 +146,22 @@ export default function UpdateUser() {
               htmlFor="lastname"
               style={{ fontSize: "20px", marginRight: "10px" }}
             >
-              Last Name:
+              Last Name
             </label>
             <input
               type="text"
               id="lastname"
               name="lastname"
+              required="true"
               value={formData.lastname}
-              onChange={handleChange}
+              onChange={(e) => {
+                const inputValue = e.target.value;
+                const nameRegex = /^[A-Za-z\s]+$/; // Regular expression for alphabetic characters and spaces
+            
+                if (inputValue === "" || nameRegex.test(inputValue)) {
+                  setFormData({ ...formData, lastname: inputValue });
+                }
+              }}
               style={{
                 fontSize: "20px",
                 width: "650px",
@@ -179,14 +177,23 @@ export default function UpdateUser() {
               htmlFor="contact"
               style={{ fontSize: "20px", marginRight: "10px" }}
             >
-              Contact:
+              Contact
             </label>
             <input
               type="text"
               id="contact"
               name="contact"
+              required="true"
+
               value={formData.contact}
-              onChange={handleChange}
+              onChange={(e) => {
+                const inputValue = e.target.value;
+                const contactNumberRegex = /^0\d{0,9}$/; // Regular expression for 10 digits with 0 initially
+            
+                if (inputValue === "" || contactNumberRegex.test(inputValue)) {
+                  setFormData({ ...formData, contact: inputValue });
+                }
+              }}
               style={{
                 fontSize: "20px",
                 width: "650px",
@@ -202,12 +209,13 @@ export default function UpdateUser() {
               htmlFor="addLine1"
               style={{ fontSize: "20px", marginRight: "10px" }}
             >
-              Address Line 1:
+              Address Line 1
             </label>
             <input
               type="text"
               id="addLine1"
               name="addLine1"
+              required="true"
               value={formData.addLine1}
               onChange={handleChange}
               style={{
@@ -225,12 +233,13 @@ export default function UpdateUser() {
               htmlFor="addLine2"
               style={{ fontSize: "20px", marginRight: "10px" }}
             >
-              Address Line 2:
+              Address Line 2
             </label>
             <input
               type="text"
               id="addLine2"
               name="addLine2"
+              required="true"
               value={formData.addLine2}
               onChange={handleChange}
               style={{
@@ -248,7 +257,7 @@ export default function UpdateUser() {
               htmlFor="addLine3"
               style={{ fontSize: "20px", marginRight: "10px" }}
             >
-              Address Line 3:
+              Address Line 3
             </label>
             <input
               type="text"
@@ -271,12 +280,13 @@ export default function UpdateUser() {
               htmlFor="email"
               style={{ fontSize: "20px", marginRight: "10px" }}
             >
-              Email:
+              Email
             </label>
             <input
               type="email"
               id="email"
               name="email"
+              disabled="true"
               value={formData.email}
               onChange={handleChange}
               style={{
@@ -296,6 +306,7 @@ export default function UpdateUser() {
               size="large"
               style={{
                 color: "#ffffff",
+                backgroundColor: "#1F3F49",
                 marginRight: "20px",
                 marginLeft: "230px",
                 fontSize: "18px",
@@ -311,7 +322,7 @@ export default function UpdateUser() {
                 size="large"
                 style={{
                   color: "#ffffff",
-                  backgroundColor: "#dc3545",
+                  backgroundColor: "#D32D41",
                   fontSize: "18px",
                   width: "100px",
                   height: "50px",
@@ -322,6 +333,8 @@ export default function UpdateUser() {
             </Link>
           </div>
         </form>
+        </div>
+      </div>
       </div>
       <ReactToastContainer />
     </div>
