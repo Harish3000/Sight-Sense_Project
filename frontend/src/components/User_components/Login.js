@@ -15,7 +15,7 @@ const Login = () => {
   const [errorMessage, setErrorMessage] = useState(""); // Declare errorMessage state
   const { login, isLoading } = useLogIn();
   const navigate = useNavigate();
-  
+
   const isUserAdmin = email.startsWith("admin_");
 
   const handleLoginFormSubmit = async (e) => {
