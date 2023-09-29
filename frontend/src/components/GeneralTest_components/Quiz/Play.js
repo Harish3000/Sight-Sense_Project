@@ -416,8 +416,16 @@ class play extends React.Component {
         Authorization: `Bearer ${token}`,
       };
 
+      // Pass user_id as user.firstname in the request data
+      const requestData = {
+        user_id: user.firstname, // Assuming user.firstname is the user_id
+      };
+
       axios
-        .delete("http://localhost:4000/GeneralTest/delete-all", { headers })
+        .delete("http://localhost:4000/GeneralTest/delete-all", {
+          headers,
+          data: requestData, // Send user_id in the request data
+        })
         .then((response) => {
           message.warning("All General Test data deleted successfully");
           console.log("Data deleted successfully:", response.data);
