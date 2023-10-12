@@ -31,6 +31,8 @@ function ImageUploader() {
     }
   };
 
+  const TIMEOUT_DURATION = 8000; // 8 seconds timeout
+
   const handleUpload = async () => {
     try {
       if (!selectedFile) {
@@ -50,6 +52,7 @@ function ImageUploader() {
           headers: {
             "Content-Type": "multipart/form-data",
           },
+          timeout: TIMEOUT_DURATION,
         }
       );
 
@@ -97,12 +100,19 @@ function ImageUploader() {
             okText: "Re-Do Test",
             cancelText: "Find Clinics",
             onOk: redoTest,
+            onCancel: () => {
+              window.location.href = "/clinicHome";
+            },
           });
         }
       }
     } catch (error) {
       console.error("Error:", error);
-      message.error("An error occurred while processing the image.");
+      if (axios.isCancel(error)) {
+        message.error("Request timed out. Please refresh and try again.");
+      } else {
+        message.error("Network error. Please refresh and try again.");
+      }
     } finally {
       setLoading(false);
     }
@@ -127,6 +137,7 @@ function ImageUploader() {
           headers: {
             "Content-Type": "multipart/form-data",
           },
+          timeout: TIMEOUT_DURATION,
         }
       );
 
@@ -155,7 +166,11 @@ function ImageUploader() {
       }
     } catch (error) {
       console.error("Error:", error);
-      message.error("An error occurred while processing the image.");
+      if (axios.isCancel(error)) {
+        message.error("Request timed out. Please refresh and try again.");
+      } else {
+        message.error("Network error. Please refresh and try again.");
+      }
     } finally {
       setLoading(false);
     }
@@ -220,15 +235,16 @@ function ImageUploader() {
         muted
         style={{
           width: "100%",
-          height: "100%",
+          minHeight: "100%",
           objectFit: "cover",
-          position: "absolute",
+          position: "fixed", // Fixed position to cover the entire viewport
           top: 0,
           left: 0,
           zIndex: -1,
         }}
         title="Background Video"
       />
+
       <div className="card">
         <h1>Azure Advanced Analysis</h1>
         <h2>Image Preview:</h2>
