@@ -3,7 +3,7 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr); /* Three columns with equal width */
   gap: 20px; /* Adjust the gap between grid items */
-  margin:20px 10px;
+  margin: 20px 10px;
 }
 
 /*clinic card css*/
@@ -38,7 +38,7 @@
   cursor: pointer;
 }
 .h1 {
-  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif !important;
   font-size: 30px;
   font-weight: bold;
   padding: 20px;

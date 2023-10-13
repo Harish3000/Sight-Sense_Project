@@ -464,7 +464,7 @@ export default function UserProfile() {
               </div>
             </div>
             <div style={{ flex: "1" }}>
-              <div>
+              <div style={{ paddingLeft: "10px", paddingRight: "20px" }}>
                 <div
                   style={{
                     paddingLeft: "20px",
@@ -576,7 +576,7 @@ export default function UserProfile() {
               </div>
             </div>
             <div
-              style={{ flex: "1", paddingTop: "10px", paddingLeft: "10px" }}
+              style={{ flex: "1", paddingTop: "10px", paddingRight: "20px" }}
             >
               <div
                 style={{
