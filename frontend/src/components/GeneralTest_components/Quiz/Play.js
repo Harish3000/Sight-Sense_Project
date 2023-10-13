@@ -1,20 +1,20 @@
-import React, { Fragment } from "react";
-import { Helmet } from "react-helmet";
-import { Modal } from "react-bootstrap";
-import { Modal as AntdModal, Alert, message } from "antd";
 import "@mdi/font/css/materialdesignicons.min.css";
-import "bootstrap/dist/css/bootstrap.min.css";
-import correctNotification from "../../../assets/GeneralTest_assets/audio/correct-answer.mp3";
-import wrongNotification from "../../../assets/GeneralTest_assets/audio/wrong-answer.mp3";
-import buttonSound from "../../../assets/GeneralTest_assets/audio/button-sound.mp3";
-import classnames from "classnames";
-import questions from "../../../question.json";
-import jsPDF from "jspdf";
-import isEmpty from "../../../utils/is-empty";
-import axios from "axios";
-import Icon from "@mdi/react";
 import { mdiFormatListBulleted } from "@mdi/js";
+import Icon from "@mdi/react";
+import { Alert, Modal as AntdModal, message } from "antd";
+import axios from "axios";
+import "bootstrap/dist/css/bootstrap.min.css";
+import classnames from "classnames";
+import jsPDF from "jspdf";
+import React, { Fragment } from "react";
+import { Modal } from "react-bootstrap";
+import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
+import buttonSound from "../../../assets/GeneralTest_assets/audio/button-sound.mp3";
+import correctNotification from "../../../assets/GeneralTest_assets/audio/correct-answer.mp3";
+import wrongNotification from "../../../assets/GeneralTest_assets/audio/wrong.mp3";
+import questions from "../../../question.json";
+import isEmpty from "../../../utils/is-empty";
 // import { AuthContext } from "../../contexts/User_context/AuthContext";
 // import { useAuthContext } from "../../../hooks/User_hooks/useAuthContext";
 
@@ -370,11 +370,11 @@ class play extends React.Component {
   showSummaryModal = () => {
     this.setState({ showModal: true });
   };
-  
+
   handleSaveButtonClick = () => {
     const { score } = this.state;
-    const user = JSON.parse(localStorage.getItem('user')); // Retrieve the user object from localStorage
-  
+    const user = JSON.parse(localStorage.getItem("user")); // Retrieve the user object from localStorage
+
     if (user && user.token) {
       const token = user.token;
       const data = {
@@ -383,14 +383,14 @@ class play extends React.Component {
         test_date: new Date(),
         test_score: score,
       };
-  
+
       const headers = {
         Authorization: `Bearer ${token}`, // Include the token in the request headers
       };
-  
+
       console.log("Data:", data);
       console.log("Headers:", headers);
-  
+
       axios
         .post("http://localhost:4000/GeneralTest/addTest", data, { headers })
         .then((response) => {
@@ -403,33 +403,40 @@ class play extends React.Component {
     } else {
       console.error("Token not found in user object in localStorage");
     }
-};
+  };
 
-handleDeleteAllDataClick = () => {
-  const user = JSON.parse(localStorage.getItem('user')); // Retrieve the user object from localStorage
+  handleDeleteAllDataClick = () => {
+    const user = JSON.parse(localStorage.getItem("user")); // Retrieve the user object from localStorage
 
-  if (user && user.token) {
-    const token = user.token;
+    if (user && user.token) {
+      const token = user.token;
 
-    // Include the token in the request headers
-    const headers = {
-      Authorization: `Bearer ${token}`,
-    };
+      // Include the token in the request headers
+      const headers = {
+        Authorization: `Bearer ${token}`,
+      };
 
-    axios
-      .delete("http://localhost:4000/GeneralTest/delete-all", { headers })
-      .then((response) => {
-        message.warning("All General Test data deleted successfully");
-        console.log("Data deleted successfully:", response.data);
-      })
-      .catch((error) => {
-        console.error("Error deleting data:", error);
-      });
-  } else {
-    console.error("Token not found in user object in localStorage");
-  }
-};
+      // Pass user_id as user.firstname in the request data
+      const requestData = {
+        user_id: user.firstname, // Assuming user.firstname is the user_id
+      };
 
+      axios
+        .delete("http://localhost:4000/GeneralTest/delete-all", {
+          headers,
+          data: requestData, // Send user_id in the request data
+        })
+        .then((response) => {
+          message.warning("All General Test data deleted successfully");
+          console.log("Data deleted successfully:", response.data);
+        })
+        .catch((error) => {
+          console.error("Error deleting data:", error);
+        });
+    } else {
+      console.error("Token not found in user object in localStorage");
+    }
+  };
 
   render() {
     const { showModal } = this.state;
@@ -476,12 +483,10 @@ handleDeleteAllDataClick = () => {
               }}
             >
               <p>Score: {state.score}</p>
-              <p>Number of Questions: {state.numberOfQuestions}</p>
-              <p>
-                Number of Answered Questions: {state.numberOfAnsweredQuestions}
-              </p>
-              <p>Correct Answers: {state.correctAnswers}</p>
-              <p>Wrong Answers: {state.wrongAnswers}</p>
+              <p>Number of Tests: {state.numberOfQuestions}</p>
+              <p>Number of Answered Tests: {state.numberOfAnsweredQuestions}</p>
+              <p>Correct Tests: {state.correctAnswers}</p>
+              <p>Faild Tests: {state.wrongAnswers}</p>
               <p style={{ fontWeight: "bold" }}>
                 Score Percentage:{" "}
                 {((state.score / state.numberOfQuestions) * 100).toFixed(2)}%
@@ -512,7 +517,7 @@ handleDeleteAllDataClick = () => {
                 className="btn btn-danger"
                 onClick={this.handleDeleteAllDataClick}
               >
-                Reset Stats
+                Reset
               </button>
             </Modal.Footer>
           </Modal>

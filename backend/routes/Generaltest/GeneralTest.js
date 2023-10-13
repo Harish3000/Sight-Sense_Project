@@ -3,8 +3,8 @@ let Test = require("../../models/GeneralTest_Modal");
 const { route } = require("../User/User");
 
 //import middle ware function - require auth for all routes
-const requireAuth = require('../../middleware/requireAuth')
-router.use(requireAuth)
+const requireAuth = require("../../middleware/requireAuth");
+router.use(requireAuth);
 
 // Update or add test
 router.route("/addTest").post((req, res) => {
@@ -52,18 +52,22 @@ router.route("/addTest").post((req, res) => {
     });
 });
 
-//Clear histoty
 router.route("/delete-all").delete((req, res) => {
-  // Assuming you have a user ID associated with the logged-in user
-  const userId = req.user.id; // Replace 'req.user.id' with how you access the user ID in your authentication system
+  const userId = req.user.firstname;
 
-  Test.deleteMany({ user_id: userId }) // Delete records with matching user_id
+  const userToDeleteId = req.user.firstname;
+
+  Test.deleteMany({ user_id: userToDeleteId })
     .then(() => {
-      res.json("All General Test data for the logged-in user deleted successfully.");
+      res.json(
+        "All General Test data for the specified user_id deleted successfully."
+      );
     })
     .catch((err) => {
       console.error(err);
-      res.status(500).json("Error deleting General Test data for the logged-in user.");
+      res
+        .status(500)
+        .json("Error deleting General Test data for the specified user_id.");
     });
 });
 

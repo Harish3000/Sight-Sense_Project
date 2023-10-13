@@ -3,7 +3,7 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr); /* Three columns with equal width */
   gap: 20px; /* Adjust the gap between grid items */
-  margin:20px 10px;
+  margin: 20px 10px;
 }
 
 /*clinic card css*/
