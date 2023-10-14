@@ -31,7 +31,7 @@ function ImageUploader() {
 		}
 	};
 
-	const TIMEOUT_DURATION = 8000; // 8 seconds timeout
+	const TIMEOUT_DURATION = 20000; // 8 seconds timeout
 
 	const handleUpload = async () => {
 		try {
