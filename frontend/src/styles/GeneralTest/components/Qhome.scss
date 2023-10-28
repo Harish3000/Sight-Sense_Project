@@ -1,5 +1,5 @@
 #Qhome {
-  background-image: url("../../../assets/GeneralTest_assets/img/eye.jpg");
+  background-image: url("../../../assets/GeneralTest_assets/img/new.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
@@ -7,9 +7,11 @@
   display: flex;
   justify-content: space-around;
   section {
-    background-color: rgba(154, 158, 166, 0.7);
+    background-color: rgba(223, 251, 231, 0.8);
+    padding-top: 10rem;
     padding-left: 2rem;
     padding-right: 2rem;
+    border-radius: 25px;
     height: 80%;
     width: 35%;
   }

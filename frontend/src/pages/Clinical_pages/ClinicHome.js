@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import "../../styles/GeneralTest/Clinical/homePage.css";
+import "../../styles/GeneralTest/Clinical/HomePage.css";
 import Card from "../../components/Clinical_components/ClinicCard";
-import "../../styles/GeneralTest/Clinical/navBar.css";
+import "../../styles/GeneralTest/Clinical/NavBar.css";
 import "../../assets/Clinical_assets/search-line.png";
 import axios from "axios";
 import { Link } from "react-router-dom";

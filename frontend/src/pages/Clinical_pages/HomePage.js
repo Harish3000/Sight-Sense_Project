@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import "../../styles/GeneralTest/Clinical/homePage.css";
+import "../../styles/GeneralTest/Clinical/HomePage.css";
 import { ToastContainer as ReactToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import VideoBG from "../../assets/Backround_video.mp4";
@@ -50,7 +50,7 @@ export default function HomePage() {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          height: '100%', // Adjusted height to cover the entire viewport
+          height: "100%", // Adjusted height to cover the entire viewport
         }}
       >
         <div className="home-body">
