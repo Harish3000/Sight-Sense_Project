@@ -31,7 +31,7 @@ function ImageUploader() {
 		}
 	};
 
-	const TIMEOUT_DURATION = 8000; // 8 seconds timeout
+	const TIMEOUT_DURATION = 20000; // 8 seconds timeout
 
 	const handleUpload = async () => {
 		try {
@@ -249,7 +249,7 @@ function ImageUploader() {
 				<h1>Azure Advanced Analysis</h1>
 				<h2>Image Preview:</h2>
 				{renderImagePreview()}
-				<div style={{ marginTop: "20px" }}>
+				{/* <div style={{ marginTop: "20px" }}>
 					<Button
 						icon={<UploadOutlined />}
 						onClick={openCamera}
@@ -257,7 +257,7 @@ function ImageUploader() {
 					>
 						Open Camera
 					</Button>
-				</div>
+				</div> */}
 				<div style={{ marginTop: "20px" }}>
 					<Upload
 						accept="image/*"
